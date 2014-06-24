@@ -17,7 +17,7 @@
       = post.comments.count
 
       %strong Author:
-      = @current_author.email
+      = link_to @current_author.full_name, account_path(@current_author)
       
     %p
       = post.the_excerpt

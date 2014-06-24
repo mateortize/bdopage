@@ -1,0 +1,8 @@
+= bootstrap_form_for(@profile, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: accounts_profile_path) do |f|
+  = f.text_field :first_name
+  = f.text_field :last_name
+
+  %hr
+  = f.form_group do
+    = f.submit "Save", class: 'btn btn-primary'
+    = link_to 'Cancel', accounts_profile_path, class: 'btn btn-default'

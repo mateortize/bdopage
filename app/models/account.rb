@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   has_one :account_profile
 
   def full_name
-    "#{self.account_profile.first_name} #{self.account_profile.last_name}" if self.account_profile.present?
+    return "#{self.account_profile.first_name} #{self.account_profile.last_name}" if self.account_profile.present?
     "Unknown"
   end
 end

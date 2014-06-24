@@ -13,9 +13,10 @@
           = link_to "Posts", accounts_posts_path
         %li
           = link_to "Videos", accounts_videos_path
+
       %p.navbar-text.navbar-right
         = link_to "Sign out", destroy_account_session_path, :method => 'delete'
       %p.navbar-text.navbar-right
         Signed in as
-        %a.navbar-link{:href => "#"}
+        %a.navbar-link{:href => accounts_profile_path(current_account) }
           = current_account.email

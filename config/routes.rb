@@ -56,28 +56,35 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
-  namespace :accounts do
-    resources :posts do
-      get 'available_videos', on: :member
-      put 'select_video', on: :member
-    end
-    resources :videos
-  end
-
   # Panda Routes
   scope "", default_format: :json do
     post "/panda/authorize_upload", to: "panda#authorize_upload"
     post "/panda/notifications", to: "panda#notifications"
   end
 
-  resources :posts do
-    post 'comment', on: :member
-    put 'comment', on: :member
+  namespace :accounts do
+    resources :posts do
+      get 'available_videos', on: :member
+      put 'select_video', on: :member
+    end
+    resources :videos
+    resource :profile
   end
-  
-  root :to => "posts#index"
 
   get 'account_root' => 'accounts/posts#index', as: :account_root
+  get '/accounts' => 'accounts/profiles#show'
+  
 
+  resources :posts
+
+  resource :profile
+  
+  resources :accounts
+
+
+  root :to => "posts#index"
+
+
+  
   get '/:action(/:id)', :controller => 'posts'
 end
