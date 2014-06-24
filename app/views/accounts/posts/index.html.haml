@@ -1,0 +1,17 @@
+%h2 Posts
+%p.text-right
+  = link_to "Add New", new_accounts_post_path, class: "btn btn-primary"
+
+%table.table
+  %thead
+    %tr
+      %th Screenshot
+      %th Title
+      %th Summary
+      %th Comments
+      %th Created At
+      %th Updated At
+      %th 
+  %tbody
+    = render @posts
+= paginate @posts

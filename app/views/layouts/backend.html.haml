@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %title Videopage7 Backend
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
+  %body
+    .container
+      = render "layouts/header"
+      = render "/shared/flashes"
+      = yield
+
+    %script{:src => "//cdn.pandastream.com/u/2.0/panda-uploader.min.js"}
+    = yield :javascript

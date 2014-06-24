@@ -1,0 +1,13 @@
+%tr
+  %td
+    - if post.video.present?
+      = image_tag post.video.screenshot, class: 'img-responsive', style: 'max-width: 120px;'
+    - else
+      = image_tag "http://placehold.it/120x80", id: "video_screenshot", class: "img-responsive"
+  %td= post.title
+  %td= post.excerpt
+  %td= post.comments.count
+  %td= post.created_at
+  %td= post.updated_at
+  %td.text-right
+    = link_to 'Edit', edit_accounts_post_path(post), class: "btn btn-info"

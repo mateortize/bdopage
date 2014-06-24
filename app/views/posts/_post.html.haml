@@ -1,0 +1,23 @@
+.row
+  .col-sm-3
+    %p
+      - if post.video.present?
+        = image_tag post.video.screenshot, class: 'img-responsive'
+      - else
+        = image_tag "http://placehold.it/263x197", id: "video_screenshot", class: "img-responsive"
+  .col-sm-9
+    %h3
+      = link_to post.title, post_path(post)
+    %p.meta
+      %strong Posted At:
+      = distance_of_time_in_words(Time.now - post.created_at)
+      ago
+
+      %strong Comments:
+      = post.comments.count
+
+      %strong Author:
+      = @current_author.email
+      
+    %p
+      = post.the_excerpt

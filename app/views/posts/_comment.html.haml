@@ -1,0 +1,12 @@
+%hr
+.comment
+  = comment.content
+  .comment-meta
+    Commented by
+    %strong
+      = comment.commenter.full_name
+    ,
+    Commented at
+    %strong
+      = distance_of_time_in_words(Time.now - comment.created_at)
+      ago

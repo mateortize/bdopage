@@ -1,0 +1,14 @@
+%tr
+  %td= image_tag video.screenshot, style: "max-height: 100px;"
+  %td= video.title
+  %td= video.encoded
+  %td= video.profile
+  %td= "#{video.width}x#{video.height}"
+  %td= video.created_at
+  %td= number_to_human_size(video.file_size)
+  %td
+    .btn-group
+      = link_to edit_accounts_video_path(video), class: "btn btn-info" do
+        %span.glyphicon.glyphicon-edit
+      = link_to accounts_video_path(video), method: :delete, class: "btn btn-danger" do
+        %span.glyphicon.glyphicon-trash

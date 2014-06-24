@@ -1,0 +1,36 @@
+- if @post.video.present?
+  = jwplayer_assets
+  = jwplayer({width: @post.video.width, height: @post.video.height, file: @post.video.url, image: @post.video.screenshot})
+
+%br
+
+%h2
+  = @post.title
+
+%p.meta
+  Posted At:
+  %strong
+    = distance_of_time_in_words(Time.now - @post.created_at)
+    ago
+  
+  %br
+
+  Comments:
+  %strong
+    = @post.comments.count
+
+  %br
+
+  Author:
+  %strong
+    = @current_author.email
+
+.post-content
+  = @post.content
+
+.comments
+  - @post.comments.each do |comment|
+    = render 'comment', comment: comment
+
+.comment-form
+  = render 'comment_form'

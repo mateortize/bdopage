@@ -1,0 +1,49 @@
+%p.text-right
+  = link_to "Add New", new_accounts_post_path, class: "btn btn-primary"
+  - unless @post.new_record?
+    = link_to "Delete", accounts_post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
+%hr
+
+= bootstrap_form_for([:accounts, @post], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+  = f.form_group do
+    = f.hidden_field :video_id, id: 'video_id'
+    .row
+      .col-sm-6
+        - if @post.video.blank?
+          = image_tag "http://placehold.it/350x150", id: "video_screenshot", class: "img-responsive hide"
+        - else
+          = image_tag @post.video.screenshot, id: "video_screenshot", class: "img-responsive"
+  = f.form_group do
+    = link_to "Select Video", available_videos_accounts_post_path(@post), id: 'btn_select_video', class: 'btn btn-info'
+    
+  = f.text_field :title
+  = f.text_area :content, rows: 10
+  = f.text_area :excerpt, rows: 5
+
+  %hr
+  = f.form_group do
+    = f.submit "Save Post", class: 'btn btn-primary'
+    = link_to 'Cancel', accounts_posts_path, class: 'btn btn-default'
+
+= content_for :javascript do
+  :javascript
+    var available_videos_window = null;
+    $(function(){
+      $('#btn_select_video').on("click", function(e){
+        e.preventDefault();
+        available_videos_window = window.open($(this).attr('href'), '_blank', "width=768, height=600");
+
+      });
+    });
+
+    function closeWindow()
+    {
+      available_videos_window.close();
+    }
+
+    function select_video(video)
+    {
+      $('#video_id').val(video.id);
+      $('#video_screenshot').attr('src', video.screenshot).removeClass('hide');
+      closeWindow();
+    }

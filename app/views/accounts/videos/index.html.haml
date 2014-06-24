@@ -1,0 +1,16 @@
+.text-right
+  = link_to "Upload Video", new_accounts_video_path, class: "btn btn-primary"
+%table.table
+  %thead
+    %tr
+      %th Thumbnail
+      %th Title
+      %th Status
+      %th Profile
+      %th Dimensions
+      %th Uploaded
+      %th Size
+      %th
+  %tbody
+    = render @videos
+= paginate @videos
