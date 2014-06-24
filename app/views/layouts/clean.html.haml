@@ -5,7 +5,7 @@
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title Video Page 7
-    = stylesheet_link_tag    "accounts", media: "all", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "accounts", media: "all"
     = csrf_meta_tags
   %body
     = render "/shared/flashes"
@@ -13,5 +13,5 @@
       .col-xs-12
         = yield
           
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "application"
     = yield :javascript

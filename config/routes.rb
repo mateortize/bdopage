@@ -78,4 +78,6 @@ Rails.application.routes.draw do
   root :to => "posts#index"
 
   get 'account_root' => 'accounts/posts#index', as: :account_root
+
+  get '/:action(/:id)', :controller => 'posts'
 end
