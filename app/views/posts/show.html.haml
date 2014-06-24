@@ -28,9 +28,4 @@
 .post-content
   = @post.content
 
-.comments
-  - @post.comments.each do |comment|
-    = render 'comment', comment: comment
-
-.comment-form
-  = render 'comment_form'
+= commontator_thread(@post)

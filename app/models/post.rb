@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-  has_many :comments
+  acts_as_commontable
+  
   belongs_to :video
 
   belongs_to :account

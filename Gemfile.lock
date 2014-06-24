@@ -53,6 +53,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    commontator (4.6.1)
+      jquery-rails
+      rails (>= 3.1)
     connection_pool (2.0.0)
     daemons (1.1.9)
     debug_inspector (0.0.2)
@@ -224,6 +227,7 @@ DEPENDENCIES
   bootstrap_form
   carrierwave
   coffee-rails (~> 4.0.0)
+  commontator (~> 4.6.0)
   devise
   factory_girl_rails
   guard-rspec

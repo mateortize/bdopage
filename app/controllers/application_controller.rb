@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     @current_author
   end
 
+  def current_user
+    current_account
+  end
+
   private
 
   def restrict_access

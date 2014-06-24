@@ -1,5 +1,0 @@
-%hr
-= bootstrap_form_for(Comment.new(post_id: @post.id), layout: :vertical, url: comment_post_path(@post)) do |f|
-  = f.text_area :content, rows: 10, label: 'Comment'
-  = f.form_group do
-    = f.submit "Comment", class: 'btn btn-primary'

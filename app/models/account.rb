@@ -4,8 +4,9 @@ class Account < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  acts_as_commontator
+  
   has_many :posts
-  has_many :comments
   has_many :videos
   has_one :account_setting
   has_one :account_profile
