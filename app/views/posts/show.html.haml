@@ -27,9 +27,17 @@
 
   Author:
   %strong
-    = @current_author.email
+    = @post.account.full_name
 
 .post-content
   = @post.content
 
 = commontator_thread(@post)
+
+
+= content_for :head do
+  - unless @post.blank?
+    %meta{:content => "videopage7.com – #{@post.title}", :property => "og:title"}/
+    %meta{:content => @post.the_excerpt, :property => "og:description"}/
+    - unless @post.video.blank?
+      %meta{:content => @post.video.screenshot, :property => "og:image"}/
