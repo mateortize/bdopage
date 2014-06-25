@@ -4,11 +4,13 @@
   %td= video.encoded
   %td= video.profile
   %td= "#{video.width}x#{video.height}"
-  %td= video.created_at
+  %td
+    = time_ago_in_words(video.created_at)
+    ago
   %td= number_to_human_size(video.file_size)
   %td
     .btn-group
       = link_to edit_admin_video_path(video), class: "btn btn-info" do
         %span.glyphicon.glyphicon-edit
-      = link_to admin_video_path(video), method: :delete, class: "btn btn-danger" do
+      = link_to admin_video_path(video), method: :delete, data: { confirm: "Are you sure to delete?" }, class: "btn btn-danger" do
         %span.glyphicon.glyphicon-trash
