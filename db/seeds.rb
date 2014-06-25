@@ -7,4 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-account1 = Account.create(email: "a1@email.com", password: "password")
+account1 = Account.create(email: "a1@email.com", password: "defaultpw")
+account2 = Account.create(email: "a2@email.com", password: "defaultpw")
