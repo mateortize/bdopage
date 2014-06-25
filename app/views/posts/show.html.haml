@@ -31,7 +31,7 @@
 
 .post-content
   = @post.content
-  
+
 .addthis_sharing_toolbox
 
 = commontator_thread(@post)
@@ -41,6 +41,12 @@
   %script{:src => "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53aaf0275b415e45", :type => "text/javascript"}
   - unless @post.blank?
     %meta{:content => "videopage7.com – #{@post.title}", :property => "og:title"}/
+    %meta{:content => "video.other", :property => "og:type"}/
+    %meta{:content => @post.video.url, :property => "og:video:url"}/
+    %meta{:content => @post.video.profile, :property => "og:video:type"}/
+    %meta{:content => @post.video.width, :property => "og:video:width"}/
+    %meta{:content => @post.video.height, :property => "og:video:height"}/
+
     %meta{:content => @post.the_excerpt, :property => "og:description"}/
     - unless @post.video.blank?
       %meta{:content => @post.video.screenshot, :property => "og:image"}/
