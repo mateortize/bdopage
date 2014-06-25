@@ -31,11 +31,14 @@
 
 .post-content
   = @post.content
+  
+.addthis_sharing_toolbox
 
 = commontator_thread(@post)
 
 
 = content_for :head do
+  %script{:src => "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53aaf0275b415e45", :type => "text/javascript"}
   - unless @post.blank?
     %meta{:content => "videopage7.com – #{@post.title}", :property => "og:title"}/
     %meta{:content => @post.the_excerpt, :property => "og:description"}/
