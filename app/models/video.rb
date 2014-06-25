@@ -31,11 +31,14 @@ class Video < ActiveRecord::Base
   def update_video_profile
     if self.profile_changed?
       encoding = self.encodings[self.profile]
-      self.height ||= encoding.height
-      self.width ||= encoding.width
-      self.encoded = true
-      self.url = encoding.url
-      self.file_size ||= self.panda_video.file_size
+      if !encoding.blank?
+        self.height ||= encoding.height
+        self.width ||= encoding.width
+        self.encoded = true
+        self.encoded = true
+        self.url = encoding.url
+        self.file_size ||= self.panda_video.file_size
+      end
     end
   end
 

@@ -11,6 +11,6 @@
 
 %p
   - if @profile.blank?
-    = link_to "Create Profile", new_accounts_profile_path
+    = link_to "Create Profile", new_admin_profile_path
   - else
-    = link_to "Update Profile", edit_accounts_profile_path
+    = link_to "Edit Profile", edit_admin_profile_path

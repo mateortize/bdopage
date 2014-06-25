@@ -1,10 +1,10 @@
-class Accounts::VideosController < Accounts::BaseController
+class Admin::VideosController < Admin::BaseController
   
   before_filter :load_video, only: [:show, :update, :edit, :destroy]
   before_filter :update_video_status, only: [:edit]
 
   def index
-    @videos = current_account.videos.order("created_at").page(params[:page]).per(5)
+    @videos = current_account.videos.order("created_at desc").page(params[:page]).per(5)
   end
 
   def show
@@ -19,9 +19,9 @@ class Accounts::VideosController < Accounts::BaseController
 
   def update
     if @video.update(video_params)
-      redirect_to accounts_videos_path
+      redirect_to admin_videos_path
     else
-      redirect_to edit_accounts_video_path(@video)
+      redirect_to edit_admin_video_path(@video)
     end
   end
 
@@ -30,16 +30,16 @@ class Accounts::VideosController < Accounts::BaseController
     @video.account = current_account
     if @video.save
       flash[:success] = "Video successfully updated"
-      redirect_to accounts_videos_path
+      redirect_to admin_videos_path
     else
       flash[:danger] = @video.errors.full_messages.to_sentence
-      redirect_to new_accounts_video_path
+      redirect_to new_admin_video_path
     end
   end
 
   def destroy
     @video.destroy
-    redirect_to accounts_videos_path
+    redirect_to admin_videos_path
   end
 
 

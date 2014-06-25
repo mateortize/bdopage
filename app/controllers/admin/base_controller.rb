@@ -1,4 +1,4 @@
-class Accounts::BaseController < ActionController::Base
+class Admin::BaseController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_account!
 
@@ -11,7 +11,9 @@ class Accounts::BaseController < ActionController::Base
 
   def restrict_access
     if request.subdomain.present? && request.subdomain != "www"
-      raise ActionController::RoutingError.new('Not Found') unless current_user.setting.blog_alias == request.subdomain
+      if current_account.setting.blank? || current_account.setting.blog_alias!=request.subdomain
+        raise ActionController::RoutingError.new('Not Found')
+      end
     end
   end
 

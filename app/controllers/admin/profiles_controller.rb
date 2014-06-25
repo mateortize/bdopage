@@ -1,11 +1,11 @@
-class Accounts::ProfilesController < Accounts::BaseController
+class Admin::ProfilesController < Admin::BaseController
   
   def index
-    @profile = current_account.account_profile
+    @profile = current_account.profile
   end
 
   def show
-    @profile = current_account.account_profile
+    @profile = current_account.profile
   end
 
   def new
@@ -18,17 +18,17 @@ class Accounts::ProfilesController < Accounts::BaseController
     @profile.account = current_account
     @profile.save
 
-    redirect_to accounts_profile_path
+    redirect_to admin_profile_path
   end
 
   def edit
-    @profile = current_account.account_profile
+    @profile = current_account.profile
   end
 
   def update
-    @profile = current_account.account_profile
+    @profile = current_account.profile
     @profile.update_attributes(profile_params)
-    redirect_to accounts_profile_path
+    redirect_to admin_profile_path
   end
 
   private

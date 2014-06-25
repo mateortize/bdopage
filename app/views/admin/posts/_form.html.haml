@@ -1,10 +1,10 @@
 %p.text-right
-  = link_to "Add New", new_accounts_post_path, class: "btn btn-primary"
+  = link_to "Add New", new_admin_post_path, class: "btn btn-primary"
   - unless @post.new_record?
-    = link_to "Delete", accounts_post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
+    = link_to "Delete", admin_post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
 %hr
 
-= bootstrap_form_for([:accounts, @post], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+= bootstrap_form_for([:admin, @post], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
   = f.form_group do
     = f.hidden_field :video_id, id: 'video_id'
     .row
@@ -14,7 +14,7 @@
         - else
           = image_tag @post.video.screenshot, id: "video_screenshot", class: "img-responsive"
   = f.form_group do
-    = link_to "Select Video", available_videos_accounts_post_path(@post), id: 'btn_select_video', class: 'btn btn-info'
+    = link_to "Select Video", available_videos_admin_posts_path, id: 'btn_select_video', class: 'btn btn-info'
     
   = f.text_field :title
   = f.text_area :content, rows: 10
@@ -23,7 +23,7 @@
   %hr
   = f.form_group do
     = f.submit "Save Post", class: 'btn btn-primary'
-    = link_to 'Cancel', accounts_posts_path, class: 'btn btn-default'
+    = link_to 'Cancel', admin_posts_path, class: 'btn btn-default'
 
 = content_for :javascript do
   :javascript

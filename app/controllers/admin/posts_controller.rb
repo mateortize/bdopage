@@ -1,7 +1,7 @@
-class Accounts::PostsController < Accounts::BaseController
+class Admin::PostsController < Admin::BaseController
   
   def index
-    @posts = current_account.posts.order("created_at").page(params[:page]).per(5)
+    @posts = current_account.posts.order("created_at desc").page(params[:page]).per(5)
   end
 
   def show
@@ -20,17 +20,14 @@ class Accounts::PostsController < Accounts::BaseController
   def update
     @post = current_account.posts.find(params[:id])
     @post.update_attributes(post_params)
-    redirect_to accounts_posts_path
+    redirect_to admin_posts_path
   end
 
   def create
     @post = Post.new(post_params)
     @post.account = current_account
     @post.save
-    redirect_to accounts_posts_path
-  end
-
-  def select_video
+    redirect_to admin_posts_path
   end
 
   def available_videos

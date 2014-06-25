@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_filter :load_post, only: [:show, :comment]
   
   def index
-    @posts = current_author.posts.order("created_at").page(params[:page]).per(5)
   end
 
   def show
@@ -11,7 +10,7 @@ class PostsController < ApplicationController
   private
 
   def load_post
-    @post = current_author.posts.find(params[:id])
+    @post = Post.find(params[:id])
   end
   
 end

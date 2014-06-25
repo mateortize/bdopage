@@ -8,11 +8,22 @@ class Account < ActiveRecord::Base
   
   has_many :posts
   has_many :videos
-  has_one :account_setting
-  has_one :account_profile
+
+  has_one :setting, class_name: 'AccountSetting'
+  has_one :profile, class_name: 'AccountProfile'
+
+  after_create :create_setting
+
 
   def full_name
-    return "#{self.account_profile.first_name} #{self.account_profile.last_name}" if self.account_profile.present?
+    return "#{self.profile.first_name} #{self.profile.last_name}" if self.profile.present?
     "Unknown"
+  end
+
+  private
+
+  def create_setting
+    self.setting = AccountSetting.create(blog_alias: Time.now.to_i, blog_enabled: false)
+    self.save
   end
 end

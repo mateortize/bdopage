@@ -62,29 +62,26 @@ Rails.application.routes.draw do
     post "/panda/notifications", to: "panda#notifications"
   end
 
-  namespace :accounts do
+  namespace :admin do
     resources :posts do
-      get 'available_videos', on: :member
-      put 'select_video', on: :member
+      get 'available_videos', on: :collection
     end
     resources :videos
     resource :profile
+    resource :setting
+    get '/' => 'posts#index'
   end
 
-  get 'account_root' => 'accounts/posts#index', as: :account_root
-  get '/accounts' => 'accounts/profiles#show'
+  get 'account_root' => 'admin/posts#index', as: :account_root
   
+  resources :accounts
 
   resources :posts
 
   resource :profile
-  
-  resources :accounts
 
 
   root :to => "posts#index"
-
-
   
-  get '/:action(/:id)', :controller => 'posts'
+  #get '/:action(/:id)', :controller => 'posts'
 end

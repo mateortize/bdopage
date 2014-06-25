@@ -10,13 +10,15 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
-          = link_to "Posts", accounts_posts_path
+          = link_to "Posts", admin_posts_path
         %li
-          = link_to "Videos", accounts_videos_path
+          = link_to "Videos", admin_videos_path
 
       %p.navbar-text.navbar-right
         = link_to "Sign out", destroy_account_session_path, :method => 'delete'
       %p.navbar-text.navbar-right
+        = link_to "Setting", admin_setting_path
+      %p.navbar-text.navbar-right
         Signed in as
-        %a.navbar-link{:href => accounts_profile_path(current_account) }
-          = current_account.email
+        %a{:href => admin_profile_path(current_account.profile) }
+          = current_account.full_name

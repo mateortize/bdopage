@@ -7,5 +7,7 @@
     = csrf_meta_tags
   %body
     .container
+      - if !current_account.blank? && current_account == @current_author
+        = render "layouts/header"
       = render "/shared/flashes"
       = yield
