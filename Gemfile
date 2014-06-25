@@ -12,6 +12,8 @@ gem 'devise'
 
 gem 'panda', '~> 1.6.0'
 
+gem "fog", "~> 1.3.1"
+
 gem 'carrierwave'
 
 gem 'sidekiq'
@@ -21,6 +23,9 @@ gem 'kaminari'
 gem 'jwplayer-rails'
 
 gem 'commontator', '~> 4.6.0'
+
+gem 'omniauth-cube7', github: 'siera26/omniauth-cube7'
+gem 'omniauth-bonofa'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

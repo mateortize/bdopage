@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624153424) do
+ActiveRecord::Schema.define(version: 20140625122352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140624153424) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.boolean  "blog_enabled"
   end
 
   add_index "account_settings", ["account_id"], name: "index_account_settings_on_account_id", using: :btree
@@ -55,6 +56,18 @@ ActiveRecord::Schema.define(version: 20140624153424) do
 
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
+
+  create_table "authentications", force: true do |t|
+    t.integer  "account_id"
+    t.string   "provider"
+    t.integer  "uid"
+    t.string   "token"
+    t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authentications", ["account_id"], name: "index_authentications_on_account_id", using: :btree
 
   create_table "commontator_comments", force: true do |t|
     t.string   "creator_type"

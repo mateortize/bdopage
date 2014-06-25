@@ -1,7 +1,6 @@
 class Admin::VideosController < Admin::BaseController
   
   before_filter :load_video, only: [:show, :update, :edit, :destroy]
-  before_filter :update_video_status, only: [:edit]
 
   def index
     @videos = current_account.videos.order("created_at desc").page(params[:page]).per(5)
@@ -29,7 +28,8 @@ class Admin::VideosController < Admin::BaseController
     @video = Video.new(video_params)
     @video.account = current_account
     if @video.save
-      flash[:success] = "Video successfully updated"
+      UpdateVideoState.perform_async(@video.id)
+      flash[:success] = "Video successfully updated, but it will take several minutes to encode."
       redirect_to admin_videos_path
     else
       flash[:danger] = @video.errors.full_messages.to_sentence
@@ -43,8 +43,6 @@ class Admin::VideosController < Admin::BaseController
   end
 
 
-
-
   private
 
   def video_params
@@ -53,14 +51,6 @@ class Admin::VideosController < Admin::BaseController
 
   def load_video
     @video = current_account.videos.find(params[:id])
-  end
-
-  def update_video_status
-    unless @video.encoded
-      unless @video.panda_video.status == 'fail'
-        @video.encoded = true
-      end
-    end
   end
 
 end

@@ -7,6 +7,6 @@ class AccountSetting < ActiveRecord::Base
   validate :validate_block_list
 
   def validate_block_list
-    errors.add(:blog_alias, 'is not allowed.') if BLOCK_LIST.include?(self.blog_alias.downcase)
+    errors.add(:blog_alias, 'is not allowed.') if BLOCK_LIST.include?(self.blog_alias.to_s.downcase)
   end
 end

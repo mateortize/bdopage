@@ -56,6 +56,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
+  get '/auth/:provider/callback', to: 'omniauth#create'
+  post '/auth/:provider/callback', to: 'omniauth#create'
+  get '/auth/failure', to: redirect('/')
+
   # Panda Routes
   scope "", default_format: :json do
     post "/panda/authorize_upload", to: "panda#authorize_upload"

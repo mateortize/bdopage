@@ -1,6 +1,10 @@
 - if @post.video.present?
-  = jwplayer_assets
-  = jwplayer({width: @post.video.width, height: @post.video.height, file: @post.video.url, image: @post.video.screenshot})
+  - if !@post.video.url.blank?
+    = jwplayer_assets
+    = jwplayer({width: @post.video.width, height: @post.video.height, file: @post.video.url, image: @post.video.screenshot})
+  - else
+    .alert.alert-info
+      Video is still in encoding...
 
 %br
 
