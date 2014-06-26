@@ -1,0 +1,25 @@
+#posts {
+  .post {
+    margin-bottom: 30px;
+
+    .post-top {
+      margin-bottom: 10px;
+    }
+
+    .post-title {
+      font-size: 1.5em;
+      font-weight: 300;
+      margin: 0;
+    }
+    .post-date {
+      color: $grey2;
+    }
+    .video-thumb {
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

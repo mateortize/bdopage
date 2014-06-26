@@ -1,4 +1,6 @@
 .row
-  #posts.col-md-8.bgwhite
-    = render @posts
-    = paginate @posts
+  #posts.col-md-9
+    .row
+      = render @posts
+      = paginate @posts
+  = render "sidebar";

@@ -5,6 +5,15 @@
   -o-box-shadow: $boxshadow;
   box-shadow: $boxshadow;
 }
+@mixin transition($transition) {
+  -moz-transition: $transition;
+  -webkit-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+//Load font
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
 //Basic
 html{
@@ -12,14 +21,21 @@ html{
 }
 body {
   padding-top: 100px;
-  background: url('/assets/bgimage.png') center center no-repeat fixed;
-  background-color: $bodybg;
+  background: $bodybg url('/assets/bgimage.png') center center no-repeat fixed;
   background-size: cover;
-}
-h2, h3, h4, h5{
-  margin-top: 0;
+  font-family: "Open Sans";
+  font-weight: 400;
 }
 .bgwhite {
   background-color: $light;
+  @include box-shadow(0 2px 11px 1px lighten($dark, 30));
   padding: 20px;
+}
+.nopadding {
+  padding: 0!important;
+}
+
+//Font
+h2, h3, h4, h5{
+  color: $secondary;
 }

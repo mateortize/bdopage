@@ -1,23 +1,39 @@
-.row
-  .col-sm-3
-    %p
-      - if post.video.present?
-        = image_tag post.video.screenshot, class: 'img-responsive'
-      - else
-        = image_tag "http://placehold.it/263x197", id: "video_screenshot", class: "img-responsive"
-  .col-sm-9
-    %h3
-      = link_to post.title, post_path(post)
-    %p.meta
-      %strong Posted At:
-      = distance_of_time_in_words(Time.now - post.created_at)
-      ago
+.post.col-md-6
+  .bgwhite
+    .row.video-thumb
+      .col-md-12.nopadding
+        - if post.video.present?
+          = image_tag post.video.screenshot, class: 'img-responsive'
+        - else
+          = image_tag "http://placehold.it/263x197", id: "video_screenshot", class: "img-responsive"
+    .row.post-top
+      .col-md-8
+        %h2.post-title
+          = link_to post.title, post_path(post)
+      .col-md-4.text-right
+        %span.post-date
+          Posted
+          = distance_of_time_in_words(Time.now - post.created_at)
+          ago
+    .row.meta-data
+      .col-md-12
+        %span
+          = link_to post.account.full_name, account_path(post.account)
+    .row.excerpt
+      .col-md-12
+        = post.the_excerpt
+    .row.comments
+      .col-md-12
+        = post.comments.count
+        comments
 
-      %strong Comments:
-      = post.comments.count
-
-      %strong Author:
-      = link_to post.account.full_name, account_path(post.account)
-      
-    %p
-      = post.the_excerpt
+:javascript
+  $(document).ready(function() {
+    if ($(document).width() > 980) {
+      var container = document.querySelector('#posts .row');
+      var msnry = new Masonry( container, {
+        // options
+        itemSelector: '.post'
+      });
+    }
+  })
