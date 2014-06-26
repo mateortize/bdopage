@@ -1,0 +1,24 @@
+.navbar.navbar-fixed-top.navbar-inverse{:role => "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{:href => "/"} VideoPage7
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li
+          = link_to "Posts", admin_posts_path
+        %li
+          = link_to "Videos", admin_videos_path
+
+      %p.navbar-text.navbar-right
+        = link_to "Sign out", destroy_account_session_path, :method => 'delete'
+      %p.navbar-text.navbar-right
+        = link_to "Setting", admin_setting_path
+      %p.navbar-text.navbar-right
+        Signed in as
+        %a{:href => admin_profile_path(current_account.profile) }
+          = current_account.full_name

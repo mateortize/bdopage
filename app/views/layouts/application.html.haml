@@ -8,6 +8,7 @@
     = yield :head
   %body
     .container
+      = render "layouts/header_public"
       - if !current_account.blank? && current_account == @current_author
         = render "layouts/header"
       = render "/shared/flashes"
