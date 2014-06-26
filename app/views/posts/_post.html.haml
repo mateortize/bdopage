@@ -26,14 +26,3 @@
       .col-md-12
         = post.comments.count
         comments
-
-:javascript
-  $(document).ready(function() {
-    if ($(document).width() > 980) {
-      var container = document.querySelector('#posts .row');
-      var msnry = new Masonry( container, {
-        // options
-        itemSelector: '.post'
-      });
-    }
-  })

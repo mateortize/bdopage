@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require_tree .
 //= require masonry.pkgd.min
+
+$(document).ready(function() {
+    if ($(document).width() > 980) {
+        var container = document.querySelector('#posts .row');
+        var msnry = new Masonry( container, {
+            itemSelector: '.post'
+        });
+    }
+})

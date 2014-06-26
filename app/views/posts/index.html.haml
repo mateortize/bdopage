@@ -1,10 +1,12 @@
+//Todo: Mobile image
 .row.mb2
-  .col-md-12
-    .bgwhite
+  .col-md-12.nopadding
+    .bgwhite.topnotice
       Notice with image
-.row
-  #posts.col-md-9
-    .row
-      = render @posts
-      = paginate @posts
-  = render "sidebar";
+.container
+  .row
+    #posts.col-md-9
+      .row
+        = render @posts
+        = paginate @posts
+    = render "sidebar";
