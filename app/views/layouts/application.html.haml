@@ -7,8 +7,8 @@
     = csrf_meta_tags
     = yield :head
   %body
+    = render "layouts/header_public"
     .container
-      = render "layouts/header_public"
       - if !current_account.blank? && current_account == @current_author
         = render "layouts/header"
       = render "/shared/flashes"

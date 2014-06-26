@@ -1,0 +1,11 @@
+#top-header {
+  height: 100px;
+  background-color: $light;
+  @include box-shadow(0 2px 11px 1px lighten($dark, 20));
+  border: none;
+  z-index: 1;
+
+  .header-content {
+    padding-top: 40px;
+  }
+}

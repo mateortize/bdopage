@@ -1,7 +1,25 @@
+// Mixins
+@mixin box-shadow($boxshadow) {
+  -moz-box-shadow: $boxshadow;
+  -webkit-box-shadow: $boxshadow;
+  -o-box-shadow: $boxshadow;
+  box-shadow: $boxshadow;
+}
+
+//Basic
 html{
   margin-top: 90px;
 }
-
+body {
+  padding-top: 100px;
+  background: url('/assets/bgimage.png') center center no-repeat fixed;
+  background-color: $bodybg;
+  background-size: cover;
+}
 h2, h3, h4, h5{
   margin-top: 0;
+}
+.bgwhite {
+  background-color: $light;
+  padding: 20px;
 }
