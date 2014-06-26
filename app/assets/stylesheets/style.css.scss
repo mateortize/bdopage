@@ -20,7 +20,7 @@ html{
   margin-top: 90px;
 }
 body {
-  padding-top: 100px;
+  padding-top: 50px;
   background: $bodybg url('/assets/bgimage.png') center center no-repeat fixed;
   background-size: cover;
   font-family: "Open Sans";
@@ -29,10 +29,13 @@ body {
 .bgwhite {
   background-color: $light;
   @include box-shadow(0 2px 11px 1px lighten($dark, 30));
-  padding: 20px;
+  padding: 40px;
 }
 .nopadding {
   padding: 0!important;
+}
+.mb2 {
+  margin-bottom: 20px;
 }
 
 //Font
