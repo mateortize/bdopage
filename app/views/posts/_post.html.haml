@@ -3,7 +3,10 @@
     .row.video-thumb.nomargin
       .col-md-12.nopadding
         - if post.video.present?
-          = image_tag post.video.screenshot, class: 'img-responsive'
+          - if !post.video.url.blank?
+            = jwplayer({width: '100%', aspectratio: '16:9', file: post.video.url, image: post.video.screenshot})
+          -else
+            = image_tag post.video.screenshot, class: 'img-responsive'
         - else
           = image_tag "http://placehold.it/263x197", id: "video_screenshot", class: "img-responsive"
     .row.post-top
