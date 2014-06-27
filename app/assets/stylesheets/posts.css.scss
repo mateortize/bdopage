@@ -19,6 +19,7 @@
         font-weight: 600;
         text-transform: uppercase;
         @include transition(all 300ms ease);
+        color: $secondary;
 
         &:hover {
           text-decoration: none;
@@ -52,6 +53,7 @@
         font-size: 1.2em;
         text-transform: uppercase;
         font-weight: 300;
+        color: $primary;
         @include transition(opacity 400ms 150ms ease-in);
       }
 
@@ -75,8 +77,10 @@
       margin: 10px 0 0 0;
 
       .searchicon {
+        color: $primary;
         display: block;
         font-size: 1.5em;
+        font-weight: 300;
         @include transition(margin 400ms 150ms ease-in);
       }
     }

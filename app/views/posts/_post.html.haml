@@ -12,8 +12,7 @@
     .row.post-top
       .col-md-12.nopadding
         %span.post-meta
-          = distance_of_time_in_words(Time.now - post.created_at)
-          ago
+          = post.created_at.strftime( '%D' )
           |
           %span
             From

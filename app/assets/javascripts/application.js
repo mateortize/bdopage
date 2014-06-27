@@ -16,6 +16,7 @@
 //= require masonry.pkgd.min
 
 $(document).ready(function() {
+    //Masonry
     if ($(document).width() > 980) {
         var container = document.querySelector('#posts .row');
         var msnry = new Masonry( container, {
