@@ -1,52 +1,55 @@
-- if @post.video.present?
-  - if !@post.video.url.blank?
-    = jwplayer_assets
-    = jwplayer({width: @post.video.width, height: @post.video.height, file: @post.video.url, image: @post.video.screenshot})
-  - else
-    .alert.alert-info
-      Video is still in encoding...
+#post-single
+  .container
+    .row
+      .col-md-9.bgwhite
+        - if @post.video.present?
+          - if !@post.video.url.blank?
+            = jwplayer_assets
+            = jwplayer({width: @post.video.width, height: @post.video.height, file: @post.video.url, image: @post.video.screenshot})
+          - else
+            .alert.alert-info
+              Video is still in encoding...
 
-%br
+        %p.post-meta
+          Posted At:
+          %strong
+            = distance_of_time_in_words(Time.now - @post.created_at)
+            ago
 
-%h2
-  = @post.title
+          %br
 
-%p.meta
-  Posted At:
-  %strong
-    = distance_of_time_in_words(Time.now - @post.created_at)
-    ago
-  
-  %br
+          Comments:
+          %strong
+            = @post.comments.count
 
-  Comments:
-  %strong
-    = @post.comments.count
+          %br
 
-  %br
+          Author:
+          %strong
+            = @post.account.full_name
 
-  Author:
-  %strong
-    = @post.account.full_name
+        %h2.post-title
+          = @post.title
 
-.post-content
-  = @post.content
+        .post-content
+          = @post.content
 
-.addthis_sharing_toolbox
+        .addthis_sharing_toolbox
 
-= commontator_thread(@post)
+        = commontator_thread(@post)
 
 
-= content_for :head do
-  %script{:src => "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53aaf0275b415e45", :type => "text/javascript"}
-  - unless @post.blank?
-    %meta{:content => "videopage7.com – #{@post.title}", :property => "og:title"}/
-    %meta{:content => "video.other", :property => "og:type"}/
-    %meta{:content => @post.the_excerpt, :property => "og:description"}/
-    
-    - unless @post.video.blank?
-      %meta{:content => @post.video.screenshot, :property => "og:image"}/
-      %meta{:content => @post.video.url, :property => "og:video:url"}/
-      %meta{:content => @post.video.profile, :property => "og:video:type"}/
-      %meta{:content => @post.video.width, :property => "og:video:width"}/
-      %meta{:content => @post.video.height, :property => "og:video:height"}/
+        = content_for :head do
+          %script{:src => "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53aaf0275b415e45", :type => "text/javascript"}
+          - unless @post.blank?
+            %meta{:content => "videopage7.com – #{@post.title}", :property => "og:title"}/
+            %meta{:content => "video.other", :property => "og:type"}/
+            %meta{:content => @post.the_excerpt, :property => "og:description"}/
+
+            - unless @post.video.blank?
+              %meta{:content => @post.video.screenshot, :property => "og:image"}/
+              %meta{:content => @post.video.url, :property => "og:video:url"}/
+              %meta{:content => @post.video.profile, :property => "og:video:type"}/
+              %meta{:content => @post.video.width, :property => "og:video:width"}/
+              %meta{:content => @post.video.height, :property => "og:video:height"}/
+      = render 'sidebar';
