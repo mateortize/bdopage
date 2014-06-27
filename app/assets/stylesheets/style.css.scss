@@ -30,7 +30,7 @@ body {
   background: $bodybg url('/assets/bgimage.png') center center no-repeat fixed;
   background-size: cover;
   font-family: "Open Sans";
-  font-weight: 400;
+  font-weight: 300;
 }
 .bgwhite {
   background-color: $light;
@@ -44,7 +44,10 @@ body {
   margin: 0!important;
 }
 .mb2 {
-  margin-bottom: 20px;
+  margin-bottom: 20px!important;
+}
+.p3 {
+  padding: 30px!important;
 }
 .shortline {
   height: 3px;
