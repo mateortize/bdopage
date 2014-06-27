@@ -2,6 +2,10 @@
   .post {
     margin-bottom: 30px;
 
+    .bgwhite {
+      padding: 20px 20px 0 20px;
+    }
+
     .post-top {
       margin: 20px 0 10px 0;
     }
@@ -14,6 +18,12 @@
       a {
         font-weight: 600;
         text-transform: uppercase;
+        @include transition(all 300ms ease);
+
+        &:hover {
+          text-decoration: none;
+          color: $dark;
+        }
       }
     }
     .post-meta {
@@ -25,6 +35,49 @@
       img {
         width: 100%;
         height: auto;
+      }
+    }
+    .excerpt {
+      color: $grey5;
+    }
+    .read {
+      display: block;
+      width: calc(100% + 10px)!important;
+      margin: 30px 0 0 -5px!important;
+      padding: 20px;
+      @include transition(all 300ms ease);
+
+      .search-text {
+        opacity: 0;
+        font-size: 1.2em;
+        text-transform: uppercase;
+        font-weight: 300;
+        @include transition(opacity 400ms 150ms ease-in);
+      }
+
+      &:hover {
+
+        text-decoration: none;
+
+        .search-text {
+          opacity: 1;
+        }
+        .searchicon {
+          margin: 1px 180px 0 0;
+        }
+
+        span {
+          color: $primary;
+        }
+      }
+
+      padding: 20px;
+      margin: 10px 0 0 0;
+
+      .searchicon {
+        display: block;
+        font-size: 1.5em;
+        @include transition(margin 400ms 150ms ease-in);
       }
     }
   }

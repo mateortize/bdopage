@@ -10,10 +10,12 @@
       .col-md-12.nopadding
         %span.post-meta
           = distance_of_time_in_words(Time.now - post.created_at)
-          ago /
+          ago
+          |
           %span
             From
             = link_to post.account.full_name, account_path(post.account)
+            |
           %span
             = post.comments.count
             comments
@@ -24,7 +26,8 @@
     .row.excerpt
       .col-md-12
         = post.the_excerpt
-    .row.comments
-      .col-md-12
-        = post.comments.count
-        comments
+    .row
+      %a.read.text-right{:href => post_path(post), :alt => ''}
+        %span.text-left.pull-left.search-text Continue reading
+        %span.glyphicon.glyphicon-search.searchicon
+        %span.clearfix
