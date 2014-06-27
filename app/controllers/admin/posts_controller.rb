@@ -19,15 +19,22 @@ class Admin::PostsController < Admin::BaseController
 
   def update
     @post = current_account.posts.find(params[:id])
-    @post.update_attributes(post_params)
-    redirect_to admin_posts_path
+    if @post.update_attributes(post_params)
+      redirect_to admin_posts_path
+    else
+      render :edit
+    end
   end
 
   def create
     @post = Post.new(post_params)
     @post.account = current_account
-    @post.save
-    redirect_to admin_posts_path
+    if @post.save
+      redirect_to admin_posts_path
+    else
+      render :edit
+    end
+    
   end
 
   def available_videos

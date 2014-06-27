@@ -15,12 +15,12 @@ class UpdateVideoState
       unless video.encodings.blank?
         video.encodings.each do |encoding|
           if encoding.status == "success"
-            video.update_video_profile!(encoding)
+            video.update_video_profile!(encoding) if !video.encoded?
           else
-            Sidekiq.logger.warn "Failed."
+            Sidekiq.logger.warn "Failed to encode: #{msg['error_message']}"
+
           end
         end
-        video.save
       end
     end
   end
