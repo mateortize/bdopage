@@ -19,7 +19,9 @@
   = f.form_group do
     - if @post.video.present?
       = link_to 'Video Setting', edit_post_video_path(@post, @video), class: 'btn btn-default'
-  %hr
+    - else
+      Please upload a video.
+
   = f.form_group do
     - if @post.video.present?
       = f.submit "Publish", class: 'btn btn-primary'
