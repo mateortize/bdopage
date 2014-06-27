@@ -1,7 +1,7 @@
 #top-header {
   height: 100px;
   background-color: $light;
-  @include box-shadow(0 2px 11px 1px lighten($dark, 20));
+  @include box-shadow(0 0px 6px 1px lighten($grey4, 30));
   border: none;
   z-index: 1;
 
@@ -20,7 +20,14 @@
   }
 }
 .topnotice {
-  background: url('/assets/noticeimg.jpg') center -200px no-repeat;
+  background: url('/assets/noticeimg.jpg') center -130px no-repeat;
   background-size: cover;
   height: 420px;
+  padding: 300px 0 0 0;
+
+  h2{
+    color: $light;
+    font-size: 3em;
+    @include text-shadow(0 1px 2px $grey2);
+  }
 }

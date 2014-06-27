@@ -5,6 +5,12 @@
   -o-box-shadow: $boxshadow;
   box-shadow: $boxshadow;
 }
+@mixin text-shadow($textshadow) {
+  -moz-text-shadow: $textshadow;
+  -webkit-text-shadow: $textshadow;
+  -o-text-shadow: $textshadow;
+  text-shadow: $textshadow;
+}
 @mixin transition($transition) {
   -moz-transition: $transition;
   -webkit-transition: $transition;
@@ -29,13 +35,22 @@ body {
 .bgwhite {
   background-color: $light;
   @include box-shadow(0 2px 11px 1px lighten($dark, 30));
-  padding: 40px;
+  padding: 20px;
 }
 .nopadding {
   padding: 0!important;
 }
+.nomargin {
+  margin: 0!important;
+}
 .mb2 {
   margin-bottom: 20px;
+}
+.shortline {
+  height: 3px;
+  background-color: $grey1;
+  width: 30%;
+  margin: 10px 0;
 }
 
 //Font

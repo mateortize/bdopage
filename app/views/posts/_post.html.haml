@@ -1,24 +1,26 @@
 .post.col-md-6
   .bgwhite
-    .row.video-thumb
+    .row.video-thumb.nomargin
       .col-md-12.nopadding
         - if post.video.present?
           = image_tag post.video.screenshot, class: 'img-responsive'
         - else
           = image_tag "http://placehold.it/263x197", id: "video_screenshot", class: "img-responsive"
     .row.post-top
-      .col-md-8
+      .col-md-12.nopadding
+        %span.post-meta
+          = distance_of_time_in_words(Time.now - post.created_at)
+          ago /
+          %span
+            From
+            = link_to post.account.full_name, account_path(post.account)
+          %span
+            = post.comments.count
+            comments
+      .col-md-12.nopadding
         %h2.post-title
           = link_to post.title, post_path(post)
-      .col-md-4.text-right
-        %span.post-date
-          Posted
-          = distance_of_time_in_words(Time.now - post.created_at)
-          ago
-    .row.meta-data
-      .col-md-12
-        %span
-          = link_to post.account.full_name, account_path(post.account)
+        .shortline
     .row.excerpt
       .col-md-12
         = post.the_excerpt
