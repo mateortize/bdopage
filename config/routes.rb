@@ -80,7 +80,9 @@ Rails.application.routes.draw do
   
   resources :accounts
 
-  resources :posts
+  resources :posts do
+    resource :video
+  end
 
   resource :profile
 

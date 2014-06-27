@@ -1,6 +1,6 @@
 #sidebar.col-md-3
   .sidebar-element.bgwhite.nopadding.create-post
     %h3.text-center.nomargin
-      %a.show.p3{:href => '#', :alt => ''}
+      = link_to new_post_path, class:'show p3', alt: '' do
         %span.glyphicon.glyphicon-plus
         %h4 Create new post
