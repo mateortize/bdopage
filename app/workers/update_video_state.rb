@@ -17,7 +17,7 @@ class UpdateVideoState
           if encoding.status == "success"
             video.update_video_profile!(encoding)
           else
-            Sidekiq.logger.warn "Failed: #{encoding.error_message}"
+            Sidekiq.logger.warn "Failed."
           end
         end
         video.save

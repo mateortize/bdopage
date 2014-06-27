@@ -34,6 +34,7 @@ class Video < ActiveRecord::Base
     self.encoded = true
     self.url = encoding.url
     self.file_size = self.panda_video.file_size
+    self.screenshot ||= encoding.screenshots.first
     self.save
   end
 
