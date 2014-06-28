@@ -1,17 +1,19 @@
 class Video < ActiveRecord::Base
-  belongs_to :video
+  belongs_to :post
   belongs_to :account, counter_cache: true
+
+  has_many :encodings, class_name: 'VideoEncoding', foreign_key: 'video_id'
+
   validates_presence_of :panda_video_id
   scope :encoded, -> { where(encoded: true) }
 
-  before_update :update_video_profile
   after_destroy :delete_panda_video
 
   def panda_video
     @panda_video ||= Panda::Video.find(self.panda_video_id)
   end
 
-  def encodings
+  def panda_encodings
     @encodings ||= self.panda_video.encodings
   end
 
@@ -28,31 +30,31 @@ class Video < ActiveRecord::Base
     self.title
   end
 
-  def update_video_profile!(encoding)
-    self.profile = encoding.profile_name
-    self.height = encoding.height
+  def create_video_encoding(encoding)
+    self.encodings.create_from_panda_encoding(encoding)
     self.width = encoding.width
+    self.height = encoding.height
+    self.file_size = encoding.file_size
+    self.screenshot = encoding.screenshots.first
     self.encoded = true
-    self.url = encoding.url
-    self.file_size = self.panda_video.file_size
-    self.screenshot ||= encoding.screenshots.first
     self.save
   end
 
-  private
-
-  def update_video_profile
-    if self.profile_changed?
-      encoding = self.encodings[self.profile]
-      if !encoding.blank?
-        self.height ||= encoding.height
-        self.width ||= encoding.width
-        self.encoded = true
-        self.url = encoding.url
-        self.file_size ||= self.panda_video.file_size
+  def refresh
+    video = self.panda_video
+    unless video.status == 'fail'
+      encodings = video.encodings
+      unless encodings.blank?
+        encodings.each do |encoding|
+          if encoding.status == "success"
+            self.create_video_encoding(encoding)
+          end
+        end
       end
     end
   end
+
+  private
 
   def delete_panda_video
     panda_video.delete

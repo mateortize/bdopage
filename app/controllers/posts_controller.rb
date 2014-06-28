@@ -4,9 +4,9 @@ class PostsController < ApplicationController
   
   def index
     if @current_author.blank?
-      @posts = Post.all.order("created_at desc").page(params[:page]).per(12)
+      @posts = Post.all.order("created_at desc").page(params[:page]).per(2)
     else
-      @posts = current_author.posts.order("created_at desc").page(params[:page]).per(12)
+      @posts = current_author.posts.order("created_at desc").page(params[:page]).per(2)
     end
   end
 
@@ -15,6 +15,9 @@ class PostsController < ApplicationController
   end
 
   def show
+    unless @post.video.blank?
+      @post.video.refresh unless @post.video.encoded?
+    end
   end
 
   def update

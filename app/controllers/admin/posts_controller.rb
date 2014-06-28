@@ -19,9 +19,9 @@ class Admin::PostsController < Admin::BaseController
   def update
     @post = current_account.posts.find(params[:id])
     if @post.update_attributes(post_params)
-        unless @post.has_video?
-          redirect_to new_admin_post_video_path(@post)
-        end
+      unless @post.has_video?
+        redirect_to new_admin_post_video_path(@post)
+      end
     end
     render :edit
   end

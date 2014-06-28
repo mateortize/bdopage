@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   
   has_one :video
   belongs_to :account
-
+  
   validates :title, presence: true
   validates :account_id, presence: true
 
@@ -20,6 +20,14 @@ class Post < ActiveRecord::Base
   def the_excerpt
     return self.excerpt if self.excerpt.present?
     self.content.html_safe.truncate(100)
+  end
+
+  def published?
+    unless self.video.blank?
+      return self.video.encoded?
+    else
+      return !self.video_url.blank?
+    end
   end
 
   def has_video?

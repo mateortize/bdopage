@@ -22,19 +22,20 @@
             Video is still in encoding, It could take for a while. Please be patient.
         - else
           = f.form_group do
-            %strong
+            = image_tag @video.screenshot, class: "img-responsive"
+          - @video.encodings.each do |encoding|
+            = f.form_group do
+              %strong
+                = encoding.profile_name
+              ,
               = "#{@video.width} x #{@video.height}"
               ,
-              = number_to_human_size(@video.file_size)
-          = f.form_group do
-            = image_tag @video.screenshot, class: "img-responsive"
-            
+              = number_to_human_size(encoding.file_size)
  
         = f.form_group do
-          = f.submit "Save", class: "btn btn-primary"
-          - unless @video.new_record?
-            = link_to 'Upload New', admin_post_video_path(@post, @video), method: :delete, data: { comfirm: 'Are you sure to remove?'}, class: 'btn btn-danger'
-          = link_to 'Back', edit_admin_post_path(@post), class: 'btn'
+          = link_to 'Back', edit_admin_post_path(@post), class: 'btn btn-default'
+          = link_to 'Refresh', refresh_admin_post_video_path(@post), class: 'btn btn-warning'
+          = link_to 'Remove Video', admin_post_video_path(@post, @video), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" }
 
 
   - if @video.new_record?

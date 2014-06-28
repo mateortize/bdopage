@@ -4,7 +4,10 @@
     %title Videopage7
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application'
+    %link{:href => "//releases.flowplayer.org/5.4.6/skin/minimalist.css", :rel => "stylesheet"}/
+    %script{:src => "//releases.flowplayer.org/5.4.6/commercial/flowplayer.min.js"}
     = csrf_meta_tags
+
     = yield :head
   %body
     = render "layouts/header_public"

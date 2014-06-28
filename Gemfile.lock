@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/scottdavis/flowplayer-gem.git
+  revision: 8bb5fcdc1d0c038abdf9c144e8911f560cd66bbd
+  specs:
+    flowplayer (0.1.3)
+      json
+
+GIT
   remote: git://github.com/siera26/omniauth-cube7.git
   revision: 772039fe3a4c0008c612bfb71c5ce8752a398604
   specs:
@@ -85,8 +92,6 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.3)
-    flowplayer (0.1.4)
-      json
     fog (1.3.1)
       builder
       excon (~> 0.13.0)
@@ -274,7 +279,7 @@ DEPENDENCIES
   commontator (~> 4.6.0)
   devise
   factory_girl_rails
-  flowplayer
+  flowplayer!
   fog (~> 1.3.1)
   guard-rspec
   haml

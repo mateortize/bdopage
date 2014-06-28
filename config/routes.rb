@@ -68,7 +68,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts do
-      resource :video
+      resource :video do
+        get :refresh, on: :collection
+      end
     end
     
     resource :profile
@@ -79,11 +81,7 @@ Rails.application.routes.draw do
   get 'account_root' => 'admin/posts#index', as: :account_root
   
   resources :accounts
-
-  resources :posts do
-    resource :video
-  end
-
+  resources :posts
   resource :profile
 
 

@@ -12,14 +12,13 @@ class UpdateVideoState
       # video failed to be uploaded to your bucket
       # Logs go here to show this Issue
     else
-      unless video.encodings.blank?
-        video.encodings.each do |encoding|
+      encodings = video.encodings
+      unless encodings.blank?
+        encodings.each do |encoding|
           if encoding.status == "success"
-            video.update_video_profile!(encoding) if !video.encoded?
-          else
-            Sidekiq.logger.warn "Failed to encode: #{msg['error_message']}"
-
+            video.create_video_encoding(encoding)
           end
+          Sidekiq.logger.warn "Failed to encode: #{msg['error_message']}"
         end
       end
     end

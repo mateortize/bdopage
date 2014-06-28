@@ -22,7 +22,7 @@ gem 'kaminari'
 
 gem 'jwplayer-rails'
 
-gem 'flowplayer'
+gem 'flowplayer', github: 'scottdavis/flowplayer-gem'
 
 gem "auto_html"
 

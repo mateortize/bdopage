@@ -1,7 +1,7 @@
 class Admin::VideosController < Admin::BaseController
   
   before_filter :load_post
-  before_filter :load_video, only: [:update, :destroy, :show, :edit]
+  before_filter :load_video, only: [:update, :destroy, :show, :edit, :refresh]
 
   set_tab :video
 
@@ -13,6 +13,11 @@ class Admin::VideosController < Admin::BaseController
   end
   
   def edit
+  end
+
+  def refresh
+    @video.refresh
+    redirect_to edit_admin_post_video_path(@post, @video)
   end
 
   def update
