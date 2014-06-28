@@ -6,15 +6,6 @@ class ApplicationController < ActionController::Base
   
   before_filter :restrict_access
   before_filter :load_current_author
-  before_filter :load_posts
-  
-  def load_posts
-    if @current_author.blank?
-      @posts = Post.all.order("created_at desc").page(params[:page]).per(5)
-    else
-      @posts = current_author.posts.order("created_at desc").page(params[:page]).per(5)
-    end
-  end
 
   def load_current_author
     setting = AccountSetting.where(blog_alias: request.subdomain).first

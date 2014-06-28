@@ -3,6 +3,11 @@ class PostsController < ApplicationController
   before_filter :load_post, only: [:show, :edit]
   
   def index
+    if @current_author.blank?
+      @posts = Post.all.order("created_at desc").page(params[:page]).per(12)
+    else
+      @posts = current_author.posts.order("created_at desc").page(params[:page]).per(12)
+    end
   end
 
   def new
