@@ -22,15 +22,15 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
 //Basic
-html{
-  margin-top: 90px;
-}
 body {
-  padding-top: 10px;
+  padding-top: 120px;
   background: $bodybg url('/assets/bgimage.png') center center no-repeat fixed;
   background-size: cover;
   font-family: "Open Sans";
   font-weight: 300;
+}
+a {
+  color: $secondary;
 }
 .bgwhite {
   background-color: $light;
