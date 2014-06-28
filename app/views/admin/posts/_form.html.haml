@@ -1,49 +1,65 @@
-%p.text-right
-  = link_to "Add New", new_admin_post_path, class: "btn btn-primary"
-  - unless @post.new_record?
-    = link_to "Delete", admin_post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
-%hr
+.container
+  .well
+    = render 'admin/posts/tabs'
+    %br
+    = bootstrap_form_for([:admin, @post], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+      = f.text_field :title
+      = f.text_area :content, rows: 10
+      = f.text_area :excerpt, rows: 5
+      = f.text_field :video_url
+      - unless @post.video_url.blank?
+        = f.form_group do
+          = @post.video_url_html
+      - if @post.video_url.blank?
+        = f.form_group do
+          - unless @post.video.blank?
+            - unless @post.video.encoded?
+              %p
+                %strong Video Status:
+                In porgress
+          - else
+              - unless @post.video.screenshot
+                = image_tag @post.video.screenshot, id: "video_screenshot", class: "img-responsive"
 
-= bootstrap_form_for([:admin, @post], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
-  = f.form_group do
-    = f.hidden_field :video_id, id: 'video_id'
-    .row
-      .col-sm-6
-        - if @post.video.blank?
-          = image_tag "http://placehold.it/350x150", id: "video_screenshot", class: "img-responsive hide"
+        = f.form_group do
+          - if @post.video.present?
+            = link_to 'Edit Video', edit_admin_post_video_path(@post, @video), class: 'btn btn-default'
+          - else
+            = link_to 'Upload Video', edit_admin_post_video_path(@post, @video), class: 'btn btn-default'
+
+
+
+      %hr
+
+      = f.form_group do
+        - if @post.video.present?
+          = f.submit "Publish", class: 'btn btn-primary'
         - else
-          = image_tag @post.video.screenshot, id: "video_screenshot", class: "img-responsive"
-  = f.form_group do
-    = link_to "Select Video", available_videos_admin_posts_path, id: 'btn_select_video', class: 'btn btn-info'
-    
-  = f.text_field :title
-  = f.text_area :content, rows: 10
-  = f.text_area :excerpt, rows: 5
+          = f.submit "Save draft", class: 'btn btn-primary'
+        - unless @post.new_record?
+          = link_to "Delete", post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
 
-  %hr
-  = f.form_group do
-    = f.submit "Save Post", class: 'btn btn-primary'
-    = link_to 'Cancel', admin_posts_path, class: 'btn btn-default'
+        = link_to "Back", posts_path(@post), class: 'btn'
 
-= content_for :javascript do
-  :javascript
-    var available_videos_window = null;
-    $(function(){
-      $('#btn_select_video').on("click", function(e){
-        e.preventDefault();
-        available_videos_window = window.open($(this).attr('href'), '_blank', "width=768, height=600");
+    = content_for :javascript do
+      :javascript
+        var available_videos_window = null;
+        $(function(){
+          $('#btn_select_video').on("click", function(e){
+            e.preventDefault();
+            available_videos_window = window.open($(this).attr('href'), '_blank', "width=768, height=600");
 
-      });
-    });
+          });
+        });
 
-    function close_window()
-    {
-      available_videos_window.close();
-    }
+        function close_window()
+        {
+          available_videos_window.close();
+        }
 
-    function select_video(video)
-    {
-      $('#video_id').val(video.id);
-      $('#video_screenshot').attr('src', video.screenshot).removeClass('hide');
-      closeWindow();
-    }
+        function select_video(video)
+        {
+          $('#video_id').val(video.id);
+          $('#video_screenshot').attr('src', video.screenshot).removeClass('hide');
+          closeWindow();
+        }

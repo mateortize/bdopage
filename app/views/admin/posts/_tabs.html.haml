@@ -1,0 +1,16 @@
+%h2
+  - if @post.new_record?
+    New Post
+  - else
+    Edit Post
+
+= tabs_tag :open_tabs=>{ class: 'nav nav-tabs' } do |tab|
+  - unless @post.new_record?
+    = tab.post 'Primary', edit_admin_post_path(@post)
+    - if @post.video.blank?
+      = tab.video 'Video', new_admin_post_video_path(@post)
+    - else
+      = tab.video 'Video', edit_admin_post_video_path(@post, @video)
+  - else
+    = tab.post 'Primary', new_admin_post_path
+    = tab.video 'Video', new_admin_post_path

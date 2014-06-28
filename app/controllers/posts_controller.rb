@@ -15,7 +15,11 @@ class PostsController < ApplicationController
   def update
     @post = current_account.posts.find(params[:id])
     if @post.update_attributes(post_params)
-      redirect_to new_post_video_path(@post)
+      unless @post.video.blank?
+        redirect_to post_path(@post)
+      else
+        redirect_to new_post_video_path(@post)
+      end
     else
       render :edit
     end

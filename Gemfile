@@ -22,6 +22,10 @@ gem 'kaminari'
 
 gem 'jwplayer-rails'
 
+gem 'flowplayer'
+
+gem "auto_html"
+
 gem 'commontator', '~> 4.6.0'
 
 gem 'omniauth-cube7', github: 'siera26/omniauth-cube7'
@@ -39,6 +43,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap_form'
+
+gem 'tabs_on_rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -1,10 +1,11 @@
 class Video < ActiveRecord::Base
-  has_many :posts
+  belongs_to :video
   belongs_to :account, counter_cache: true
   validates_presence_of :panda_video_id
   scope :encoded, -> { where(encoded: true) }
 
   before_update :update_video_profile
+  after_destroy :delete_panda_video
 
   def panda_video
     @panda_video ||= Panda::Video.find(self.panda_video_id)
@@ -51,6 +52,10 @@ class Video < ActiveRecord::Base
         self.file_size ||= self.panda_video.file_size
       end
     end
+  end
+
+  def delete_panda_video
+    panda_video.delete
   end
 
 end

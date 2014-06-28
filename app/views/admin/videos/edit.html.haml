@@ -1,16 +1,2 @@
 %h2 Edit Video
-= bootstrap_form_for([:admin, @video], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
-  = f.text_field :title
-  - if @video.encoded?
-    = f.select :profile, @video.encodings.collect{|e| e.profile_name }
-    %h3 
-      Choose you Video Thumbnail
-    = f.form_group do
-      - @video.screenshots.each do |url|
-        .col-sm-3
-          = f.radio_button :screenshot, url
-          = image_tag url, class: "img-responsive"
-      &nbsp;
-
-  = f.form_group do
-    = f.submit "Save", class: "btn btn-primary"
+= render 'form'

@@ -1,53 +1,63 @@
-%h2 Video
-= bootstrap_form_for [@post, @video], url: post_video_path(@post), html: { role: "form" } do |f|
-  = f.hidden_field :panda_video_id
-  .progress.progress-striped.active
-    #progress-bar.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45", :role => "progressbar", :style => "width: 0%"}
-      %span.sr-only 0% Complete
-  .form-group
-    #browse.btn.btn-primary Choose file
-    #cancel-btn.btn.btn-danger Cancel
+.container
+  .well
+    %h2
+      = @post.title
 
-  - if @video.present? && @video.encoded?
-    = f.select :profile, @video.encodings.collect{|e| e.profile_name }
-    %h3 
-      Choose you Video Thumbnail
-    = f.form_group do
-      - @video.screenshots.each do |url|
-        .col-sm-3
-          = f.radio_button :screenshot, url
-          = image_tag url, class: "img-responsive"
-      &nbsp;
+    = bootstrap_form_for [@post, @video], url: post_video_path(@post), html: { role: "form" } do |f|
+      = f.hidden_field :panda_video_id
+      - unless @video.blank?
+        .progress.progress-striped.active
+          #progress-bar.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45", :role => "progressbar", :style => "width: 0%"}
+            %span.sr-only 0% Complete
+        .form-group
+          #browse.btn.btn-primary Choose file
+          #cancel-btn.btn.btn-danger Cancel
+          = link_to 'Back', edit_post_path(@post), class: 'btn'
 
-    = f.form_group do
-      = f.submit "Publish", class: "btn btn-primary"
+      - if @video.present? && @video.encoded?
+        = f.select :profile, @video.encodings.collect{|e| e.profile_name }
+        %h5 
+          Video thumbnails
+        = f.form_group do
+          .clearfix
+            - @video.screenshots.each do |url|
+              .col-sm-1
+                = f.radio_button :screenshot, url
+                = image_tag url, class: "img-responsive"
+          &nbsp;
 
-= content_for :javascript do
-  %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
-  :javascript
-    var upl = panda.uploader.init({
-      'buttonId': 'browse',
-      'onQueue': function(files) {
-        $.each(files, function(i, file) {
-          upl.setPayload(file, {'csrf': " form_authenticity_token "});
-        })
-      },
-      'onProgress': function(file, percent) {
-        console.log("progress", percent, "%");
-        $("#progress-bar").css("width", percent + "%");
-      },
-      'onSuccess': function(file, data) {
-        console.log("Hey");
-        $("#video_panda_video_id").val(data.id)
-      },
-      'onError': function(file, message) {
-        console.log("error", message);
-      },
-      'onComplete': function(){
-        $("#new_video").submit();
-      }
-    });
+        = f.form_group do
+          = link_to 'Back', edit_post_path(@post), class: 'btn'
+          = f.submit "Save", class: "btn btn-primary"
+          = link_to 'Remove', post_video_path(@post, @video), method: 'destroy', data: { comfirm: 'Are you sure to remove?'}, class: 'btn btn-danger'
 
-    $("#cancel-btn").click(function() {
-      upl.cancel(file);
-    });
+  - unless @video.blank?
+    = content_for :javascript do
+      %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
+      :javascript
+        var upl = panda.uploader.init({
+          'buttonId': 'browse',
+          'onQueue': function(files) {
+            $.each(files, function(i, file) {
+              upl.setPayload(file, {'csrf': " form_authenticity_token "});
+            })
+          },
+          'onProgress': function(file, percent) {
+            console.log("progress", percent, "%");
+            $("#progress-bar").css("width", percent + "%");
+          },
+          'onSuccess': function(file, data) {
+            console.log("Hey");
+            $("#video_panda_video_id").val(data.id)
+          },
+          'onError': function(file, message) {
+            console.log("error", message);
+          },
+          'onComplete': function(){
+            $("#new_video").submit();
+          }
+        });
+
+        $("#cancel-btn").click(function() {
+          upl.cancel(file);
+        });

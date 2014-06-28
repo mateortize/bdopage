@@ -7,7 +7,6 @@ class VideosController < ApplicationController
   end
   
   def edit
-
   end
 
   def new

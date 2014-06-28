@@ -68,9 +68,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts do
-      get 'available_videos', on: :collection
+      resource :video
     end
-    resources :videos
+    
     resource :profile
     resource :setting
     get '/' => 'posts#index'
