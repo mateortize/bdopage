@@ -52,6 +52,9 @@ a {
 .mb2 {
   margin-bottom: 20px!important;
 }
+.mt2 {
+  margin-top: 20px;
+}
 .p3 {
   padding: 30px!important;
 }
@@ -91,7 +94,46 @@ a {
   }
 }
 
+//Nav tabs
+.nav,
+.nav-tabs {
+  margin-bottom: 20px;
+  border-bottom: 1px solid $grey1;
+
+  a, span {
+    display: block;
+    padding: 10px 15px;
+    color: $secondary;
+  }
+  a {
+    @include transition(all 300ms ease);
+    color: $grey3;
+
+    &:hover {
+      background-color: $secondary!important;
+      color: $light;
+    }
+  }
+}
+
+//Forms
+textarea {
+  resize: none;
+  padding: 10px!important;
+}
+label {
+  color: $secondary;
+}
+
 //Font
 h2, h3, h4, h5{
   color: $secondary;
+}
+
+//Tables
+table {
+
+  td {
+    font-size: .9em;
+  }
 }

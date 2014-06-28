@@ -119,7 +119,7 @@
   }
 }
 // Responsive videos
-.video {
+.video-container {
   position: relative;
   padding-bottom: 56%;
   padding-top: 30px;
@@ -127,31 +127,12 @@
   overflow: hidden;
 }
 
-.video iframe,
-.video object,
-.video embed {
+.video-container iframe,
+.video-container object,
+.video-container embed {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-}
-.edit-post {
-
-  .nav,
-  .nav-tabs {
-
-    a, span {
-      display: block;
-      padding: 10px 15px;
-      color: $secondary;
-    }
-    a {
-
-      &:hover {
-        background-color: $secondary;
-        color: $light;
-      }
-    }
-  }
 }

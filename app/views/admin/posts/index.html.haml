@@ -2,21 +2,24 @@
   .row
     .col-md-12
       .bgwhite
-        %h2 Your posts
-        .shortline
-        %p.text-right
+        %h2.pull-left Your posts
+        %p.text-right.pull-right.mt2
           = link_to "Add New", new_admin_post_path, class: "btn btn-primary"
+        %span.clearfix
+        .shortline
 
-        %table.table
-          %thead
-            %tr
-              %th Screenshot
-              %th Title
-              %th Summary
-              %th Comments
-              %th Created At
-              %th Updated At
-              %th
-          %tbody
-            = render @posts
-        = paginate @posts
+
+        .table-responsive
+          %table.table
+            %thead
+              %tr
+                %th Screenshot
+                %th Title
+                %th Summary
+                %th Comments
+                %th Created
+                %th Updated
+                %th
+            %tbody
+              = render @posts
+          = paginate @posts
