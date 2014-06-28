@@ -1,8 +1,11 @@
-%h2 Account Profile
-%p
-  %strong Name
-  = @current_author.full_name
+.container
+  .row
+    .col-md-12
+      %h2 Account Profile
+      %p
+        %strong Name
+        = @current_author.full_name
 
-%p
-  %strong Email
-  = @current_author.email
+      %p
+        %strong Email
+        = @current_author.email

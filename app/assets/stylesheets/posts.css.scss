@@ -89,3 +89,32 @@
     margin-bottom: 20px;
   }
 }
+.pagination {
+
+  span {
+
+    &.current {
+      color: $light;
+      display: inline-block;
+      padding: 10px 15px;
+      background: $secondary;
+      border: 1px solid lighten($secondary, 10);
+    }
+
+    a {
+      color: $primary;
+      display: inline-block;
+      padding: 10px 15px;
+      background: $light;
+      @include transition(all 300ms ease);
+
+      &:hover {
+        color: $light;
+        background: $secondary;
+
+        text-decoration: none;
+      }
+    }
+
+  }
+}
