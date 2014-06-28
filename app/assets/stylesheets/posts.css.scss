@@ -118,3 +118,40 @@
 
   }
 }
+// Responsive videos
+.video {
+  position: relative;
+  padding-bottom: 56%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+
+.video iframe,
+.video object,
+.video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.edit-post {
+
+  .nav,
+  .nav-tabs {
+
+    a, span {
+      display: block;
+      padding: 10px 15px;
+      color: $secondary;
+    }
+    a {
+
+      &:hover {
+        background-color: $secondary;
+        color: $light;
+      }
+    }
+  }
+}

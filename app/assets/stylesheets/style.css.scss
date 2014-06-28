@@ -17,6 +17,12 @@
   -o-transition: $transition;
   transition: $transition;
 }
+@mixin border-radius($borderradius) {
+  -moz-border-radius: $borderradius;
+  -webkit-border-radius: $borderradius;
+  -o-border-radius: $borderradius;
+  border-radius: $borderradius;
+}
 
 //Load font
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
@@ -54,6 +60,35 @@ a {
   background-color: $grey1;
   width: 30%;
   margin: 10px 0;
+}
+
+//Buttons
+.btn {
+  @include border-radius(0);
+  border: none;
+  @include transition(all 300ms ease);
+
+  &:hover {
+    background-color: $secondary!important;
+  }
+
+  &.btn-primary {
+    background-color: $primary;
+  }
+  &.btn-default,
+  &.btn-back {
+    background-color: $grey2;
+    color: $light;
+  }
+  &.btn-info {
+    background-color: $grey2;
+  }
+  &.btn-danger {
+    &:hover {
+      opacity: .9;
+      background-color: #d9534f!important;
+    }
+  }
 }
 
 //Font
