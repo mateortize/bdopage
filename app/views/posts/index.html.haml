@@ -4,5 +4,7 @@
     #posts.col-md-9
       .row
         = render @posts
-        = paginate @posts
     = render "sidebar";
+  .row
+    .col-md-9
+      = paginate @posts
