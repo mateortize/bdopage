@@ -1,4 +1,19 @@
 #sidebar.col-md-3
+  .sidebar-element.bgwhite.user-shortinfo
+    .row.mb2
+      .col-md-4
+        //Todo: Please insert the user avatar with link to user profile with an if requestion.. if not exist a user profile, show nouserimg.jpg
+        = image_tag 'nouserimage.jpg', :class => 'img-responsive'
+      .col-md-8
+        %h4.user-name
+          //Todo: Please insert the user name as link to user profile
+          User name
+    .row
+      .col-md-12
+        %p.user-shortdesc
+          //Todo: Please insert an excerpt for the user description.
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+          labore et...
   .sidebar-element.bgwhite.nopadding.create-post
     %h3.text-center.nomargin
       = link_to new_admin_post_path, class:'show p3', alt: '' do

@@ -13,26 +13,24 @@
               .alert.alert-info
                 Video is still in encoding...
 
-        %p.post-meta
-          Posted At:
-          %strong
+
+        %span.post-meta
+          %span
+            Posted At:
             = distance_of_time_in_words(Time.now - @post.created_at)
             ago
-
-          %br
-
-          Comments:
-          %strong
+            |
+          %span
+            Comments:
             = @post.comments.count
+            |
+          %span
+            Author:
+            = link_to @post.account.full_name, account_path(@post.account)
 
-          %br
-
-          Author:
-          %strong
-            = @post.account.full_name
-
-        %h2.post-title
+        %span.post-title
           = @post.title
+        .shortline
 
         .post-content
           = @post.content

@@ -1,6 +1,7 @@
 #sidebar {
 
   .sidebar-element {
+    margin-bottom: 15px;
 
     &.create-post {
 
@@ -20,6 +21,9 @@
           }
         }
       }
+    }
+    .user-name {
+      margin-top: 20px;
     }
   }
 }
