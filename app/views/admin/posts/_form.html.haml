@@ -14,12 +14,12 @@
         = f.form_group do
           - unless @post.video.blank?
             - unless @post.video.encoded?
-              %p
-                %strong Video Status:
-                In porgress
+              %strong Video Status:
+              In porgress
+            - unless @post.video.screenshot.blank?
+              = image_tag @post.video.screenshot, id: "video_screenshot", class: "img-responsive"
           - else
-              - unless @post.video.screenshot
-                = image_tag @post.video.screenshot, id: "video_screenshot", class: "img-responsive"
+            No video file.
 
         = f.form_group do
           - if @post.video.present?
