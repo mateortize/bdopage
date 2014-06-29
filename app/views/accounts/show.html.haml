@@ -1,8 +1,14 @@
-%h2 Account Profile
-%p
-  %strong Name
-  = @account.full_name
+#show-profile
+  .container
+    .bgwhite
+      .row
+        .col-md-12
+          %h2 Account Profile
+          .shortline.mb2
+          %p
+            %strong Name
+            = @account.full_name
 
-%p
-  %strong Email
-  = @account.email
+          %p
+            %strong Email
+            = @account.email

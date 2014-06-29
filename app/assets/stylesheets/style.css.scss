@@ -17,6 +17,12 @@
   -o-transition: $transition;
   transition: $transition;
 }
+@mixin border-radius($borderradius) {
+  -moz-border-radius: $borderradius;
+  -webkit-border-radius: $borderradius;
+  -o-border-radius: $borderradius;
+  border-radius: $borderradius;
+}
 
 //Load font
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
@@ -46,6 +52,9 @@ a {
 .mb2 {
   margin-bottom: 20px!important;
 }
+.mt2 {
+  margin-top: 20px;
+}
 .p3 {
   padding: 30px!important;
 }
@@ -56,7 +65,87 @@ a {
   margin: 10px 0;
 }
 
+//Buttons
+.btn {
+  @include border-radius(0);
+  border: none;
+  @include transition(all 300ms ease);
+
+  &:hover {
+    background-color: $secondary!important;
+  }
+
+  &.btn-primary {
+    background-color: $primary;
+  }
+  &.btn-default,
+  &.btn-back {
+    background-color: $grey2;
+    color: $light;
+  }
+  &.btn-info {
+    background-color: $grey2;
+  }
+  &.btn-danger {
+    &:hover {
+      opacity: .9;
+      background-color: #d9534f!important;
+    }
+  }
+}
+
+//Nav tabs
+.nav,
+.nav-tabs {
+  margin-bottom: 20px;
+  border-bottom: 1px solid $grey1;
+
+  a, span {
+    display: block;
+    padding: 10px 15px;
+    color: $secondary;
+  }
+  a {
+    @include transition(all 300ms ease);
+    color: $grey3;
+
+    &:hover {
+      background-color: $secondary!important;
+      color: $light;
+    }
+  }
+}
+
+//Forms
+textarea {
+  resize: none;
+  padding: 10px!important;
+}
+label {
+  color: $secondary;
+}
+
 //Font
 h2, h3, h4, h5{
   color: $secondary;
+}
+
+//Tables
+table {
+
+  td {
+    font-size: .9em;
+  }
+}
+
+//Alerts
+.alert {
+  background-color: $light;
+  color: $primary;
+  position: fixed;
+  width: 50%;
+  margin-left: -25%;
+  left: 50%;
+  top: 25px;
+  z-index: 1;
 }

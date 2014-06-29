@@ -4,9 +4,9 @@ class PostsController < ApplicationController
   
   def index
     if @current_author.blank?
-      @posts = Post.all.order("created_at desc").page(params[:page]).per(2)
+      @posts = Post.all.order("created_at desc").page(params[:page]).per(12)
     else
-      @posts = current_author.posts.order("created_at desc").page(params[:page]).per(2)
+      @posts = current_author.posts.order("created_at desc").page(params[:page]).per(12)
     end
   end
 

@@ -1,16 +1,22 @@
-%h2 Sign in
-= bootstrap_form_for(resource, as: resource_name, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: session_path(resource_name)) do |f|
-  = f.email_field :email
-  = f.password_field :password
+#sign-in
+  .container
+    .bgwhite
+      .row
+        .col-md-12
+          %h2 Sign in
+          .shortline.mb2
+          = bootstrap_form_for(resource, as: resource_name, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: session_path(resource_name)) do |f|
+            = f.email_field :email
+            = f.password_field :password
 
-  = f.form_group do
-    - if devise_mapping.rememberable?
-      = f.check_box :remember_me
+            = f.form_group do
+              - if devise_mapping.rememberable?
+                = f.check_box :remember_me
 
-  = f.form_group do
-    = f.submit "Sign in"
-    = render "devise/shared/links"
+            = f.form_group do
+              = f.submit "Sign in"
+              = render "devise/shared/links"
 
-  = f.form_group do
-    %p
-      = link_to "Sign in with BAIO NG+", "/auth/bonofa"
+            = f.form_group do
+              %p
+                = link_to "Sign in with BAIO NG+", "/auth/bonofa"

@@ -2,16 +2,17 @@
   .container
     .row
       .col-md-9.bgwhite
-        - unless @post.video_url.blank?
-          = @post.video_url_html
-        - else
-          - if @post.video.present?
-            - if !@post.video.url.blank?
-              = jwplayer_assets
-              = jwplayer({width: @post.video.width, height: @post.video.height, file: @post.video.url, image: @post.video.screenshot})
-            - else
-              .alert.alert-info
-                Video is still in encoding...
+        .video-container
+          - unless @post.video_url.blank?
+            = @post.video_url_html
+          - else
+            - if @post.video.present?
+              - if !@post.video.url.blank?
+                = jwplayer_assets
+                = jwplayer({width: @post.video.width, height: @post.video.height, file: @post.video.url, image: @post.video.screenshot})
+              - else
+                .alert.alert-info
+                  Video is still in encoding...
 
 
         %span.post-meta

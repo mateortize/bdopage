@@ -2,13 +2,14 @@
   .bgwhite
     .row.video-thumb.nomargin
       .col-md-12.nopadding
-        - unless post.video_url.blank?
-          = post.video_url_html
-        - else
-          - if post.video.present? and post.video.encoded?
-            %video{preload: "auto", poster: post.video.screenshot, controls: true, width:'100%'}
-              - post.video.encodings.each do |encoding|
-                %source{:src => encoding.url, :type => encoding.profile_name}/
+        .video-container
+          - unless post.video_url.blank?
+            = post.video_url_html
+          - else
+            - if post.video.present? and post.video.encoded?
+              %video{preload: "auto", poster: post.video.screenshot, controls: true, width:'100%'}
+                - post.video.encodings.each do |encoding|
+                  %source{:src => encoding.url, :type => encoding.profile_name}/
 
     .row.post-top
       .col-md-12.nopadding

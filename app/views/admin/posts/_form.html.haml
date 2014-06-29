@@ -1,15 +1,16 @@
-.container
-  .well
-    = render 'admin/posts/tabs'
-    %br
-    = bootstrap_form_for([:admin, @post], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9") do |f|
+= render 'admin/posts/tabs'
+%br
+= bootstrap_form_for([:admin, @post], layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f|
+  .row
+    .col-md-6
       = f.text_field :title
       = f.text_area :content, rows: 10
       = f.text_area :excerpt, rows: 5
+    .col-md-6
       = f.text_field :video_url
       = f.form_group do
         .help
-          %p Please input youtubue or vimeo url, OR just upload your video.
+          %p Please input youtubue or vimeo url, or just upload your video.
       - unless @post.video_url.blank?
         = f.form_group do
           = @post.video_url_html
@@ -36,9 +37,10 @@
 
       %hr
 
-      = f.form_group do
-        = f.submit "Publish", class: 'btn btn-primary'
-        - unless @post.new_record?
-          = link_to "Delete", post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
+      .text-right
+        = f.form_group do
+          = f.submit "Publish", class: 'btn btn-primary'
+          - unless @post.new_record?
+            = link_to "Delete", post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
 
-        = link_to "Back", posts_path(@post), class: 'btn'
+          = link_to "Back", admin_path(@admin), class: 'btn btn-default'
