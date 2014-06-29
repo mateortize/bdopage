@@ -22,7 +22,10 @@
             Video is still in encoding, It could take for a while. Please be patient.
         - else
           = f.form_group do
-            = image_tag @video.screenshot, class: "img-responsive"
+            %video{ poster: @video.screenshot, controls: true, width: @video.width, height: @video.height, autoplay: false }
+              - @video.encodings.each do |encoding|
+                %source{:src => encoding.url, :type => encoding.mime_type}/
+
           - @video.encodings.each do |encoding|
             = f.form_group do
               %strong
