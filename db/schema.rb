@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628133617) do
+ActiveRecord::Schema.define(version: 20140629054728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140628133617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.text     "description"
   end
 
   add_index "account_profiles", ["account_id"], name: "index_account_profiles_on_account_id", using: :btree
@@ -111,6 +112,19 @@ ActiveRecord::Schema.define(version: 20140628133617) do
 
   add_index "commontator_threads", ["commontable_id", "commontable_type"], name: "index_commontator_threads_on_c_id_and_c_type", unique: true, using: :btree
 
+  create_table "follows", force: true do |t|
+    t.integer  "followable_id",                   null: false
+    t.string   "followable_type",                 null: false
+    t.integer  "follower_id",                     null: false
+    t.string   "follower_type",                   null: false
+    t.boolean  "blocked",         default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
+  add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -133,6 +147,9 @@ ActiveRecord::Schema.define(version: 20140628133617) do
     t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.string   "panda_video_id"
+    t.string   "mime_type"
   end
 
   add_index "video_encodings", ["video_id"], name: "index_video_encodings_on_video_id", using: :btree

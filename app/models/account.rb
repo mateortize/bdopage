@@ -5,6 +5,8 @@ class Account < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   acts_as_commontator
+  acts_as_followable
+  acts_as_follower
   
   has_many :posts
   has_many :videos

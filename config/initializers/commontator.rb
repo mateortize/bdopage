@@ -35,7 +35,7 @@ Commontator.configure do |config|
   # Arguments: a user (acts_as_commontator)
   # Returns: the user's name (String)
   # Default: lambda { |user| I18n.t('commontator.anonymous') } (all users are anonymous)
-  config.user_name_proc = lambda { |user| I18n.t('commontator.anonymous') }
+  config.user_name_proc = lambda { |user| user.full_name }
 
   # user_link_proc
   # Type: Proc
@@ -64,8 +64,13 @@ Commontator.configure do |config|
   #            view.commontator_gravatar_image_tag(
   #              user, 1, :s => 60, :d => 'mm') }
   config.user_avatar_proc = lambda { |user, view|
-                                     view.commontator_gravatar_image_tag(
-                                       user, 1, :s => 60, :d => 'mm') }
+                                    if (user.profile.avatar)
+                                      return view.image_tag(user.profile.avatar)
+                                    else
+                                      return view.commontator_gravatar_image_tag(
+                                       user, 1, :s => 60, :d => 'mm') 
+                                    end
+                                   }
 
   # user_email_proc
   # Type: Proc

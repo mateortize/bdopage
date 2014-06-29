@@ -43,6 +43,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap_form'
 
 gem 'tabs_on_rails'
+gem 'acts_as_follower'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

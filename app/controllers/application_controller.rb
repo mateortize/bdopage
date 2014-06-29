@@ -8,13 +8,9 @@ class ApplicationController < ActionController::Base
   before_filter :load_current_author
 
   def load_current_author
-    setting = AccountSetting.where(blog_alias: request.subdomain).first
-    @current_author = setting.account unless setting.blank?
+    @current_author = @account_setting.account unless @account_setting.blank?
+    @current_author ||= current_account
     return @current_author
-  end
-
-  def current_guest
-    current_account
   end
 
   def current_author
@@ -29,7 +25,8 @@ class ApplicationController < ActionController::Base
 
   def restrict_access
     if request.subdomain.present? && request.subdomain != "www"
-      raise ActionController::RoutingError.new('Not Found') if AccountSetting.where(blog_alias: request.subdomain).blank?
+      @account_setting = AccountSetting.where(blog_alias: request.subdomain).first
+      raise ActionController::RoutingError.new('Not Found') if @account_setting.blank?
     end
   end
 

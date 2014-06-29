@@ -8,8 +8,9 @@
     %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
   %body
     .container
-      = render "layouts/header_public"
+      = render "layouts/header_account"
       = render "/shared/flashes"
-      = yield
+      .bgwhite
+        = yield
 
     = yield :javascript

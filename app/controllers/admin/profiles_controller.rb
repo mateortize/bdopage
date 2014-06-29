@@ -34,7 +34,7 @@ class Admin::ProfilesController < Admin::BaseController
   private
 
   def profile_params
-      params.require(:account_profile).permit(:first_name,:last_name, :avatar, :remove_avatar)
+      params.require(:account_profile).permit(:first_name,:last_name, :avatar, :remove_avatar, :description)
   end
 
 end

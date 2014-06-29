@@ -6,6 +6,7 @@
     = f.form_group do
       = image_tag(@profile.avatar_url)
       = f.check_box :remove_avatar
+  = f.text_area :description
   %hr
   = f.form_group do
     = f.submit "Save", class: 'btn btn-primary'

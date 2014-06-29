@@ -5,7 +5,7 @@ class Admin::BaseController < ActionController::Base
 
   before_filter :restrict_access
 
-  layout 'backend'
+  layout 'admin'
 
   private
 

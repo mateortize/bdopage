@@ -34,6 +34,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts_as_follower (0.2.1)
     arel (5.0.1.20140414130214)
     auto_html (1.6.4)
       redcarpet (~> 3.1)
@@ -264,6 +265,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_follower
   auto_html
   binding_of_caller
   bootstrap-sass (~> 3.1.1)

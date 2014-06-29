@@ -1,73 +1,71 @@
-.container
-  .well
-    = render 'admin/posts/tabs'
-    %br
-    = bootstrap_form_for [:admin, @post, @video], url: admin_post_video_path(@post), layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", html: { role: "form" } do |f|
-      = f.hidden_field :panda_video_id
-      - if @video.new_record?
-        .row
-          %label.control-label.col-sm-3
-            File
-          .col-sm-9
-            .progress.progress-striped.active
-              #progress-bar.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45", :role => "progressbar", :style => "width: 0%"}
-                %span.sr-only 0% Complete
-            .clearfix
-              #browse.btn.btn-primary Choose file
-              #cancel-btn.btn.btn-danger Cancel
-
-      - if @video.panda_video_id
-        - unless @video.encoded?
-          .alert.alert-info
-            Video is still in encoding, It could take for a while. Please be patient.
-        - else
-          = f.form_group do
-            %video{ poster: @video.screenshot, controls: true, width: @video.width, height: @video.height, autoplay: false }
-              - @video.encodings.each do |encoding|
-                %source{:src => encoding.url, :type => encoding.mime_type}/
-
-          - @video.encodings.each do |encoding|
-            = f.form_group do
-              %strong
-                = encoding.profile_name
-              ,
-              = "#{@video.width} x #{@video.height}"
-              ,
-              = number_to_human_size(encoding.file_size)
- 
-        = f.form_group do
-          = link_to 'Back', edit_admin_post_path(@post), class: 'btn btn-default'
-          = link_to 'Refresh', refresh_admin_post_video_path(@post), class: 'btn btn-warning'
-          = link_to 'Remove Video', admin_post_video_path(@post, @video), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" }
-
-
+= render 'admin/posts/tabs'
+%br
+= bootstrap_form_for [:admin, @post, @video], url: admin_post_video_path(@post), layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", html: { role: "form" } do |f|
+  = f.hidden_field :panda_video_id
   - if @video.new_record?
-    = content_for :javascript do
-      %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
-      :javascript
-        var upl = panda.uploader.init({
-          'buttonId': 'browse',
-          'onQueue': function(files) {
-            $.each(files, function(i, file) {
-              upl.setPayload(file, {'csrf': " form_authenticity_token "});
-            })
-          },
-          'onProgress': function(file, percent) {
-            console.log("progress", percent, "%");
-            $("#progress-bar").css("width", percent + "%");
-          },
-          'onSuccess': function(file, data) {
-            console.log("Hey");
-            $("#video_panda_video_id").val(data.id)
-          },
-          'onError': function(file, message) {
-            console.log("error", message);
-          },
-          'onComplete': function(){
-            $("#new_video").submit();
-          }
-        });
+    .row
+      %label.control-label.col-sm-3
+        File
+      .col-sm-9
+        .progress.progress-striped.active
+          #progress-bar.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45", :role => "progressbar", :style => "width: 0%"}
+            %span.sr-only 0% Complete
+        .clearfix
+          #browse.btn.btn-primary Choose file
+          #cancel-btn.btn.btn-danger Cancel
 
-        $("#cancel-btn").click(function() {
-          upl.cancel(file);
-        });
+  - if @video.panda_video_id
+    - unless @video.encoded?
+      .alert.alert-info
+        Video is still in encoding, It could take for a while. Please be patient.
+    - else
+      = f.form_group do
+        %video{ poster: @video.screenshot, controls: true, width: @video.width, height: @video.height, autoplay: false }
+          - @video.encodings.each do |encoding|
+            %source{:src => encoding.url, :type => encoding.mime_type}/
+
+      - @video.encodings.each do |encoding|
+        = f.form_group do
+          %strong
+            = encoding.profile_name
+          ,
+          = "#{@video.width} x #{@video.height}"
+          ,
+          = number_to_human_size(encoding.file_size)
+
+    = f.form_group do
+      = link_to 'Back', edit_admin_post_path(@post), class: 'btn btn-default'
+      = link_to 'Refresh', refresh_admin_post_video_path(@post), class: 'btn btn-warning'
+      = link_to 'Remove Video', admin_post_video_path(@post, @video), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" }
+
+
+- if @video.new_record?
+  = content_for :javascript do
+    %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
+    :javascript
+      var upl = panda.uploader.init({
+        'buttonId': 'browse',
+        'onQueue': function(files) {
+          $.each(files, function(i, file) {
+            upl.setPayload(file, {'csrf': " form_authenticity_token "});
+          })
+        },
+        'onProgress': function(file, percent) {
+          console.log("progress", percent, "%");
+          $("#progress-bar").css("width", percent + "%");
+        },
+        'onSuccess': function(file, data) {
+          console.log("Hey");
+          $("#video_panda_video_id").val(data.id)
+        },
+        'onError': function(file, message) {
+          console.log("error", message);
+        },
+        'onComplete': function(){
+          $("#new_video").submit();
+        }
+      });
+
+      $("#cancel-btn").click(function() {
+        upl.cancel(file);
+      });

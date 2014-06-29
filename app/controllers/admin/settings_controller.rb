@@ -20,7 +20,7 @@ class Admin::SettingsController < Admin::BaseController
   def update
     @setting = current_account.setting
     if @setting.update_attributes(setting_params)
-      redirect_to admin_setting_path
+      redirect_to profile_path
     else
       render :edit
     end 
