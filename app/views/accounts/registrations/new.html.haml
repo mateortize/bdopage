@@ -1,0 +1,15 @@
+.sign-up
+  .container
+    .bgwhite
+      .row
+        .col-md-12
+          %h2 Sign up
+          .shortline.mb2
+          = bootstrap_form_for(resource, as: resource_name, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: registration_path(resource_name)) do |f|
+            = devise_error_messages!
+            = f.email_field :email, autofocus: true
+            = f.password_field :password, autocomplete: "off"
+            = f.password_field :password_confirmation, autocomplete: "off"
+            = f.form_group do
+              = f.submit "Sign up"
+              = render "accounts/shared/links"
