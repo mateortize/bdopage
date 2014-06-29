@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Videopage7
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+    = yield :head
+  %body
+    - if !current_account.blank? && current_account == @current_author
+      = render "layouts/header_admin"
+    - else
+      = render "layouts/header_public"
+
+    .container-fluid
+      = render "/shared/flashes"
+      = yield
+      = yield :javascript
