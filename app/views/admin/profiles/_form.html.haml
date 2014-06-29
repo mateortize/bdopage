@@ -4,7 +4,7 @@
   = f.file_field :avatar
   - if @profile.avatar?
     = f.form_group do
-      = image_tag(@profile.avatar_url)
+      = image_tag(@profile.avatar_url, :class => 'img-responsive')
       = f.check_box :remove_avatar
   = f.text_area :description
   %hr

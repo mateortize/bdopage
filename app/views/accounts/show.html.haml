@@ -3,31 +3,41 @@
     .row
       .col-md-12
         %h2 Account Profile
-        %p
-          %strong Name:
-          = @account.full_name
+        .shortline
+        .row
+          .col-md-8
+            %p
+              %strong Name:
+              = @account.full_name
 
-        %p
-          %strong Email:
-          = @account.email
-        %p
-          = image_tag(@account.profile.avatar_url) unless @account.profile.avatar.blank?
-        %p
-          %strong Blog alias:
-          %strong 
-            = @account.setting.blog_alias
+            %p
+              %strong Email:
+              = @account.email
+            %p
+              %strong Description
+              = @account.profile.description
+            %p
+              %strong Blog alias:
+              %strong
+                = @account.setting.blog_alias
 
-          .help
-            Your blog domain is
-            %strong
-              = link_to "#{@account.setting.blog_alias}.#{request.domain}", "http://#{@account.setting.blog_alias}.#{request.domain}"
-          %p
-            %strong Followers:
-            = @account.followers_count
+              %p.help
+                Your blog domain is
+                %strong
+                  = link_to "#{@account.setting.blog_alias}.#{request.domain}", "http://#{@account.setting.blog_alias}.#{request.domain}"
+              %p
+                %strong Followers:
+                = @account.followers_count
+          .col-md-4
+            .avatar-show
+              = image_tag(@account.profile.avatar_url, :class => 'img-responsive') unless @account.profile.avatar.blank?
+          %span.clearfix
+          %hr
+          .col-md-12
+            - if @account == current_account
+              %p
+                = link_to 'Edit Profile', edit_admin_profile_path, class: 'btn btn-default'
+                = link_to 'Change Blog Alias', edit_admin_setting_path, class: 'btn btn-primary'
+            - elsif !current_account.blank?
+              = link_to 'Follow', follow_account_path(@current_author), method: :put, class: 'btn btn-primary'
 
-        - if @account == current_account
-          %p
-            = link_to 'Edit Profile', edit_admin_profile_path, class: 'btn btn-warning'
-            = link_to 'Change Blog Alias', edit_admin_setting_path, class: 'btn btn-danger'
-        - elsif !current_account.blank?
-          = link_to 'Follow', follow_account_path(@current_author), method: :put, class: 'btn btn-primary'

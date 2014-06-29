@@ -5,9 +5,7 @@
 .alert-alert{
   @extend .alert-danger;
 }
-
 #admin-overview {
-  margin-bottom: 20px;
 
   .shortline {
     margin-bottom: 50px;
@@ -16,12 +14,6 @@
   table {
     margin-top: -20px;
   }
-}
-#new-post {
-  margin-bottom: 20px;
-}
-#edit-post {
-  margin-bottom: 20px;
 }
 .help {
 

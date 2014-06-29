@@ -4,6 +4,12 @@
   @include box-shadow(0 0px 6px 1px lighten($grey4, 30));
   border: none;
   z-index: 1;
+  font-size: 1.2em;
+
+  .nav,
+  .nav-tabs {
+    border: none;
+  }
 
   .navbar-brand {
     padding: 0 0 0 7px;
@@ -21,6 +27,7 @@
 
   .header-content {
     padding-top: 23px;
+    height: 100%;
   }
 }
 .topnotice {
