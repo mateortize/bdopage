@@ -1,0 +1,13 @@
+.sign-up
+  .container
+    .bgwhite
+      .row
+        .col-md-12
+          %h2 Forget your password?
+          .shortline.mb2
+          = bootstrap_form_for(resource, as: resource_name, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: password_path(resource_name), html: { method: :post }) do |f|
+            = devise_error_messages!
+            = f.email_field :email, autofocus: true
+            = f.form_group do
+              = f.submit "Send me reset password instructions"
+              = render "accounts/shared/links"
