@@ -9,6 +9,7 @@ class Notifier < ActionMailer::Base
     @post = Post.find(post_id)
     @author = @post.account
     @follower = Account.find(follower_id)
+    @host = "#{@author.blog_alias}.videopage7.com"
     mail(subject: "[VideoPage7] New post arrived from #{@author.full_name}", to: @follower.email, from: @author.email)
   end
 end

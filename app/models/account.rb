@@ -24,8 +24,8 @@ class Account < ActiveRecord::Base
     "Unknown"
   end
 
-  def blog_url
-    
+  def blog_alias
+    self.setting.blog_alias.strip
   end
 
   def self.from_omniauth(auth)
