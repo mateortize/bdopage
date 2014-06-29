@@ -15,7 +15,8 @@ class Account < ActiveRecord::Base
   has_one :setting, class_name: 'AccountSetting'
   has_one :profile, class_name: 'AccountProfile'
 
-  after_create :create_setting
+  after_create :generate_setting
+  after_create :generate_profile
 
 
   def full_name
@@ -36,13 +37,10 @@ class Account < ActiveRecord::Base
         password_confirmation:  password,
       )
 
-      profile = AccountProfile.create(
-        first_name:             auth.info.first_name,
-        last_name:              auth.info.last_name
-      )
-
-      account.profile = profile
-      account.save
+      profile = account.profile
+      profile.first_name = auth.info.first_name
+      profile.last_name = auth.info.last_name
+      profile.save
     end
 
     account.authentications.build(
@@ -56,8 +54,11 @@ class Account < ActiveRecord::Base
 
   private
 
-  def create_setting
-    self.setting = AccountSetting.create(blog_alias: Time.now.to_i, blog_enabled: false)
-    self.save
+  def generate_setting
+    self.create_setting(blog_alias: Time.now.to_i, blog_enabled: false)
+  end
+
+  def generate_profile
+    self.create_profile()
   end
 end
