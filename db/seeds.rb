@@ -8,4 +8,6 @@
 
 
 account1 = Account.create(email: "a1@email.com", password: "defaultpw")
+account1.create_profile(first_name: "a1", last_name: "a1")
 account2 = Account.create(email: "a2@email.com", password: "defaultpw")
+account2.create_profile(first_name: "a2", last_name: "a2")

@@ -9,7 +9,7 @@
     = yield :head
   %body
     - if !current_account.blank? && current_account == @current_author
-      = render "layouts/header_account"
+      = render "layouts/header_admin"
     - else
       = render "layouts/header_public"
 

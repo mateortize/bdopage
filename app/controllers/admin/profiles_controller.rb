@@ -18,7 +18,7 @@ class Admin::ProfilesController < Admin::BaseController
     @profile.account = current_account
     @profile.save
 
-    redirect_to admin_profile_path
+    redirect_to account_path(current_account)
   end
 
   def edit

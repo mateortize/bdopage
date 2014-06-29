@@ -3,11 +3,15 @@ class AccountsController < ApplicationController
   
   def show
     @account = Account.find(params[:id])
+    @profile = @account.profile
   end
 
   def follow
     @account = Account.find(params[:id])
-    current_account.follow
+    current_account.follow(@account)
+
+    flash[:success] = "Followed successfully."
+    redirect_to :back
   end
   
 end

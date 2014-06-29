@@ -1,20 +1,21 @@
 #sidebar.col-md-3
   - unless @current_author.blank?
-    .sidebar-element.bgwhite.user-shortinfo
-      .row.mb2
-        .col-md-4
-          //Todo: Please insert the user avatar with link to user profile with an if requestion.. if not exist a user profile, show nouserimg.jpg
-          - unless @current_author.profile.avatar.blank?
-            = image_tag @current_author.profile.avatar, :class => 'img-responsive'
-        .col-md-8
-          %h4.user-name
-            = link_to @current_author.full_name, profile_path
-            //Todo: Please insert the user name as link to user profile
-      .row
-        .col-md-12
-          %p.user-shortdesc
-            //Todo: Please insert an excerpt for the user description.
-            = @current_author.profile.description
+    - unless @current_author.profile.blank?
+      .sidebar-element.bgwhite.user-shortinfo
+        .row.mb2
+          .col-md-4
+            //Todo: Please insert the user avatar with link to user profile with an if requestion.. if not exist a user profile, show nouserimg.jpg
+            - unless @current_author.profile.avatar.blank?
+              = image_tag @current_author.profile.avatar, :class => 'img-responsive'
+          .col-md-8
+            %h4.user-name
+              = link_to @current_author.full_name, account_path(@current_author)
+              //Todo: Please insert the user name as link to user profile
+        .row
+          .col-md-12
+            %p.user-shortdesc
+              //Todo: Please insert an excerpt for the user description.
+              = @current_author.profile.description
 
   - if @current_author == current_account        
     .sidebar-element.bgwhite.nopadding.create-post

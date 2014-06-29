@@ -4,11 +4,11 @@
       .col-md-12
         %h2 Account Profile
         %p
-          %strong Name
+          %strong Name:
           = @current_author.full_name
 
         %p
-          %strong Email
+          %strong Email:
           = @current_author.email
         %p
           = image_tag(@current_author.profile.avatar_url) if @current_author.profile.avatar?
@@ -16,6 +16,11 @@
           %strong Blog alias:
           %strong 
             = @current_author.setting.blog_alias
+
+          .help
+            Your blog domain is
+            %strong
+              = link_to "#{@current_author.setting.blog_alias}.#{request.domain}", "http://#{@current_author.setting.blog_alias}.#{request.domain}"
 
         - if @current_author == current_account
           %p

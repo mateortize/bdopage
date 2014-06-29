@@ -2,11 +2,16 @@ class Post < ActiveRecord::Base
   include AutoHtml
   acts_as_commontable
   
+
   has_one :video
   belongs_to :account
+
+  scope :published, -> { where(published: true) }
   
   validates :title, presence: true
   validates :account_id, presence: true
+
+  after_save :send_new_post_notification
 
   auto_html_for :video_url do
     html_escape
@@ -33,4 +38,13 @@ class Post < ActiveRecord::Base
   def has_video?
     self.video.present? or self.video_url.present?
   end
+
+  def send_new_post_notification
+    if self.published_changed?
+      self.account.followers.each do |account|
+        Notifier.delay.send_new_post_to_follower(self.id, account.id)
+      end
+    end
+  end
+
 end

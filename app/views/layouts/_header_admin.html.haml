@@ -17,7 +17,7 @@
           = link_to "Sign out", destroy_account_session_path, :method => 'delete'
         %p.navbar-text.navbar-right
           Signed in as
-          %a{:href => '#' }
+          %a{:href => account_path(current_account) }
             = current_account.full_name
       - else
         %p.navbar-text.navbar-right

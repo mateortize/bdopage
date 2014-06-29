@@ -1,0 +1,10 @@
+%p Dear #{@follower.full_name},
+%p #{@author.full_name} posted a new article.
+%p
+  %strong="Title: #{@post.title}"
+%p
+  = @post.excerpt
+%p
+  Please click here to read full article.
+  
+= render 'email_sig'

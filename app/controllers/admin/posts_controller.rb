@@ -19,8 +19,9 @@ class Admin::PostsController < Admin::BaseController
   def update
     @post = current_account.posts.find(params[:id])
     if @post.update_attributes(post_params)
-      unless @post.has_video?
-        redirect_to new_admin_post_video_path(@post)
+      if(params[:commit] == "Publish")
+        @post.published = true
+        @post.save
       end
     end
     render :edit
@@ -29,11 +30,11 @@ class Admin::PostsController < Admin::BaseController
   def create
     @post = Post.new(post_params)
     @post.account = current_account
+    @post.published = true if(params[:commit] == "Publish")
     if @post.save
-      redirect_to new_admin_post_video_path(@post)
-    else
-      render :edit
+      flash[:success] = "Published successfully."
     end
+    render :edit
   end
 
   def destroy

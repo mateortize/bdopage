@@ -78,9 +78,12 @@ Rails.application.routes.draw do
     get '/' => 'posts#index'
   end
 
-  get 'account_root' => 'admin/posts#index', as: :account_root
+  get '' => 'posts#index', as: :account_root
   
-  resources :accounts
+  resources :accounts do
+    put :follow, on: :member
+  end
+
   resources :posts
   resource :profile
 

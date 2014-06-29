@@ -54,7 +54,6 @@ class Account < ActiveRecord::Base
     account
   end
 
-
   private
 
   def create_setting
