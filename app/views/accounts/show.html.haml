@@ -29,6 +29,5 @@
           %p
             = link_to 'Edit Profile', edit_admin_profile_path, class: 'btn btn-warning'
             = link_to 'Change Blog Alias', edit_admin_setting_path, class: 'btn btn-danger'
-            = link_to 'Follow', follow_account_path(@current_author), method: :put, class: 'btn btn-primary'
         - elsif !current_account.blank?
           = link_to 'Follow', follow_account_path(@current_author), method: :put, class: 'btn btn-primary'
