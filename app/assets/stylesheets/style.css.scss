@@ -50,6 +50,9 @@ a {
     }
   }
 }
+p {
+  margin-bottom: 10px;
+}
 .bgwhite {
   background-color: $light;
   @include box-shadow(0 2px 11px 1px lighten($dark, 30));
