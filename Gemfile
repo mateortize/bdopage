@@ -22,10 +22,6 @@ gem 'sidekiq'
 
 gem 'kaminari'
 
-gem 'jwplayer-rails'
-
-gem 'flowplayer', github: 'scottdavis/flowplayer-gem'
-
 gem "auto_html"
 
 gem 'commontator', '~> 4.6.0'
