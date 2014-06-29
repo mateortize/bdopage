@@ -45,6 +45,10 @@ GEM
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     bootstrap_form (2.1.1)
+    bootsy (2.0.9)
+      carrierwave (~> 0.10.0)
+      mini_magick (~> 3.7.0)
+      remotipart (~> 1.2.1)
     builder (3.2.2)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -209,6 +213,7 @@ GEM
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
+    remotipart (1.2.1)
     rinku (1.5.1)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -292,6 +297,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 3.1.1)
   bootstrap_form
+  bootsy
   carrierwave
   coffee-rails (~> 4.0.0)
   commontator (~> 4.6.0)

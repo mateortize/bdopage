@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   devise_for :accounts, :controllers => {:registrations => "registrations"}
   mount Commontator::Engine => '/commontator'
   # The priority is based upon order of creation: first created -> highest priority.

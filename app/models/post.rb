@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   include AutoHtml
+  include Bootsy::Container
   acts_as_commontable
   
 

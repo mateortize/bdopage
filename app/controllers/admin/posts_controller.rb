@@ -52,6 +52,6 @@ class Admin::PostsController < Admin::BaseController
   private
 
     def post_params
-      params.require(:post).permit(:title,:content, :excerpt, :video_url)
+      params.require(:post).permit(:title,:content, :excerpt, :video_url, :bootsy_image_gallery_id)
     end
 end

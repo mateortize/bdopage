@@ -22,9 +22,17 @@ gem 'sidekiq'
 
 gem 'kaminari'
 
+#youtube, vimeo from link
 gem "auto_html"
 
+#commenting system
 gem 'commontator', '~> 4.6.0'
+
+#follow user
+gem 'acts_as_follower'
+
+# for wysiwyg editor
+gem 'bootsy'
 
 gem 'omniauth-cube7', github: 'siera26/omniauth-cube7'
 gem 'omniauth-bonofa'
@@ -43,7 +51,6 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap_form'
 
 gem 'tabs_on_rails'
-gem 'acts_as_follower'
 
 gem 'mailcatcher'
 

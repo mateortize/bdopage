@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( accounts.css )
+Rails.application.config.assets.precompile += %w( admin.css )

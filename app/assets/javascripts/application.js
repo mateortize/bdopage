@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-// = require bootstrap
+//= require bootsy
+//= require bootstrap
 //= require_tree .
 //= require masonry.pkgd.min
 
