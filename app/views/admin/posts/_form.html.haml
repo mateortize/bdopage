@@ -13,13 +13,14 @@
           %p Please input youtubue or vimeo url, or just upload your video.
       - unless @post.video_url.blank?
         = f.form_group do
-          = @post.video_url_html
+          .video-container
+            = @post.video_url_html
       - if @post.video_url.blank?
         = f.form_group do
           - unless @post.video.blank?
             - unless @post.video.encoded?
               %strong Video Status:
-              In porgress
+              In progress
             - unless @post.video.screenshot.blank?
               = image_tag @post.video.screenshot, id: "video_screenshot", class: "img-responsive"
           - else

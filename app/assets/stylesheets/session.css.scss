@@ -1,0 +1,20 @@
+.baio-login {
+
+  a {
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  span {
+
+    &.baio-logo {
+      background: url('/assets/baiologo.png') no-repeat left -28px transparent;
+      width: 46px;
+      display: inline-block;
+      height: 23px;
+      vertical-align: -3px;
+    }
+  }
+}

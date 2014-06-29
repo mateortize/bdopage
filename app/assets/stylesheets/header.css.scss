@@ -1,4 +1,19 @@
 #top-header {
+  font-weight: 600;
+
+  .main-nav {
+    margin: 15px 0 0 40px;
+
+    a {
+      display: inline;
+      padding: 0;
+
+      &:hover {
+        background-color: transparent!important;
+      }
+    }
+  }
+
   height: 100px;
   background-color: $light;
   @include box-shadow(0 0px 6px 1px lighten($grey4, 30));
@@ -13,6 +28,7 @@
 
   .navbar-brand {
     padding: 0 0 0 7px;
+    margin-right: 20px;
   }
 
   a {
@@ -40,5 +56,28 @@
     color: $light;
     font-size: 3em;
     @include text-shadow(0 1px 2px $grey2);
+  }
+}
+.navbar-toggle {
+  background-color: $primarybg;
+  color: $light;
+  border: none;
+
+  &:hover {
+    background-color: $secondarybg!important;
+  }
+}
+.navbar-collapse {
+  background-color: $light;
+  border-color: $grey1!important;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  a {
+    display: inline-block;
+    padding: 15px 0;
   }
 }

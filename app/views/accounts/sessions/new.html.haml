@@ -14,9 +14,11 @@
                 = f.check_box :remember_me
 
             = f.form_group do
-              = f.submit "Sign in"
+              = f.submit "Sign in", :class => 'btn btn-primary'
               = render "accounts/shared/links"
 
             = f.form_group do
-              %p
-                = link_to "Sign in with BAIO NG+", "/auth/bonofa"
+              %p.baio-login
+                = link_to "/auth/bonofa" do
+                  %span Sign in with
+                  %span.baio-logo
