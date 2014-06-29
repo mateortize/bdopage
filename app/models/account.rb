@@ -24,6 +24,10 @@ class Account < ActiveRecord::Base
     "Unknown"
   end
 
+  def blog_url
+    
+  end
+
   def self.from_omniauth(auth)
     Authentication.where(auth.slice("provider", "uid")).first.try(:account) || create_from_omniauth(auth)
   end

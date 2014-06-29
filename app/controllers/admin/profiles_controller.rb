@@ -28,7 +28,7 @@ class Admin::ProfilesController < Admin::BaseController
   def update
     @profile = current_account.profile
     @profile.update_attributes(profile_params)
-    redirect_to edit_admin_profile_path(@profile)
+    redirect_to account_path(current_account)
   end
 
   private

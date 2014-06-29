@@ -20,4 +20,6 @@ class SessionsController < ApplicationController
     session[:account_id] = nil
     redirect_to account_login_url
   end
+
+  
 end
