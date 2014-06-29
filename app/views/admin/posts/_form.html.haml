@@ -41,6 +41,6 @@
         = f.form_group do
           = f.submit "Publish", class: 'btn btn-primary'
           - unless @post.new_record?
-            = link_to "Delete", post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
+            = link_to "Delete", admin_post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
 
           = link_to "Back", admin_path(@admin), class: 'btn btn-default'

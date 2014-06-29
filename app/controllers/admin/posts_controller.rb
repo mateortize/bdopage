@@ -1,6 +1,6 @@
 class Admin::PostsController < Admin::BaseController
 
-  before_filter :load_post, only: [:show, :edit]
+  before_filter :load_post, only: [:show, :edit, :destroy]
   
   set_tab :post
 
@@ -34,6 +34,12 @@ class Admin::PostsController < Admin::BaseController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @post.destroy
+    flash[:success] = "A post successfully deleted"
+    redirect_to admin_posts_path
   end
 
   private
