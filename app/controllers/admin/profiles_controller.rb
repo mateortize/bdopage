@@ -28,13 +28,13 @@ class Admin::ProfilesController < Admin::BaseController
   def update
     @profile = current_account.profile
     @profile.update_attributes(profile_params)
-    redirect_to admin_profile_path
+    redirect_to edit_admin_profile_path(@profile)
   end
 
   private
 
   def profile_params
-      params.require(:account_profile).permit(:first_name,:last_name, :avatar)
+      params.require(:account_profile).permit(:first_name,:last_name, :avatar, :remove_avatar)
   end
 
 end

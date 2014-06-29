@@ -1,7 +1,11 @@
 = bootstrap_form_for(@profile, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: admin_profile_path) do |f|
   = f.text_field :first_name
   = f.text_field :last_name
-
+  = f.file_field :avatar
+  - if @profile.avatar?
+    = f.form_group do
+      = image_tag(@profile.avatar_url)
+      = f.check_box :remove_avatar
   %hr
   = f.form_group do
     = f.submit "Save", class: 'btn btn-primary'

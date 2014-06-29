@@ -8,6 +8,8 @@
   %strong
     Email:
   = current_account.email
+%p
+  = image_tag(current_account.profile.avatar_url) if current_account.profile.avatar?
 
 %p
   - if @profile.blank?

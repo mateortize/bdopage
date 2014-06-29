@@ -140,6 +140,8 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_magick (3.7.0)
+      subexec (~> 0.2.1)
     minitest (5.3.5)
     multi_json (1.10.1)
     multi_xml (0.5.5)
@@ -246,6 +248,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    subexec (0.2.3)
     tabs_on_rails (2.2.0)
     thin (1.5.1)
       daemons (>= 1.0.9)
@@ -287,6 +290,7 @@ DEPENDENCIES
   jquery-rails
   jwplayer-rails
   kaminari
+  mini_magick
   omniauth-bonofa
   omniauth-cube7!
   panda (~> 1.6.0)
