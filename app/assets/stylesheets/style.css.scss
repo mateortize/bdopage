@@ -137,3 +137,15 @@ table {
     font-size: .9em;
   }
 }
+
+//Alerts
+.alert {
+  background-color: $light;
+  color: $primary;
+  position: fixed;
+  width: 50%;
+  margin-left: -25%;
+  left: 50%;
+  top: 25px;
+  z-index: 1;
+}
