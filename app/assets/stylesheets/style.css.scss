@@ -40,6 +40,14 @@ a {
 
   &:hover {
     outline: none;
+    text-decoration: none;
+  }
+  &.primarycolor {
+    color: $primary!important;
+
+    &:hover {
+      color: $secondary!important;
+    }
   }
 }
 .bgwhite {
