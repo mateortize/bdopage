@@ -1,3 +1,11 @@
+.alert-notice{
+  @extend .alert-info;
+}
+
+.alert-alert{
+  @extend .alert-danger;
+}
+
 #admin-overview {
   margin-bottom: 20px;
 

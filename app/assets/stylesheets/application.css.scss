@@ -22,3 +22,12 @@
 @import "single";
 @import "admin";
 @import "mobile";
+
+
+.alert-notice{
+  @extend .alert-info;
+}
+
+.alert-alert{
+  @extend .alert-danger;
+}
