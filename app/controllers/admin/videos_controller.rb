@@ -34,7 +34,7 @@ class Admin::VideosController < Admin::BaseController
     @video.post = @post
     if @video.save
       UpdateVideoState.perform_async(@video.id)
-      flash[:success] = "Video successfully updated, but it will take several minutes to encode."
+      flash[:success] = "Video successfully uploaded, but it will take several minutes to encode."
     else
       flash[:danger] = @video.errors.full_messages.to_sentence
     end

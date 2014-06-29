@@ -41,9 +41,8 @@ class Video < ActiveRecord::Base
   end
 
   def refresh
-    video = self.panda_video
-    unless video.status == 'fail'
-      encodings = video.encodings
+
+      encodings = self.panda_video.encodings
       unless encodings.blank?
         encodings.each do |encoding|
           if encoding.status == "success"
@@ -51,7 +50,7 @@ class Video < ActiveRecord::Base
           end
         end
       end
-    end
+
   end
 
   private

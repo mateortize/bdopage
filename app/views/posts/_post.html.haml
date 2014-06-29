@@ -9,7 +9,7 @@
             - if post.video.present? and post.video.encoded?
               %video{preload: "auto", poster: post.video.screenshot, controls: true, width:'100%'}
                 - post.video.encodings.each do |encoding|
-                  %source{:src => encoding.url, :type => encoding.profile_name}/
+                  %source{:src => encoding.url, :type => encoding.mime_type}/
 
     .row.post-top
       .col-md-12.nopadding
