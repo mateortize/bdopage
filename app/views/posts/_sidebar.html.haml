@@ -4,7 +4,7 @@
       .sidebar-element.bgwhite
         .user-shortinfo
           //Todo: Follow link
-          %a.follow-layer{:href => '#', :alt => ''}
+          = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer' do
             %span.glyphicon.glyphicon-plus
             Follow
           .row
