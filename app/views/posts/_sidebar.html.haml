@@ -1,19 +1,24 @@
 #sidebar.col-md-3.pull-right
   - unless @current_author.blank?
     - unless @current_author.profile.blank?
-      .sidebar-element.bgwhite.user-shortinfo
-        .row
-          .col-md-12
-            - unless @current_author.profile.avatar.blank?
-              = image_tag @current_author.profile.avatar, :class => 'img-responsive'
-        .row
-          .col-md-12
-            %h4.user-name
-              = link_to @current_author.full_name, account_path(@current_author)
-        .row
-          .col-md-12
-            %p.user-shortdesc
-              = truncate (@current_author.profile.description), length: 125
+      .sidebar-element.bgwhite
+        .user-shortinfo
+          //Todo: Follow link
+          %a.follow-layer{:href => '#', :alt => ''}
+            %span.glyphicon.glyphicon-plus
+            Follow
+          .row
+            .col-md-12
+              - unless @current_author.profile.avatar.blank?
+                = image_tag @current_author.profile.avatar, :class => 'img-responsive'
+          .row
+            .col-md-12
+              %h4.user-name
+                = link_to @current_author.full_name, account_path(@current_author)
+          .row
+            .col-md-12
+              %p.user-shortdesc
+                = truncate (@current_author.profile.description), length: 125
     
 
   - if @current_author == current_account        

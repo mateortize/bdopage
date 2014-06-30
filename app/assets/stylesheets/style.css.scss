@@ -25,18 +25,21 @@
 }
 
 //Load font
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700italic,700);
 
 //Basic
 html {
-  background: $bodybg url('/assets/bgimage.jpg') center center no-repeat fixed;
+  background: url('/assets/bgimage.jpg') center center no-repeat fixed;
   background-size: cover;
+  min-height: 100%;
 }
 body {
+  min-height: 100%;
   padding-top: 130px;
-  font-family: "Open Sans";
+  font-family: "Roboto";
   font-weight: 300;
-  background-color: rgba($primary, .9);
+  background-color: rgba($bodybg, .9);
 }
 .bgwhite {
   background-color: $light;

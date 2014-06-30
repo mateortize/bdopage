@@ -2,17 +2,22 @@
 
   .sidebar-element {
     margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
 
     &.create-post {
       background: #636d7a;
-      background: -moz-linear-gradient(left,  #636d7a 0%, #252b33 100%);
-      background: -webkit-gradient(linear, left top, right top, color-stop(0%,#636d7a), color-stop(100%,#252b33));
-      background: -webkit-linear-gradient(left,  #636d7a 0%,#252b33 100%);
-      background: -o-linear-gradient(left,  #636d7a 0%,#252b33 100%);
-      background: -ms-linear-gradient(left,  #636d7a 0%,#252b33 100%);
-      background: linear-gradient(to right,  #636d7a 0%,#252b33 100%);
+      background: -moz-linear-gradient(left, $tertiary 0%, $primary 100%);
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%,$tertiary), color-stop(100%,$primary));
+      background: -webkit-linear-gradient(left, $tertiary 0%,$primary 100%);
+      background: -o-linear-gradient(left, $tertiary 0%,$primary 100%);
+      background: -ms-linear-gradient(left, $tertiary 0%,$primary 100%);
+      background: linear-gradient(to right, $tertiary 0%,$primary 100%);
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#636d7a', endColorstr='#252b33',GradientType=1 );
 
+      h4 {
+        font-size: .9em;
+      }
 
       a {
         color: $secondary;
@@ -29,6 +34,36 @@
 
           span {
             -moz-transform: rotate(90deg);
+          }
+        }
+      }
+    }
+    .user-shortinfo {
+
+      .follow-layer {
+        opacity: 0;
+        position: absolute;
+        left: -500px;
+        top: 0;
+        background-color: rgba($secondarybg,.9);
+        width: 100%;
+        padding: 20px;
+        color: $light;
+        text-align: center;
+        z-index: 1;
+        text-transform: uppercase;
+        font-weight: 600;
+        @include transition(all 700ms ease);
+      }
+
+      &:hover {
+
+        .follow-layer {
+          opacity: 1;
+          left: 0;
+
+          &:hover {
+            background-color: $primarybg;
           }
         }
       }
