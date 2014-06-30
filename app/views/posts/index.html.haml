@@ -2,30 +2,31 @@
   .row
     = render "sidebar";
     #posts.col-md-9
-      .page-status
-        .row
-          .col-md-4
-            .bgwhite.status-done
-              .status-head
-                %span.status-icon
-                %span Congratulations
-              .status-body
-                You have created your own videopage!
-          .col-md-4
-            .bgwhite
-              .status-head
-                %span.status-icon
-                %span Your first post
-              .status-body
-                Now you can create quickly your first video post
+      - if !current_account.blank? && current_account.posts.first.blank?
+        .page-status
+          .row
+            .col-md-4
+              .bgwhite.status-done
+                .status-head
+                  %span.status-icon
+                  %span Congratulations
+                .status-body
+                  You have created your own videopage!
+            .col-md-4
+              .bgwhite
+                .status-head
+                  %span.status-icon
+                  %span Your first post
+                .status-body
+                  Now you can create quickly your first video post
 
-          .col-md-4
-            .bgwhite
-              .status-head
-                %span.status-icon
-                %span Publish
-              .status-body
-                After creating your video post, you can publish this!
+            .col-md-4
+              .bgwhite
+                .status-head
+                  %span.status-icon
+                  %span Publish
+                .status-body
+                  After creating your video post, you can publish this!
       .row.post-container
         = render @posts
   .row
