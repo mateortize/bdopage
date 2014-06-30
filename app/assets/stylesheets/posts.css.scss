@@ -19,11 +19,11 @@
         font-weight: 600;
         text-transform: uppercase;
         @include transition(all 300ms ease);
-        color: $secondary;
+        color: $primary;
 
         &:hover {
           text-decoration: none;
-          color: $dark;
+          color: $secondary;
         }
       }
     }

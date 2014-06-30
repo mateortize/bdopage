@@ -4,6 +4,15 @@
     margin-bottom: 15px;
 
     &.create-post {
+      background: #636d7a;
+      background: -moz-linear-gradient(left,  #636d7a 0%, #252b33 100%);
+      background: -webkit-gradient(linear, left top, right top, color-stop(0%,#636d7a), color-stop(100%,#252b33));
+      background: -webkit-linear-gradient(left,  #636d7a 0%,#252b33 100%);
+      background: -o-linear-gradient(left,  #636d7a 0%,#252b33 100%);
+      background: -ms-linear-gradient(left,  #636d7a 0%,#252b33 100%);
+      background: linear-gradient(to right,  #636d7a 0%,#252b33 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#636d7a', endColorstr='#252b33',GradientType=1 );
+
 
       a {
         color: $secondary;
@@ -12,7 +21,9 @@
         span{
           @include transition(all 300ms ease);
         }
-
+        h4 {
+          color: $light;
+        }
         &:hover {
           text-decoration: none;
 

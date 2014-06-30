@@ -2,11 +2,12 @@
   - unless @current_author.blank?
     - unless @current_author.profile.blank?
       .sidebar-element.bgwhite.user-shortinfo
-        .row.mb2
-          .col-md-4
+        .row
+          .col-md-12
             - unless @current_author.profile.avatar.blank?
               = image_tag @current_author.profile.avatar, :class => 'img-responsive'
-          .col-md-8.nopadding
+        .row
+          .col-md-12
             %h4.user-name
               = link_to @current_author.full_name, account_path(@current_author)
         .row

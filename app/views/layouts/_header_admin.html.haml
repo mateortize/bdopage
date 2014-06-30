@@ -14,7 +14,7 @@
         %p.navbar-text.navbar-right
           = link_to "Sign out", destroy_account_session_path, :method => 'delete'
         %p.navbar-text.navbar-right
-          %a.primarycolor{:href => account_path(current_account) }
+          %a.tertiarycolor{:href => account_path(current_account) }
             Your profile (
             = current_account.full_name
             )

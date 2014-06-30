@@ -28,34 +28,19 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 
 //Basic
+html {
+  background: $bodybg url('/assets/bgimage.jpg') center center no-repeat fixed;
+  background-size: cover;
+}
 body {
   padding-top: 130px;
-  background: $bodybg url('/assets/bgimage.png') center center no-repeat fixed;
-  background-size: cover;
   font-family: "Open Sans";
   font-weight: 300;
-}
-a {
-  color: $secondary;
-
-  &:hover {
-    outline: none;
-    text-decoration: none;
-  }
-  &.primarycolor {
-    color: $primary!important;
-
-    &:hover {
-      color: $secondary!important;
-    }
-  }
-}
-p {
-  margin-bottom: 10px;
+  background-color: rgba($primary, .9);
 }
 .bgwhite {
   background-color: $light;
-  @include box-shadow(0 2px 11px 1px lighten($dark, 30));
+  @include box-shadow(0 2px 11px 1px $grey6);
   padding: 20px;
   margin-bottom: 20px;
 }
@@ -76,7 +61,7 @@ p {
 }
 .shortline {
   height: 3px;
-  background-color: $grey1;
+  background-color: $secondary;
   width: 30%;
   margin: 10px 0;
 }
@@ -142,12 +127,31 @@ textarea {
   padding: 10px!important;
 }
 label {
-  color: $secondary;
+  color: $primary;
 }
 
 //Font
 h2, h3, h4, h5{
+  color: $primary;
+}
+a {
   color: $secondary;
+
+  &:hover {
+    outline: none;
+    text-decoration: none;
+    color: $primary;
+  }
+  &.tertiarycolor {
+    color: $tertiary!important;
+
+    &:hover {
+      color: $secondary!important;
+    }
+  }
+}
+p {
+  margin-bottom: 10px;
 }
 
 //Tables
