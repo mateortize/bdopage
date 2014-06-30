@@ -20,7 +20,7 @@
 $(document).ready(function() {
     //Masonry
     if ($(document).width() > 980) {
-        var container = document.querySelector('#posts .row');
+        var container = document.querySelector('.post-container');
         var msnry = new Masonry( container, {
             itemSelector: '.post'
         });

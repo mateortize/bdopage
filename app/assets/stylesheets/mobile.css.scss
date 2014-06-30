@@ -1,4 +1,10 @@
 @media screen and(max-width: 980px) {
+  #top-header {
+
+    .navbar-brand {
+      width: 248px;
+    }
+  }
   .topnotice {
     background: url('/assets/noticeimg.jpg') center bottom no-repeat;
     padding: 250px 0 0 0;
