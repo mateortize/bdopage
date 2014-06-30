@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     current_account.follow(@account)
 
-    flash[:success] = "Followed successfully."
+    flash[:success] = "You followed him."
     redirect_to :back
   end
   

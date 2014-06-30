@@ -25,4 +25,9 @@ $(document).ready(function() {
             itemSelector: '.post'
         });
     }
+
+    $('iframe').load(function(){
+      console.log(111);
+      $(this).find('html').css({background: 'none'});
+    });
 })

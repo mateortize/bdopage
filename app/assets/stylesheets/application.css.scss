@@ -34,3 +34,8 @@
 .alert-alert{
   @extend .alert-danger;
 }
+
+
+html:not([app='videopage7']){
+  background:none;
+}
