@@ -1,0 +1,39 @@
+.thread_comment_list {
+
+  .comment {
+    border: none;
+    font-family: "Open Sans";
+    font-weight: 300;
+    font-size: .9em;
+
+
+    .comment-meta {
+      border-bottom: 1px solid $grey1;
+      padding-bottom: 3px;
+    }
+    .comment-content {
+      margin-top: 7px;
+    }
+  }
+  .comment-date {
+    margin: 5px 0;
+    max-width: 90px;
+    font-size: .8em;
+
+    span {
+      color: $grey2;
+    }
+  }
+
+  .comment_avatar {
+    max-width: 100px;
+    margin-right: 10px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+  .comment_body {
+    width: calc(100% - 110px);
+  }
+}

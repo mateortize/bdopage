@@ -40,7 +40,18 @@ a {
 
   &:hover {
     outline: none;
+    text-decoration: none;
   }
+  &.primarycolor {
+    color: $primary!important;
+
+    &:hover {
+      color: $secondary!important;
+    }
+  }
+}
+p {
+  margin-bottom: 10px;
 }
 .bgwhite {
   background-color: $light;

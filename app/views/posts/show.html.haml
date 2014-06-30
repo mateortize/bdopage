@@ -36,9 +36,11 @@
         .post-content
           = @post.content.html_safe
 
-        .addthis_sharing_toolbox
-
-        = commontator_thread(@post)
+        .row
+          .col-md-9
+            = commontator_thread(@post)
+          .col-md-3.text-right
+            .addthis_sharing_toolbox
 
 
         = content_for :head do
