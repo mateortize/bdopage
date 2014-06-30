@@ -50,6 +50,7 @@
             upl.setPayload(file, {'csrf': " form_authenticity_token "});
           })
         },
+        'maxFileSize': '200 MB',
         'onProgress': function(file, percent) {
           console.log("progress", percent, "%");
           $("#progress-bar").css("width", percent + "%");
