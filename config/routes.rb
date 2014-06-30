@@ -87,6 +87,12 @@ Rails.application.routes.draw do
 
   resources :posts
   resource :profile
+  resources :pages, only:[] do
+    collection do
+      get :impress
+      get :terms_and_conditions
+    end
+  end
 
 
   root :to => "posts#index"
