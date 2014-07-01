@@ -8,22 +8,23 @@
             .col-md-4
               .bgwhite.status-done
                 .status-head
-                  %span.status-icon
+                  .status-icon.icon-icon1
                   %span Congratulations
                 .status-body
                   You have created your own videopage!
             .col-md-4
               .bgwhite
                 .status-head
-                  %span.status-icon
+                  .status-icon.icon-icon3
                   %span Your first post
                 .status-body
-                  Now you can create quickly your first video post
+                  = link_to new_admin_post_path, alt: '' do
+                    Now you can create quickly your first video post
 
             .col-md-4
               .bgwhite
                 .status-head
-                  %span.status-icon
+                  .status-icon.icon-icon2
                   %span Publish
                 .status-body
                   After creating your video post, you can publish this!

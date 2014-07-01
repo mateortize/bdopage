@@ -24,7 +24,7 @@
   border-radius: $borderradius;
 }
 
-//Load font
+//Load fonts
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700italic,700);
 
@@ -36,7 +36,7 @@ body {
   padding: 130px 0 20px 0;
   font-family: "Roboto";
   font-weight: 300;
-  background: asset-url('/assets/bgimage.jpg', 'image') center center no-repeat fixed;
+  background: asset-url('bgimage.jpg', 'image') center center no-repeat fixed;
   background-size: cover;
 }
 body:before {
@@ -202,7 +202,7 @@ table {
 .page-status {
 
   .bgwhite {
-    padding-bottom: 60px;
+    padding-bottom: 30px;
     text-align: center;
 
     &.status-done {
@@ -219,6 +219,11 @@ table {
     margin-bottom: 10px;
     font-size: 1.4em;
     color: $secondary;
+
+    .status-icon {
+      font-size: 5em;
+      margin-bottom: 20px;
+    }
 
     .status-number {
       font-size: 3em;
