@@ -64,12 +64,7 @@ Commontator.configure do |config|
   #            view.commontator_gravatar_image_tag(
   #              user, 1, :s => 60, :d => 'mm') }
   config.user_avatar_proc = lambda { |user, view|
-                                    if (user.profile.avatar)
-                                      return view.image_tag(user.profile.avatar)
-                                    else
-                                      return view.commontator_gravatar_image_tag(
-                                       user, 1, :s => 60, :d => 'mm') 
-                                    end
+                                      return view.image_tag(user.profile.profile_image)                                   
                                    }
 
   # user_email_proc
