@@ -17,9 +17,12 @@ class UpdateVideoState
         encodings.each do |encoding|
           if encoding.status == "success"
             video.create_video_encoding(encoding)
+          else
+            Sidekiq.logger.warn "Failed to encode: #{msg['error_message']}"
           end
-          Sidekiq.logger.warn "Failed to encode: #{msg['error_message']}"
         end
+      else
+        Sidekiq.logger.warn "Failed to encode: #{msg['error_message']}"
       end
     end
   end

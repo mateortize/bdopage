@@ -4,14 +4,19 @@
       .sidebar-element.bgwhite
         .user-shortinfo
           - unless current_account.blank?
-            - unless current_account.following?(@current_author)
-              = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer' do
+            - if current_account == @current_author
+              = link_to edit_admin_profile_path, class: 'follow-layer' do
                 %span.glyphicon.glyphicon-plus
-                Follow
+                Edit Profile
             - else
-              .follow-layer
-                %span.glyphicon.glyphicon-star
-                You follow him
+              - unless current_account.following?(@current_author)
+                = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer' do
+                  %span.glyphicon.glyphicon-plus
+                  Follow
+              - else
+                .follow-layer
+                  %span.glyphicon.glyphicon-star
+                  You follow him
           .row
             .col-md-12
               - unless @current_author.profile.avatar.blank?

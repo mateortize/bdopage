@@ -12,6 +12,7 @@ unless Rails.env.test?
         :provider               => 'AWS',                        # required
         :aws_access_key_id      => s3_settings["access_key_id"],                        # required
         :aws_secret_access_key  => s3_settings["secret_access_key"],                        # required
+        :region                 => s3_settings["region"]
       }
       config.fog_directory  = s3_settings["bucket"]                     # required
     end
