@@ -10,7 +10,7 @@
   span {
 
     &.baio-logo {
-      background: url('/assets/baiologo.png') no-repeat left -28px transparent;
+      background: asset-url('/assets/baiologo.png', 'image') no-repeat left -28px transparent;
       width: 46px;
       display: inline-block;
       height: 23px;

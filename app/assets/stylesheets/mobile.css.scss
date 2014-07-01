@@ -5,15 +5,23 @@
       width: 248px;
     }
   }
-  .topnotice {
-    background: url('/assets/noticeimg.jpg') center bottom no-repeat;
-    padding: 250px 0 0 0;
-  }
   #sidebar {
     float: none!important;
 
     .sidebar-element {
       text-align: center;
+    }
+    .follow-layer {
+      opacity: 1!important;
+      left: 50%!important;
+      @include border-radius(50%);
+      width: 100px!important;
+      height: 100px!important;
+      margin-left: -50px!important;
+      margin-top: 50px;
+      vertical-align: center;
+      padding-top: 42px!important;
+      font-size: .8em;
     }
   }
   .navbar-collapse {

@@ -47,18 +47,6 @@
     height: 100%;
   }
 }
-.topnotice {
-  background: url('/assets/noticeimg.jpg') center -130px no-repeat;
-  background-size: cover;
-  height: 420px;
-  padding: 300px 0 0 0;
-
-  h2{
-    color: $light;
-    font-size: 3em;
-    @include text-shadow(0 1px 2px $grey2);
-  }
-}
 .navbar-toggle {
   background-color: $primarybg;
   color: $light;
