@@ -83,6 +83,7 @@ Rails.application.routes.draw do
   
   resources :accounts do
     put :follow, on: :member
+    put :unfollow, on: :member
   end
 
   resources :posts

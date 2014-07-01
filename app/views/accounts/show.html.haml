@@ -28,6 +28,16 @@
               %p
                 %strong Followers:
                 = @account.followers_count
+
+              %p
+                - unless current_account.blank?
+                  - unless current_account.following?(@current_author)
+                    = link_to follow_account_path(@current_author), method: :put, class: 'btn btn-primary' do
+                      Follow
+                  - else
+                    = link_to unfollow_account_path(@current_author), method: :put, class: 'btn btn-danger' do
+                      Unfollow
+
           .col-md-4
             .avatar-show
               = image_tag(@account.profile.avatar_url, :class => 'img-responsive') unless @account.profile.avatar.blank?
