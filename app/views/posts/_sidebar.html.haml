@@ -6,7 +6,7 @@
           - unless current_account.blank?
             - if current_account == @current_author
               = link_to edit_admin_profile_path, class: 'follow-layer' do
-                %span.glyphicon.glyphicon-plus
+                %span.glyphicon.glyphicon-pencil
                 Edit Profile
             - else
               - unless current_account.following?(@current_author)

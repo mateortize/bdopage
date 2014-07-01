@@ -1,0 +1,14 @@
+#footer {
+  .footer-nav {
+
+    a {
+      color: $light;
+      font-weight: 400;
+
+      &:hover {
+        color: $light;
+        text-decoration: underline;
+      }
+    }
+  }
+}

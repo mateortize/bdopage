@@ -18,3 +18,9 @@
       = render "/shared/flashes"
       = yield
       = yield :javascript
+
+      #footer
+        .container
+          .row.footer-nav
+            .col-md-12.text-right
+              = link_to 'Imprint', impress_pages_path

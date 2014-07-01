@@ -1,5 +1,8 @@
 = render 'admin/posts/tabs'
-%br
+.row.mb2.text-right
+  .col-md-6
+    .help
+      %span Please choose a file that is under 200 MB.
 = bootstrap_form_for [:admin, @post, @video], url: admin_post_video_path(@post), layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", html: { role: "form" } do |f|
   = f.hidden_field :panda_video_id
   - if @video.new_record?
