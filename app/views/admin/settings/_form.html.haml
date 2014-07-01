@@ -1,6 +1,6 @@
 = bootstrap_form_for(@setting, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: admin_setting_path) do |f|
   = f.text_field :blog_alias
-  = f.select :blog_enabled, [true, false]
+  = #f.select :blog_enabled, [true, false]
   %hr
   = f.form_group do
     = f.submit "Save", class: 'btn btn-primary'

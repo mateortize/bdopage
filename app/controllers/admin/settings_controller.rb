@@ -1,5 +1,8 @@
 class Admin::SettingsController < Admin::BaseController
-  
+  before_filter :restrict_access_only_www, only: [:edit]
+
+  layout 'admin'
+
   def index
     @setting = current_account.setting
   end
@@ -32,5 +35,12 @@ class Admin::SettingsController < Admin::BaseController
   def setting_params
       params.require(:account_setting).permit(:blog_alias,:blog_enabled)
   end
+
+  def restrict_access_only_www
+    if request.subdomain.present? && request.subdomain != "www"
+      redirect_to edit_admin_setting_url(host: "www.#{request.domain}")
+    end
+  end
+
 
 end

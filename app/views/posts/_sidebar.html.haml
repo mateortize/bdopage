@@ -31,18 +31,19 @@
             .col-md-12
               %p.user-shortdesc
                 = truncate (@current_author.profile.description), length: 125
-          %hr.visible-xs
-          .row.visible-xs
-            .col-xs-12
-              - unless current_account.following?(@current_author)
-                = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer-mobile' do
-                  %span.glyphicon.glyphicon-plus
-                  Follow
-              - else
-                .follow-layer-mobile
-                  %span.glyphicon.glyphicon-star
-                  You follow him
-    
+          - unless current_account.blank?
+            %hr.visible-xs
+            .row.visible-xs
+              .col-xs-12
+                - unless current_account.following?(@current_author)
+                  = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer-mobile' do
+                    %span.glyphicon.glyphicon-plus
+                    Follow
+                - else
+                  .follow-layer-mobile
+                    %span.glyphicon.glyphicon-star
+                    You follow him
+      
 
   - if @current_author == current_account        
     .sidebar-element.bgwhite.nopadding.create-post
