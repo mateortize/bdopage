@@ -32,9 +32,15 @@ class Admin::PostsController < Admin::BaseController
     @post.account = current_account
     @post.published = true if(params[:commit] == "Publish")
     if @post.save
-      flash[:success] = "Published successfully."
+      if @post.published?
+        flash[:success] = "Published successfully."
+        redirect_to admin_posts_path
+      else
+        redirect_to new_admin_post_video_path(@post)
+      end
+    else
+      render :edit
     end
-    render :edit
   end
 
   def destroy

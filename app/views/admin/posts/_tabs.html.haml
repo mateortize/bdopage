@@ -9,9 +9,9 @@
   - unless @post.new_record?
     = tab.post 'Content', edit_admin_post_path(@post)
     - if @post.video.blank?
-      = tab.video 'Video', new_admin_post_video_path(@post)
+      = tab.video 'Preview Video', new_admin_post_video_path(@post)
     - else
-      = tab.video 'Video', edit_admin_post_video_path(@post, @video)
+      = tab.video 'Preview Video', edit_admin_post_video_path(@post, @video)
   - else
     = tab.post 'Content', new_admin_post_path
-    = tab.video 'Video', new_admin_post_path
+    = tab.video 'Preview Video', new_admin_post_path
