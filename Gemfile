@@ -21,7 +21,7 @@ gem 'mini_magick'
 gem 'sidekiq'
 
 gem 'kaminari'
-gem 'will_paginate'
+#gem 'will_paginate'
 
 #youtube, vimeo from link
 gem "auto_html"

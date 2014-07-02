@@ -3,7 +3,6 @@ class Post < ActiveRecord::Base
   include Bootsy::Container
   acts_as_commontable
   
-
   has_one :video
   belongs_to :account
 

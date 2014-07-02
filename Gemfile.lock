@@ -123,9 +123,6 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
-    kaminari (0.15.1)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -309,7 +306,6 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.0)
   jquery-rails
-  kaminari
   mailcatcher
   mini_magick
   omniauth-bonofa

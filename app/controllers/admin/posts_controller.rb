@@ -5,7 +5,7 @@ class Admin::PostsController < Admin::BaseController
   set_tab :post
 
   def index
-    @posts = current_account.posts.order("created_at desc").page(params[:page]).per(5)
+    @posts = current_account.posts.order("created_at desc").page(params[:page]).per(12)
   end
 
   def new
