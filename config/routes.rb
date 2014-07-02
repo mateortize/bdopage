@@ -92,6 +92,7 @@ Rails.application.routes.draw do
     collection do
       get :impress
       get :terms_and_conditions
+      get :contact
     end
   end
 
