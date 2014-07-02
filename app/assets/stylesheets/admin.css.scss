@@ -1,7 +1,6 @@
 .alert-notice{
   @extend .alert-info;
 }
-
 .alert-alert{
   @extend .alert-danger;
 }
@@ -20,4 +19,7 @@
   p {
     color: $grey2;
   }
+}
+.editprofileimg {
+  max-width: 200px;
 }
