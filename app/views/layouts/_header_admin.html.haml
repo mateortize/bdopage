@@ -10,7 +10,7 @@
         =image_tag 'logobeta.png'
     .collapse.navbar-collapse
       - unless current_account.blank?
-        = link_to "Manage your posts", admin_posts_path
+        = active_link_to "Manage your posts", admin_posts_path
         %p.navbar-text.navbar-right.mr0
           = link_to "Sign out", destroy_account_session_path, :method => 'delete'
         %p.navbar-text.navbar-right

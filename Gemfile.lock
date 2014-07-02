@@ -21,6 +21,8 @@ GEM
       activesupport (= 4.1.1)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_link_to (1.0.2)
+      actionpack
     activemodel (4.1.1)
       activesupport (= 4.1.1)
       builder (~> 3.1)
@@ -123,6 +125,9 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.0.0)
+    kaminari (0.16.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     listen (2.4.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -284,12 +289,12 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    will_paginate (3.0.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to
   acts_as_follower
   auto_html
   binding_of_caller
@@ -306,6 +311,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   mailcatcher
   mini_magick
   omniauth-bonofa
@@ -321,4 +327,3 @@ DEPENDENCIES
   tabs_on_rails
   thin
   uglifier (>= 1.3.0)
-  will_paginate

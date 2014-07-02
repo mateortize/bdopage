@@ -23,6 +23,8 @@ gem 'sidekiq'
 gem 'kaminari'
 #gem 'will_paginate'
 
+gem 'active_link_to'
+
 #youtube, vimeo from link
 gem "auto_html"
 
