@@ -1,13 +1,19 @@
 #footer {
   .footer-nav {
+    color: $light;
 
     a {
       color: $light;
       font-weight: 400;
+      margin: 0 5px;
+      @include transition(all 300ms ease);
+
+      &:last-child {
+        margin-right: 0;
+      }
 
       &:hover {
-        color: $light;
-        text-decoration: underline;
+        color: $secondary;
       }
     }
   }
