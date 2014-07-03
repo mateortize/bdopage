@@ -26,7 +26,5 @@ module Videopage7
         Devise::UnlocksController.layout "devise"            
         Devise::PasswordsController.layout "devise"        
     end
-
-    config.assets.precompile = %w( admin.css application.css application.js )
   end
 end

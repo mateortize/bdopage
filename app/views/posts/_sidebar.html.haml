@@ -45,9 +45,17 @@
                     You follow him
       
 
-  - if @current_author == current_account        
+  - if current_account.blank?
+    .sidebar-element.bgwhite.nopadding.create-post
+      %h3.text-center.nomargin
+        = link_to new_admin_post_path, class:'show p3', alt: '' do
+          %span.glyphicon.glyphicon-plus
+          %h4 Create new videopage
+  - elsif @current_author == current_account        
     .sidebar-element.bgwhite.nopadding.create-post
       %h3.text-center.nomargin
         = link_to new_admin_post_path, class:'show p3', alt: '' do
           %span.glyphicon.glyphicon-plus
           %h4 Create new post
+
+
