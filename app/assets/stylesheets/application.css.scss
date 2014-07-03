@@ -12,24 +12,23 @@
  *
  *= require_self
  *= require bootsy
- *= require bootstrap
- *= require fontello
- *= require fontello-ie7
- *= require colors
- *= require style
- *= require header
- *= require footer
- *= require posts
- *= require page
- *= require sidebar
- *= require single
- *= require comments
- *= require session
- *= require admin
- *= require mobile
  */
 
-
+@import "bootstrap";
+@import "fontello";
+@import "fontello-ie7";
+@import "colors";
+@import "style";
+@import "header";
+@import "footer";
+@import "posts";
+@import "page";
+@import "sidebar";
+@import "single";
+@import "comments";
+@import "session";
+@import "admin";
+@import "mobile";
 
 
 .alert-notice{

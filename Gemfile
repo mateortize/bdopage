@@ -37,7 +37,7 @@ gem 'acts_as_follower'
 # for wysiwyg editor
 gem 'bootsy'
 
-gem 'omniauth-cube7', github: 'siera26/omniauth-cube7'
+gem 'omniauth-cube7'
 gem 'omniauth-bonofa'
 
 # Use SCSS for stylesheets
