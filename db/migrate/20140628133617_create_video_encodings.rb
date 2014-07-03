@@ -9,6 +9,7 @@ class CreateVideoEncodings < ActiveRecord::Migration
       t.integer :file_size
       t.integer :width
       t.integer :height
+      t.string :mime_type
       t.references :video, index: true
       t.timestamps
     end
