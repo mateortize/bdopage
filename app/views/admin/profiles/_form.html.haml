@@ -3,7 +3,7 @@
   = f.text_field :last_name
   - if @profile.avatar?
     = f.form_group do
-      = image_tag(@profile.avatar_url, :class => 'img-responsive')
+      = image_tag(@profile.avatar_url, :class => 'img-responsive editprofileimg')
       = f.check_box :remove_avatar
   - else
     = f.file_field :avatar
