@@ -3,6 +3,13 @@ class AccountProfile < ActiveRecord::Base
   belongs_to :account
 
   validates :account_id, uniqueness: true
+  validate :avatar_size
+
+  def avatar_size
+    if avatar.file.size.to_f/(1000*1000) > 2
+      errors.add(:file, "You cannot upload a file greater than 2MB")
+    end
+  end
 
   def profile_image
     return avatar_url unless avatar_url.blank?
