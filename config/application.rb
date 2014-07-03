@@ -27,6 +27,6 @@ module Videopage7
         Devise::PasswordsController.layout "devise"        
     end
 
-    config.assets.precompile = %w( admin.css application.css )
+    config.assets.precompile = %w( admin.css application.css application.js )
   end
 end
