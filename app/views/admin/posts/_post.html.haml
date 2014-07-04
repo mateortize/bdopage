@@ -3,7 +3,7 @@
     - if post.video.present?
       = image_tag post.video.screenshot, class: 'img-responsive', style: 'max-width: 120px;'
     - elsif post.has_embeded_video?
-      - if post.embeded_video.available?
+      - if !post.embeded_video.blank?
         = image_tag post.embeded_video_thumbnail_small, class: 'img-responsive', style: 'max-width: 120px;'
 
   %td= post.title

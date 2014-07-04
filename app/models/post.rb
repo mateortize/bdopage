@@ -31,7 +31,11 @@ class Post < ActiveRecord::Base
   def embeded_video
 
     if has_embeded_video?
-      return VideoInfo.new(self.video_url)
+      begin
+        return VideoInfo.new(self.video_url)
+      rescue
+        return nil
+      end
     end
 
     return nil
