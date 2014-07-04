@@ -27,7 +27,9 @@ gem 'active_link_to'
 
 #youtube, vimeo from link
 gem "auto_html"
-gem 'conred'
+gem 'cloudinary'
+gem 'video_info'
+
 #commenting system
 gem 'commontator', '~> 4.6.0'
 

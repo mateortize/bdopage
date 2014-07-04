@@ -1,0 +1,18 @@
+development:
+  cloud_name: bonofa
+  api_key: '212487685337914'
+  api_secret: HccMBIgQaBSnmZ4K8noxKb144EI
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: bonofa-ag
+  api_key: '317381554552419'
+  api_secret: Hw3NU7BMaB95CZnlyBQbFc1SgqE
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: bonofa
+  api_key: '212487685337914'
+  api_secret: HccMBIgQaBSnmZ4K8noxKb144EI
+  enhance_image_tag: true
+  static_image_support: false

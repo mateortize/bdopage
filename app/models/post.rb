@@ -27,6 +27,13 @@ class Post < ActiveRecord::Base
     self.content.html_safe.truncate(100)
   end
 
+  def embeded_video
+    if has_embeded_video?
+      return VideoInfo.new(self.video_url)
+    end
+    return nil
+  end
+
   def published?
     unless self.video.blank?
       return self.video.encoded?
@@ -37,6 +44,15 @@ class Post < ActiveRecord::Base
 
   def has_video?
     self.video.present? or self.video_url.present?
+  end
+
+  def has_panda_video?
+    return false if has_video?
+    return self.video.panda_video_id.present?
+  end
+
+  def has_embeded_video?
+    self.video_url.present?
   end
 
   def send_new_post_notification
