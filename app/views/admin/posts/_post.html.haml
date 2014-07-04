@@ -3,7 +3,8 @@
     - if post.video.present?
       = image_tag post.video.screenshot, class: 'img-responsive', style: 'max-width: 120px;'
     - elsif post.has_embeded_video?
-      = image_tag post.embeded_video_thumbnail_small, class: 'img-responsive', style: 'max-width: 120px;'
+      - if post.embeded_video.available?
+        = image_tag post.embeded_video_thumbnail_small, class: 'img-responsive', style: 'max-width: 120px;'
 
   %td= post.title
   %td= post.excerpt
