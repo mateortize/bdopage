@@ -5,10 +5,10 @@
   %strong
     Name:
   = current_account.full_name
-%p
-  %strong
-    Email:
-  = current_account.email
+- if !@account.profile.email_private?
+  %p
+    %strong Email:
+    = @account.email
 %p
   = image_tag(current_account.profile.avatar_url) if current_account.profile.avatar?
 

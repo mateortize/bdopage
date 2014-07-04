@@ -28,13 +28,17 @@ class Admin::ProfilesController < Admin::BaseController
   def update
     @profile = current_account.profile
     @profile.update_attributes(profile_params)
+
+    @profile.private_fields = profile_params[:private_fields]
+    @profile.save
+
     redirect_to account_path(current_account)
   end
 
   private
 
   def profile_params
-      params.require(:account_profile).permit(:first_name,:last_name, :avatar, :remove_avatar, :description)
+      params.require(:account_profile).permit(:first_name,:last_name, :avatar, :remove_avatar, :description, :private_fields=>[])
   end
 
 end

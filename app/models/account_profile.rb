@@ -7,6 +7,14 @@ class AccountProfile < ActiveRecord::Base
   validates :account_id, uniqueness: true
   validate :avatar_file_size
 
+  PRIVATABLE_FIELDS = %w( email )
+  PRIVATABLE_FIELDS.each do |field_name|
+    define_method "#{field_name}_private?" do
+      return false if self.private_fields.blank?
+      return self.private_fields.include?(field_name)
+    end
+  end
+
   def avatar_file_size
     unless !avatar.blank?
       unless avatar.file.blank?
