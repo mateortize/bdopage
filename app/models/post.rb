@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
   def embeded_video_thumbnail_small
     begin
       Timeout::timeout(3) do
-        embeded_video.thumbnail_small if !embeded_video.blank?
+        return embeded_video.thumbnail_small if !embeded_video.blank?
       end
     rescue Timeout::Error
       return nil
