@@ -1,3 +1,4 @@
+require 'timeout'
 class Post < ActiveRecord::Base
   include AutoHtml
   include Bootsy::Container
@@ -28,10 +29,22 @@ class Post < ActiveRecord::Base
   end
 
   def embeded_video
+
     if has_embeded_video?
       return VideoInfo.new(self.video_url)
     end
+
     return nil
+  end
+
+  def embeded_video_thumbnail_small
+    begin
+      Timeout::timeout(3) do
+        embeded_video.thumbnail_small if !embeded_video.blank?
+      end
+    rescue Timeout::Error
+      return nil
+    end
   end
 
   def published?
