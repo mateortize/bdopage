@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20140629151338) do
 
   create_table "account_settings", force: true do |t|
     t.string   "blog_alias"
+    t.boolean  "blog_enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
-    t.boolean  "blog_enabled"
   end
 
   add_index "account_settings", ["account_id"], name: "index_account_settings_on_account_id", using: :btree
@@ -142,11 +142,10 @@ ActiveRecord::Schema.define(version: 20140629151338) do
   create_table "posts", force: true do |t|
     t.string   "title"
     t.text     "content"
+    t.text     "excerpt"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
-    t.text     "excerpt"
-    t.integer  "video_id"
     t.string   "video_url"
     t.boolean  "published"
   end
@@ -155,6 +154,8 @@ ActiveRecord::Schema.define(version: 20140629151338) do
 
   create_table "video_encodings", force: true do |t|
     t.string   "profile_name"
+    t.string   "panda_video_id"
+    t.string   "status"
     t.string   "url"
     t.integer  "file_size"
     t.integer  "width"
@@ -162,9 +163,6 @@ ActiveRecord::Schema.define(version: 20140629151338) do
     t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
-    t.string   "panda_video_id"
-    t.string   "mime_type"
   end
 
   add_index "video_encodings", ["video_id"], name: "index_video_encodings_on_video_id", using: :btree
@@ -172,17 +170,14 @@ ActiveRecord::Schema.define(version: 20140629151338) do
   create_table "videos", force: true do |t|
     t.string   "title"
     t.string   "panda_video_id"
-    t.string   "screenshot"
-    t.string   "h264_url"
-    t.string   "ogg_url"
+    t.boolean  "encoded",        default: false
     t.string   "height"
     t.string   "width"
     t.string   "file_size"
-    t.string   "profile"
-    t.boolean  "encoded",        default: false
+    t.string   "screenshot"
+    t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "account_id"
     t.string   "url"
     t.integer  "post_id"
   end
