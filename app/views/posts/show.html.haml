@@ -51,9 +51,10 @@
             %meta{:content => @post.the_excerpt, :property => "og:description"}/
 
             - unless @post.video.blank?
-              %meta{:content => @post.video.screenshot, :property => "og:image"}/
-              %meta{:content => @post.video.url, :property => "og:video:url"}/
-              %meta{:content => @post.video.profile, :property => "og:video:type"}/
-              %meta{:content => @post.video.width, :property => "og:video:width"}/
-              %meta{:content => @post.video.height, :property => "og:video:height"}/
+              - unless @post.video.encodings.blank?
+                %meta{:content => @post.video.screenshot, :property => "og:image"}/
+                %meta{:content => @post.video.url, :property => "og:video:url"}/
+                %meta{:content => @post.video.encodings.first.profile_name, :property => "og:video:type"}/
+                %meta{:content => @post.video.width, :property => "og:video:width"}/
+                %meta{:content => @post.video.height, :property => "og:video:height"}/
       = render 'sidebar';
