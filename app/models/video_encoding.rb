@@ -1,7 +1,7 @@
 class VideoEncoding < ActiveRecord::Base
   belongs_to :video
 
-  validates :profile_name, presence: true, scope: [:video_id]
+  validates :profile_name, presence: true
 
   def self.create_from_panda_encoding(encoding)
     self.create(
