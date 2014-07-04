@@ -10,15 +10,18 @@ class Account < ActiveRecord::Base
   acts_as_followable
   acts_as_follower
   
-  has_many :posts
-  has_many :videos
+  has_many :posts, dependent: :destroy
+  has_many :videos, dependent: :destroy
   has_many :authentications, dependent: :destroy
 
   has_one :setting, class_name: 'AccountSetting'
   has_one :profile, class_name: 'AccountProfile'
 
+  has_many :pages
+
   after_create :generate_setting
   after_create :generate_profile
+  after_create :generate_default_pages
 
 
   def full_name
@@ -58,7 +61,6 @@ class Account < ActiveRecord::Base
     account
   end
 
-  private
 
   def generate_setting
     self.create_setting(blog_alias: Time.now.to_i, blog_enabled: false)
@@ -66,5 +68,13 @@ class Account < ActiveRecord::Base
 
   def generate_profile
     self.create_profile()
+  end
+
+  def generate_default_pages
+    self.create_impress_page
+  end
+
+  def generate_impress_page
+    self.pages.create(slug: 'impress', title: 'Impress', content: '')
   end
 end
