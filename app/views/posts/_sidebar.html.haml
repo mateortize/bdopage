@@ -20,7 +20,7 @@
           .row
             .col-md-12
               - unless @current_author.profile.avatar.blank?
-                = image_tag @current_author.profile.avatar, :class => 'img-responsive'
+                = image_tag @current_author.profile.avatar_url, :class => 'img-responsive'
               - else
                 = image_tag 'nouserimage.jpg', :class => 'img-responsive'
           .row
