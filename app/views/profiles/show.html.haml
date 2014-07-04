@@ -7,10 +7,6 @@
         %p
           %strong Name:
           = @current_author.full_name
-
-        %p
-          %strong Email:
-          = @current_author.email
         %p
           = image_tag(@current_author.profile.avatar_url) if @current_author.profile.avatar?
         %p

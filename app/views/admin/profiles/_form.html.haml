@@ -9,6 +9,10 @@
     = f.file_field :avatar
     
   = f.text_area :description
+
+  - if !@profile.private_fields.blank?
+    - @profile.private_fields.each do |field_name|
+      = field_name
   %hr
   = f.form_group do
     = f.submit "Save", class: 'btn btn-primary'
