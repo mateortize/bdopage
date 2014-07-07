@@ -4,8 +4,6 @@ class OmniauthController < ApplicationController
 
   def create
     @account = Account.from_omniauth(env['omniauth.auth'])
-    flash[:success] = "Signed in."
-
     sign_in @account
     redirect_to root_path
   end
