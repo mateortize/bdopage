@@ -15,6 +15,8 @@ module Commontator
       :scope => [:creator_type, :creator_id, :thread_id],
       :message => I18n.t('commontator.comment.errors.double_posted')
 
+    validates :body, length: { maximum: 2000 }
+
     protected
 
     cattr_accessor :acts_as_votable_initialized
