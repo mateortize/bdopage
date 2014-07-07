@@ -56,7 +56,8 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap_form'
 
 gem 'tabs_on_rails'
-gem "paranoia", "~> 2.0"
+gem 'paranoia', '~> 2.0'
+gem 'friendly_id', '~> 5.0.0'
 
 gem 'mailcatcher'
 

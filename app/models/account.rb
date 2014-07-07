@@ -9,6 +9,7 @@ class Account < ActiveRecord::Base
   acts_as_commontator
   acts_as_followable
   acts_as_follower
+
   
   has_many :posts, dependent: :destroy
   has_many :videos, dependent: :destroy
@@ -22,7 +23,6 @@ class Account < ActiveRecord::Base
   after_create :generate_setting
   after_create :generate_profile
   after_create :generate_default_pages
-
 
   def full_name
     return "#{self.profile.first_name} #{self.profile.last_name}" if self.profile.present?

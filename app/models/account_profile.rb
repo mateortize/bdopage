@@ -1,8 +1,8 @@
 class AccountProfile < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
-  belongs_to :account
-
   serialize :private_fields
+
+  belongs_to :account
 
   validates :account_id, uniqueness: true
   validate :avatar_file_size
