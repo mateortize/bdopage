@@ -7,8 +7,7 @@
       .form-group
         %label.control-label.col-sm-2{:for => "post_content"} Content
         .col-sm-10
-          = bootsy_area :post, :content, class: 'form-control', rows: 6 do
-            = @post.content
+          = f.bootsy_area :content, class: 'form-control', rows: 6
       = f.text_area :excerpt, rows: 6
     .col-md-6
       = f.text_field :video_url

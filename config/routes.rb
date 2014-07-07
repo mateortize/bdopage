@@ -77,6 +77,10 @@ Rails.application.routes.draw do
         get :refresh, on: :collection
       end
     end
+
+    namespace :pages do
+      resource :imprint
+    end
     
     resource :profile
     resource :setting

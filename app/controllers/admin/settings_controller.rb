@@ -1,6 +1,7 @@
 class Admin::SettingsController < Admin::BaseController
   before_filter :restrict_access_on_none_www, only: [:edit]
 
+  set_tab :blog
   layout 'admin'
 
   def index

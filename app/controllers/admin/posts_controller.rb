@@ -81,11 +81,10 @@ class Admin::PostsController < Admin::BaseController
 
   private
 
-  def load_post
-    @post = current_account.posts.find(params[:id]) unless params[:id].blank?
-  end
-  
-  private
+    def load_post
+      @post = current_account.posts.find(params[:id]) unless params[:id].blank?
+    end
+    
 
     def post_params
       params.require(:post).permit(:title,:content, :excerpt, :video_url, :bootsy_image_gallery_id)

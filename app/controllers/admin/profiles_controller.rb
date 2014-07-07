@@ -1,4 +1,5 @@
 class Admin::ProfilesController < Admin::BaseController
+  set_tab :profile
   
   def index
     @profile = current_account.profile
