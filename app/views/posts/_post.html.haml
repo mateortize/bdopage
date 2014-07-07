@@ -29,7 +29,7 @@
         .shortline
     .row.excerpt
       .col-md-12
-        = post.the_excerpt
+        = strip_tags post.the_excerpt
     .row
       %a.read.text-right{:href => post_path(post), :alt => ''}
         %span.text-left.pull-left.search-text Continue reading
