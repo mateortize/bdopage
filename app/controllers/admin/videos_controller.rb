@@ -42,8 +42,9 @@ class Admin::VideosController < Admin::BaseController
   end
 
   def destroy
-    @video.destroy
-    redirect_to edit_admin_post_path(@post)
+    @post.destroy
+    flash[:danger] = "Deleted successfully"
+    redirect_to admin_posts_path
   end
 
 

@@ -39,7 +39,7 @@
     = f.form_group do
       = link_to 'Back', edit_admin_post_path(@post), class: 'btn btn-default'
       = link_to 'Refresh', refresh_admin_post_video_path(@post), class: 'btn btn-warning'
-      = link_to 'Remove Video', admin_post_video_path(@post, @video), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" }
+      = link_to 'Remove Video', admin_post_video_path(@post), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" }
 
 
 - if @video.new_record?

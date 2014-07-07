@@ -69,6 +69,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts do
+      put :publish, on: :member
+      put :unpublish, on: :member
+
       resource :video do
         get :refresh, on: :collection
       end

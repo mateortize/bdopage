@@ -39,13 +39,23 @@
               = link_to 'Upload Video', new_admin_post_video_path(@post), class: 'btn btn-default'
           -else
             = f.submit "Save draft and upload a video", class: 'btn btn-warning'
-
+      .form-group
+        %label.control-label.col-sm-2 Status
+        .col-sm-10
+          %label.control-label= @post.status
       %hr
 
       .text-right
         = f.form_group do
-          = f.submit "Publish", class: 'btn btn-primary'
-          = f.submit "Update", class: 'btn btn-secondary'
+          - if @post.valid?
+            - if @post.published
+              = link_to 'Unpublish', unpublish_admin_post_path(@post), class: 'btn btn-primary', method: :put
+            - else
+              = link_to 'Publish', publish_admin_post_path(@post), class: 'btn btn-primary', method: :put
+
+
+          = f.submit "Save", class: 'btn btn-secondary'
+
           - unless @post.new_record?
             = link_to "Delete", admin_post_path(@post), method: :delete, data:{ confirm: "Are yo sure to delete?" }, class: 'btn btn-danger'
 
