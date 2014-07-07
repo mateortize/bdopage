@@ -5,7 +5,11 @@ class Admin::PostsController < Admin::BaseController
   set_tab :post
 
   def index
-    @posts = current_account.posts.order("created_at desc").page(params[:page]).per(12)
+    status = params[:status]
+    status ||= 'all'
+    set_tab status.to_sym
+    @posts = current_account.posts_for(status)
+    @posts = @posts.order("created_at desc").page(params[:page]).per(12)
   end
 
   def new
@@ -31,13 +35,17 @@ class Admin::PostsController < Admin::BaseController
     @post = Post.new(post_params)
     @post.account = current_account
     if @post.save_draft!
-      flash[:success] = "Created successfully"
-    end
 
-    if @post.has_embeded_video?
-      render :edit
+      if @post.has_embeded_video?
+        flash[:success] = "Created successfully"
+        render :edit
+      else
+        flash[:success] = "Created successfully, Please upload your video!"
+        redirect_to new_admin_post_video_path(@post) 
+      end
+
     else
-      redirect_to new_admin_post_video_path(@post) 
+      render :edit
     end
   end
 
@@ -45,6 +53,12 @@ class Admin::PostsController < Admin::BaseController
     @post.destroy
     flash[:success] = "Deleted successfully"
     redirect_to admin_posts_path
+  end
+
+  def restore
+    Post.restore(params[:id])
+    flash[:success] = "Restored successfully"
+    redirect_to admin_posts_path(status: 'trash')
   end
 
   def publish
@@ -68,7 +82,7 @@ class Admin::PostsController < Admin::BaseController
   private
 
   def load_post
-    @post = current_account.posts.find(params[:id])
+    @post = current_account.posts.find(params[:id]) unless params[:id].blank?
   end
   
   private

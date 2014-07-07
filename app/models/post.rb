@@ -2,11 +2,13 @@ require 'timeout'
 class Post < ActiveRecord::Base
   include AutoHtml
   include Bootsy::Container
+
   acts_as_commontable
+  acts_as_paranoid
   
   #post status: published, draft
 
-  has_one :video, dependent: :destroy
+  has_one :video
   belongs_to :account
 
   scope :published, -> { where(published: true) }
@@ -16,6 +18,8 @@ class Post < ActiveRecord::Base
   validate :validate_video_ability, on: :update
 
   after_save :send_new_post_notification
+  before_destroy :set_post_status_to_trash
+  before_restore :set_post_status_to_draft
 
   auto_html_for :video_url do
     html_escape
@@ -40,7 +44,7 @@ class Post < ActiveRecord::Base
   end
 
   def unpublish!
-    self.status = 'private'
+    self.status = 'draft'
     self.published = false
     self.save
   end
@@ -48,7 +52,7 @@ class Post < ActiveRecord::Base
   def save_draft!
     self.status = 'draft'
     self.published = false
-    self.save(validate: false)
+    self.save
   end
 
   def the_excerpt
@@ -98,6 +102,16 @@ class Post < ActiveRecord::Base
         Notifier.delay.send_new_post_to_follower(self.id, account.id)
       end
     end
+  end
+
+  def set_post_status_to_trash
+    self.status = 'trash'
+    self.save
+  end
+
+  def set_post_status_to_draft
+    self.status = 'draft'
+    self.save
   end
 
 end

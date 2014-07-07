@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     resources :posts do
       put :publish, on: :member
       put :unpublish, on: :member
+      put :restore, on: :member
 
       resource :video do
         get :refresh, on: :collection

@@ -61,6 +61,16 @@ class Account < ActiveRecord::Base
     account
   end
 
+  def posts_for(status)
+    if status == 'all'
+      @posts = self.posts
+    elsif status == 'trash'
+      @posts = self.posts.only_deleted
+    else
+      @posts = self.posts.where(status: status)
+    end
+  end
+
 
   def generate_setting
     self.create_setting(blog_alias: Time.now.to_i, blog_enabled: false)

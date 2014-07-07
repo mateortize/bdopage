@@ -13,4 +13,7 @@
   %td= post.created_at
   %td= post.updated_at
   %td.text-right
-    = link_to 'Edit', edit_admin_post_path(post), class: "btn btn-info"
+    - unless post.destroyed?
+      = link_to 'Edit', edit_admin_post_path(post), class: "btn btn-info"
+    - else
+      = link_to 'Restore', restore_admin_post_path(post), class: "btn btn-info", method: :put
