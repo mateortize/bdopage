@@ -81,10 +81,10 @@ class Account < ActiveRecord::Base
   end
 
   def generate_default_pages
-    self.create_impress_page
+    self.create_imprint_page
   end
 
-  def generate_impress_page
-    self.pages.create(slug: 'impress', title: 'Impress', content: '')
+  def generate_imprint_page
+    self.pages.create(slug: 'imprint', title: 'Imprint', content: '')
   end
 end
