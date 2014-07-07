@@ -98,7 +98,7 @@ Rails.application.routes.draw do
   resource :profile
   resources :pages, only:[] do
     collection do
-      get :impress
+      get :imprint
       get :terms_and_conditions
       get :contact
     end

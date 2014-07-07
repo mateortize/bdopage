@@ -7,7 +7,7 @@ class Admin::Pages::ImprintsController < Admin::BaseController
     if @page.update_attributes(page_params)
       flash[:success] = "Updated successfully."
     end
-    render :edit
+    redirect_to edit_admin_pages_imprint_path
   end
 
   def edit
