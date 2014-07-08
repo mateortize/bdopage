@@ -106,12 +106,12 @@ class Post < ActiveRecord::Base
 
   def set_post_status_to_trash
     self.status = 'trash'
-    self.save
+    self.save(validate: false)
   end
 
   def set_post_status_to_draft
     self.status = 'draft'
-    self.save
+    self.save(validate: false)
   end
 
 end

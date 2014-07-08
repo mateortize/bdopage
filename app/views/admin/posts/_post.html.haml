@@ -16,4 +16,5 @@
     - unless post.destroyed?
       = link_to 'Edit', edit_admin_post_path(post), class: "btn btn-info"
     - else
+      = link_to 'Permanently delete', really_destroy_admin_post_path(post), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure to delete permanently?' }
       = link_to 'Restore', restore_admin_post_path(post), class: "btn btn-info", method: :put

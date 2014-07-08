@@ -72,6 +72,7 @@ Rails.application.routes.draw do
       put :publish, on: :member
       put :unpublish, on: :member
       put :restore, on: :member
+      delete :really_destroy, on: :member 
 
       resource :video do
         get :refresh, on: :collection

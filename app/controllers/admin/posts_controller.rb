@@ -1,6 +1,6 @@
 class Admin::PostsController < Admin::BaseController
 
-  before_filter :load_post, only: [:show, :update, :edit, :destroy, :publish, :unpublish]
+  before_filter :load_post, only: [:show, :update, :destroy, :edit, :publish, :unpublish]
   
   set_tab :post
 
@@ -50,13 +50,23 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def destroy
-    @post.destroy
-    flash[:success] = "Deleted successfully"
+    if @post.destroy()
+      flash[:success] = "Deleted successfully"
+    else
+      flash[:success] = "Cannot delete."
+    end
+    redirect_to admin_posts_path
+  end
+
+  def really_destroy
+    @post = current_account.posts.with_deleted.find(params[:id])
+    @post.really_destroy!
     redirect_to admin_posts_path
   end
 
   def restore
-    Post.restore(params[:id])
+    @post = current_account.posts.with_deleted.find(params[:id])
+    @post.restore
     flash[:success] = "Restored successfully"
     redirect_to admin_posts_path(status: 'trash')
   end
