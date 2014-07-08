@@ -1,5 +1,5 @@
 class Admin::SettingsController < Admin::BaseController
-  before_filter :restrict_access_on_none_www, only: [:edit]
+  before_filter :redirect_to_www, only: [:edit]
 
   set_tab :blog
   layout 'admin'
@@ -37,9 +37,13 @@ class Admin::SettingsController < Admin::BaseController
       params.require(:account_setting).permit(:blog_alias,:blog_enabled)
   end
 
-  def restrict_access_on_none_www
-    if request.subdomain.present? && request.subdomain != "www"
-      redirect_to edit_admin_setting_url(host: "www.#{request.domain}")
+  def redirect_to_www
+    if request.subdomain != "www"
+      if Rails.env.production?
+        redirect_to edit_admin_setting_url(host: "www.#{request.domain}")
+      elsif request.subdomain.present?
+        redirect_to edit_admin_setting_url(host: "www.#{request.domain}")
+      end
     end
   end
 
