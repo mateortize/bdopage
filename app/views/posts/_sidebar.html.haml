@@ -51,7 +51,7 @@
         = link_to new_account_session_path, class:'show p3', alt: '' do
           %span.glyphicon.glyphicon-plus
           %h4 Create new videopage now!
-  - elsif @current_author == current_account        
+  - elsif @current_author == current_account or @current_author.blank?        
     .sidebar-element.bgwhite.nopadding.create-post
       %h3.text-center.nomargin
         = link_to new_admin_post_path, class:'show p3', alt: '' do
