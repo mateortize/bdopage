@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :load_current_author
 
   def load_current_author
-    @current_author = @account_setting.account unless @account_setting.blank?
-    @current_author ||= current_account
+    @current_author = @account_setting.try(:account)
     return @current_author
   end
 
