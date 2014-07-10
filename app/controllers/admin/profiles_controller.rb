@@ -7,6 +7,7 @@ class Admin::ProfilesController < Admin::BaseController
 
   def show
     @profile = current_account.profile
+    @account = current_account
   end
 
   def new
