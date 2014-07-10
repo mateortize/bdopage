@@ -82,6 +82,9 @@ body:before {
 .p3 {
   padding: 30px!important;
 }
+.prelative {
+  position: relative;
+}
 .shortline {
   height: 3px;
   background-color: $secondary;
@@ -105,6 +108,10 @@ body:before {
   &.btn-secondary {
     background-color: $secondarybg;
     color: $light;
+
+    &:hover {
+      background-color: darken($secondarybg, 7)!important;
+    }
   }
   &.btn-default,
   &.btn-back {

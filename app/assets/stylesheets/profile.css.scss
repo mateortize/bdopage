@@ -1,0 +1,23 @@
+#showprofile {
+
+  .profile-fullname {
+    margin: 45px 0 0 0;
+  }
+  .show-blogalias {
+    margin-top: 45px;
+  }
+  .follower-count {
+    position: absolute;
+    right: 3px;
+    top: 20px;
+    background-color: $secondarybg;
+    color: $light;
+    padding-top: 15px;
+    font-weight: 600;
+    @include box-shadow(0 0 0 7px $light);
+    cursor: default;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+  }
+}

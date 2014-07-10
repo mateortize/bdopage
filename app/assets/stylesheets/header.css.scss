@@ -45,6 +45,12 @@
     padding-top: 23px;
     padding-left: 18px;
     height: 100%;
+
+    .glyphicon {
+      font-size: 1em;
+      margin-right: 5px;
+      vertical-align: -1px;
+    }
   }
 }
 .navbar-toggle {

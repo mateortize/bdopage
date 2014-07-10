@@ -1,25 +1,29 @@
-.container
+#showprofile.container
   .bgwhite
     .row
       .col-md-12
         %h2 Account Profile
         .shortline
-        .row
-          .col-md-8
-            %p
-              %strong Name:
-              = @account.full_name
-            - if !@account.profile.email_private?
-              %p
-                %strong Email:
-                = @account.email
+        .row.mt2
+          .col-md-12
+            .row.mb2
+              .col-md-2.prelative
+                .follower-count.img-circle{:title => "Your followers"}
+                  = @account.followers_count
+                = image_tag(@account.profile.avatar_url, :class => 'img-responsive img-circle') unless @account.profile.avatar.blank?
+              .col-md-7
+                %h2.profile-fullname
+                  = @account.full_name
+                %span
+                  - if !@account.profile.email_private?
+                    = @account.email
+              .col-md-3.show-blogalias.text-right
+                %strong Blog Alias:
+                = @account.setting.blog_alias
+            %hr
             %p
               %strong Description
               = @account.profile.description
-            %p
-              %strong Blog alias:
-              %strong
-                = @account.setting.blog_alias
 
               %p.help
                 Your blog domain is
@@ -37,10 +41,6 @@
                   - else
                     = link_to unfollow_account_path(@current_author), method: :put, class: 'btn btn-danger' do
                       Unfollow
-
-          .col-md-4
-            .avatar-show
-              = image_tag(@account.profile.avatar_url, :class => 'img-responsive') unless @account.profile.avatar.blank?
           %span.clearfix
           %hr
           .col-md-12
