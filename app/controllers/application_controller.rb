@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def load_current_author
     @current_author = @account_setting.try(:account)
+    @current_author ||= current_account
     return @current_author
   end
 

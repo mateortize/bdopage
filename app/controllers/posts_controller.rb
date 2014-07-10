@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   
   
   def index
-    if @current_author.blank?
+    if request.subdomain.blank? || request.subdomain == "www"
       @posts = Post.all.published.order("created_at desc").page(params[:page]).per(12)
     else
       @posts = current_author.posts.published.order("created_at desc").page(params[:page]).per(12)

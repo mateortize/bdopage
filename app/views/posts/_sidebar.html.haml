@@ -1,48 +1,48 @@
 #sidebar.col-md-3.pull-right
-  - unless @current_author.blank?
-    - unless @current_author.profile.blank?
-      .sidebar-element.bgwhite
-        .user-shortinfo
-          - unless current_account.blank?
-            - if current_account == @current_author
-              = link_to edit_admin_profile_path, class: 'follow-layer' do
-                %span.glyphicon.glyphicon-pencil
-                Edit Profile
+  - if !@current_author.blank? && !@current_author.profile.blank?
+    .sidebar-element.bgwhite
+      .user-shortinfo
+        - unless current_account.blank?
+          - if current_account == @current_author
+            = link_to edit_admin_profile_path, class: 'follow-layer' do
+              %span.glyphicon.glyphicon-pencil
+              Edit Profile
+          - else
+            - unless current_account.following?(@current_author)
+              = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer' do
+                %span.glyphicon.glyphicon-plus
+                Follow
             - else
+              .follow-layer
+                %span.glyphicon.glyphicon-star
+                You follow him
+        .row
+          .col-md-12
+            - unless @current_author.profile.avatar.blank?
+              = image_tag @current_author.profile.avatar_url, :class => 'img-responsive'
+            - else
+              = image_tag 'nouserimage.jpg', :class => 'img-responsive'
+        .row
+          .col-md-12
+            %h4.user-name
+              = link_to @current_author.full_name, account_path(@current_author)
+        .row
+          .col-md-12
+            %p.user-shortdesc
+              = truncate (@current_author.profile.description), length: 125
+
+        - unless current_account.blank?
+          %hr.visible-xs
+          .row.visible-xs
+            .col-xs-12
               - unless current_account.following?(@current_author)
-                = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer' do
+                = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer-mobile' do
                   %span.glyphicon.glyphicon-plus
                   Follow
               - else
-                .follow-layer
+                .follow-layer-mobile
                   %span.glyphicon.glyphicon-star
                   You follow him
-          .row
-            .col-md-12
-              - unless @current_author.profile.avatar.blank?
-                = image_tag @current_author.profile.avatar_url, :class => 'img-responsive'
-              - else
-                = image_tag 'nouserimage.jpg', :class => 'img-responsive'
-          .row
-            .col-md-12
-              %h4.user-name
-                = link_to @current_author.full_name, account_path(@current_author)
-          .row
-            .col-md-12
-              %p.user-shortdesc
-                = truncate (@current_author.profile.description), length: 125
-          - unless current_account.blank?
-            %hr.visible-xs
-            .row.visible-xs
-              .col-xs-12
-                - unless current_account.following?(@current_author)
-                  = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer-mobile' do
-                    %span.glyphicon.glyphicon-plus
-                    Follow
-                - else
-                  .follow-layer-mobile
-                    %span.glyphicon.glyphicon-star
-                    You follow him
       
 
   - if current_account.blank?
@@ -51,7 +51,7 @@
         = link_to new_account_session_path, class:'show p3', alt: '' do
           %span.glyphicon.glyphicon-plus
           %h4 Create new videopage now!
-  - elsif @current_author == current_account or @current_author.blank?        
+  - elsif @current_author == current_account || @current_author.blank?        
     .sidebar-element.bgwhite.nopadding.create-post
       %h3.text-center.nomargin
         = link_to new_admin_post_path, class:'show p3', alt: '' do
