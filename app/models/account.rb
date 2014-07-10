@@ -80,10 +80,6 @@ class Account < ActiveRecord::Base
   end
 
   def generate_default_pages
-    self.create_imprint_page
-  end
-
-  def generate_imprint_page
     self.pages.create(slug: 'imprint', title: 'Imprint', content: '')
   end
 end
