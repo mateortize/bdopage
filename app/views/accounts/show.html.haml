@@ -52,5 +52,6 @@
               - elsif !current_account.blank?
                 = link_to 'Follow', follow_account_path(@current_author), method: :put, class: 'btn btn-primary'
 
-              = link_to "See imprint page", imprint_pages_path, class: 'btn btn-primary'
+              - if !@account.pages.find_by(slug: 'imprint').blank?
+                = link_to "See imprint page", imprint_pages_path, class: 'btn btn-primary'
 

@@ -71,7 +71,6 @@ class Account < ActiveRecord::Base
     end
   end
 
-
   def generate_setting
     self.create_setting(blog_alias: Time.now.to_i, blog_enabled: false)
   end
