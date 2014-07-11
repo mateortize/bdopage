@@ -82,6 +82,15 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def screenshot
+    if !self.embeded_video.blank?
+      return self.embeded_video_thumbnail_small
+    elsif !self.video.blank?
+      return self.video.screenshot
+    end
+    return nil
+  end
+
   def has_video?
     self.video.present? or self.video_url.present?
   end
