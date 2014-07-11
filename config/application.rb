@@ -26,5 +26,7 @@ module Videopage7
         Devise::UnlocksController.layout "devise"            
         Devise::PasswordsController.layout "devise"        
     end
+
+    config.action_mailer.preview_path = "#{Rails.root}/app/views/notifier"
   end
 end

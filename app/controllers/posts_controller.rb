@@ -20,7 +20,6 @@ class PostsController < ApplicationController
     unless @post.video.blank?
       @post.video.refresh unless @post.video.encoded?
     end
-
   end
 
   private
