@@ -108,5 +108,5 @@ Rails.application.routes.draw do
 
   root :to => "posts#index"
   
-  #get '/:action(/:id)', :controller => 'posts'
+  #get '/welcome' => 'pages/welcome'
 end
