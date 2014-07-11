@@ -5,10 +5,14 @@ class PostsController < ApplicationController
   
   
   def index
-    if request.subdomain.blank? || request.subdomain == "www"
-      @posts = Post.all.published.order("created_at desc").page(params[:page]).per(12)
+    unless current_user.blank?
+      if request.subdomain.blank? || request.subdomain == "www"
+        @posts = Post.all.published.order("created_at desc").page(params[:page]).per(12)
+      else
+        @posts = current_author.posts.published.order("created_at desc").page(params[:page]).per(12)
+      end
     else
-      @posts = current_author.posts.published.order("created_at desc").page(params[:page]).per(12)
+      render "pages/promotion"
     end
   end
 

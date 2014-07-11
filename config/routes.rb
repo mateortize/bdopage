@@ -102,11 +102,10 @@ Rails.application.routes.draw do
       get :imprint
       get :terms_and_conditions
       get :contact
+      get :promotion
     end
   end
 
 
   root :to => "posts#index"
-  
-  #get '/welcome' => 'pages/welcome'
 end
