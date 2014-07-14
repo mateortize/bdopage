@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
   def follow
     current_account.follow(@account)
     current_account.reload
-    redirect_to :back
+    redirect_to account_path(@account)
   end
 
   def videos
@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
   def unfollow
     current_account.stop_following(@account) if current_account.following?(@account)
     current_account.reload
-    redirect_to :back
+    redirect_to account_path(@account)
   end
 
   private
