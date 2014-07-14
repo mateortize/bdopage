@@ -1,12 +1,18 @@
 = render 'profile_videos_tabs'
 
 .row.mt2
-  - @posts.each do |post|
-    .col-md-3
+  - @posts.each_with_index do |post, index|
+    .col-sm-3.col-xs-6
       = link_to post_path(post) do
         = image_tag post.screenshot, class: 'img-responsive'
 
       %h5= post.title
+
+    - if (index+1) % 4 == 0
+      .clearfix
+    - if (index+1) % 2 == 0
+      .clearfix.visible-xs-block
+
 
 .row
   .col-md-9
