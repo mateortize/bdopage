@@ -31,15 +31,15 @@
                   = link_to "#{@account.setting.blog_alias}.#{request.domain}", "http://#{@account.setting.blog_alias}.#{request.domain}"
               %p
                 %strong Followers:
-                = @account.followers.count
+                = @account.followers_count
 
               %p
-                - if !current_account.blank? && @current_author!=current_account
-                  - unless current_account.following?(@current_author)
-                    = link_to follow_account_path(@current_author), method: :put, class: 'btn btn-primary' do
+                - if !current_account.blank? && @account!=current_account
+                  - unless current_account.following?(@account)
+                    = link_to follow_account_path(@account), method: :put, class: 'btn btn-primary' do
                       Follow
                   - else
-                    = link_to unfollow_account_path(@current_author), method: :put, class: 'btn btn-danger' do
+                    = link_to unfollow_account_path(@account), method: :put, class: 'btn btn-danger' do
                       Unfollow
           %span.clearfix
           %hr
@@ -50,7 +50,7 @@
                 = link_to 'Edit Imprint Page', edit_admin_pages_imprint_path, class: 'btn btn-default'
                 = link_to 'Change Blog Alias', edit_admin_setting_path, class: 'btn btn-default'
               - elsif !current_account.blank?
-                = link_to 'Follow', follow_account_path(@current_author), method: :put, class: 'btn btn-primary'
+                = link_to 'Follow', follow_account_path(@account), method: :put, class: 'btn btn-primary'
 
               - if !@account.pages.find_by(slug: 'imprint').blank?
                 = link_to "Imprint", imprint_pages_path, class: 'btn btn-primary'

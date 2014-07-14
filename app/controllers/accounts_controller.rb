@@ -10,8 +10,7 @@ class AccountsController < ApplicationController
   end
 
   def follow
-    me = Account.find(current_account.id)
-    me.follow(@account)
+    current_account.follow(@account)
     redirect_to :back
   end
 
@@ -21,8 +20,7 @@ class AccountsController < ApplicationController
   end
 
   def unfollow
-    me = Account.find(current_account.id)
-    me.stop_following(@account) if me.following?(@account)
+    current_account.stop_following(@account) if current_account.following?(@account)
     redirect_to :back
   end
 
