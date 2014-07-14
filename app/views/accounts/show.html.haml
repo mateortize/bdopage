@@ -22,7 +22,7 @@
       = @account.profile.description
 
       %p.help
-        Your blog domain is
+        blog domain:
         %strong
           = link_to "#{@account.setting.blog_alias}.#{request.domain}", "http://#{@account.setting.blog_alias}.#{request.domain}"
       %p
