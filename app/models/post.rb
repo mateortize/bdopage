@@ -63,7 +63,8 @@ class Post < ActiveRecord::Base
   def embeded_video
     if has_embeded_video?
       begin
-        return VideoInfo.new(self.video_url)
+        video = VideoInfo.new(self.video_url)
+        return video
       rescue
         return nil
       end
@@ -72,22 +73,9 @@ class Post < ActiveRecord::Base
     return nil
   end
 
-  def embeded_video_thumbnail_small
-    begin
-      Timeout::timeout(3) do
-        return embeded_video.thumbnail_small if !embeded_video.blank?
-      end
-    rescue Timeout::Error
-      return nil
-    end
-  end
-
   def screenshot
-    if !self.embeded_video.blank?
-      return self.embeded_video_thumbnail_small
-    elsif !self.video.blank?
-      return self.video.screenshot
-    end
+    return self.embeded_video.thumbnail_large if !self.embeded_video.blank?
+    return self.video.screenshot if !self.video.blank?
     return nil
   end
 
