@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  skip_before_action :authenticate_account!, only: [:show]
+  skip_before_action :authenticate_account!, only: [:show, :videos]
   before_filter :load_account
 
   layout 'bgwhite'
