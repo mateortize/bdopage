@@ -1,0 +1,16 @@
+= render 'profile_videos_tabs'
+
+%h2= "Videos"
+.shortline
+.row.mt2
+  - @posts.each do |post|
+    .col-md-3
+      = link_to post_path(post) do
+        = image_tag post.screenshot, class: 'img-responsive'
+
+      %h5= post.title
+
+.row
+  .col-md-9
+    = paginate @posts
+    

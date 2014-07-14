@@ -1,14 +1,22 @@
 class AccountsController < ApplicationController
   skip_before_action :authenticate_account!, only: [:show]
-  before_filter :load_account, only:[:show, :follow, :unfollow]
-  
+  before_filter :load_account
+
+  layout 'bgwhite'
+
   def show
+    set_tab :profile
     @profile = @account.profile
   end
 
   def follow
     current_account.follow(@account)
     redirect_to :back
+  end
+
+  def videos
+    set_tab :videos
+    @posts = current_account.posts.published.order("created_at desc").page(params[:page]).per(12)
   end
 
   def unfollow

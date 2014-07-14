@@ -93,10 +93,12 @@ Rails.application.routes.draw do
   resources :accounts do
     put :follow, on: :member
     put :unfollow, on: :member
+    get :videos, on: :member
   end
 
   resources :posts
   resource :profile
+
   resources :pages, only:[] do
     collection do
       get :imprint
