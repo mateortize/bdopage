@@ -10,9 +10,9 @@ class AccountsController < ApplicationController
   end
 
   def follow
-    current_account.follow(@account)
-    current_account.reload
-    redirect_to account_path(@account)
+    me = Account.find(current_account.id)
+    me.follow(@account)
+    redirect_to :back
   end
 
   def videos
@@ -21,9 +21,9 @@ class AccountsController < ApplicationController
   end
 
   def unfollow
-    current_account.stop_following(@account) if current_account.following?(@account)
-    current_account.reload
-    redirect_to account_path(@account)
+    me = Account.find(current_account.id)
+    me.stop_following(@account) if me.following?(@account)
+    redirect_to :back
   end
 
   private
