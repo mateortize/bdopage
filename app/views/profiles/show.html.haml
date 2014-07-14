@@ -9,7 +9,7 @@
             .row.mb2
               .col-md-2.prelative
                 .follower-count.img-circle{:title => "Your followers"}
-                  = @account.followers_count
+                  = @account.followers.count
                 = image_tag(@account.profile.avatar_url, :class => 'img-responsive img-circle') unless @account.profile.avatar.blank?
               .col-md-7
                 %h2.profile-fullname
@@ -31,7 +31,7 @@
                   = link_to "#{@account.setting.blog_alias}.#{request.domain}", "http://#{@account.setting.blog_alias}.#{request.domain}"
               %p
                 %strong Followers:
-                = @account.followers_count
+                = @account.followers.count
 
               %p
                 - if !current_account.blank? && @current_author!=current_account
