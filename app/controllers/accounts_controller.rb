@@ -16,7 +16,7 @@ class AccountsController < ApplicationController
 
   def videos
     set_tab :videos
-    @posts = current_account.posts.published.order("created_at desc").page(params[:page]).per(12)
+    @posts = @account.posts.published.order("created_at desc").page(params[:page]).per(12)
   end
 
   def unfollow
