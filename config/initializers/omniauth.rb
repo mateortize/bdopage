@@ -1,7 +1,7 @@
 if Rails.env.development?
-  Omniauth::Bonofa.configure do |config|
-    config.site = "http://baio.sevendevs.de"
-  end
+  provider :bonofa, bonofa_app_id, bonofa_app_secret, client_options: {
+    site: "http://baio.sevendevs.de"
+  }
 end
 
 Rails.application.config.middleware.use OmniAuth::Builder do

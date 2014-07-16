@@ -40,7 +40,7 @@ gem 'acts_as_follower'
 gem 'bootsy'
 
 gem 'omniauth-cube7'
-gem 'omniauth-bonofa'
+gem 'omniauth-bonofa', '~> 0.0.5'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
