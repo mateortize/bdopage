@@ -21,3 +21,38 @@
     text-align: center;
   }
 }
+#profile-videos {
+  .profile-video {
+
+    .video-hv {
+      opacity: 0;
+      background-color: rgba($secondarybg, .6);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      @include transition(all 300ms ease);
+
+      .glyphicon {
+        color: $light;
+        font-size: 3em;
+        height: 40px;
+        left: 50%;
+        margin-left: -20px;
+        margin-top: -20px;
+        position: absolute;
+        top: 50%;
+        width: 40px;
+      }
+    }
+
+    &:hover {
+
+      .video-hv {
+        opacity: 1;
+      }
+    }
+  }
+}
