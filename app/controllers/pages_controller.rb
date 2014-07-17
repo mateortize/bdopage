@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   end
 
   def promotion
+    @posts = Post.all.published.order("created_at desc").limit(20)
   end
 
   def show

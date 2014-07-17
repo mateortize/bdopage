@@ -26,7 +26,6 @@ class AccountsController < ApplicationController
 
   def imprint
     @page = @account.pages.find_by(slug: 'imprint')
-
   end
 
   private

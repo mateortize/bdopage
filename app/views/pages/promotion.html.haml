@@ -27,16 +27,10 @@
           %span.glyphicon.glyphicon-chevron-right
 
       #post-carousel.owl-carousel
-        %div Post 1
-        %div Post 2
-        %div Post 3
-        %div Post 4
-        %div Post 5
-        %div Post 6
-        %div Post 7
-        %div Post 8
-        %div Post 9
-        %div Post 10
+        - @posts.each do |post|
+          %div
+            - unless post.screenshot.blank?
+              = link_to post_path(post) do
+                = image_tag post.screenshot, class: 'img img-responsive'
 
-
-
+            = post.title
