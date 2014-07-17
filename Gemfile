@@ -59,7 +59,7 @@ gem 'tabs_on_rails'
 gem 'paranoia', '~> 2.0'
 
 gem 'mailcatcher'
-
+gem 'airbrake', group: :production
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
