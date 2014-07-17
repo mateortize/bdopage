@@ -1,11 +1,42 @@
 #homepage.container
   .row
-    = render "sidebar";
+    = render "posts/sidebar";
     .col-md-9
-      #slider.carousel.slide{:data => {:ride => 'carousel'}}
-        %ol.carousel-indicators
-          %li.active{:data => {:target => '#slider', 'slide-to' => '0'}}
-          %li{:data => {:target => '#slider', 'slide-to' => '1'}}
-          %li{:data => {:target => '#slider', 'slide-to' => '2'}}
+      #myCarousel.carousel.slide{"data-interval" => "3000", "data-ride" => "carousel"}
+        / Carousel items
+        .carousel-inner
+          .active.item
+            = image_tag 'slider1.jpg'
+            .carousel-caption
+              %h2 Create your own videopage
+              %p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          .item
+            = image_tag 'slider1.jpg'
+            .carousel-caption
+              %h2 Create your own videopage
+              %p Aliquam sit amet gravida nibh, facilisis gravida odio.
+          .item
+            = image_tag 'slider1.jpg'
+            .carousel-caption
+              %h2 Create your own videopage
+              %p Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+        / Carousel nav
+        %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"}
+          %span.glyphicon.glyphicon-chevron-left
+        %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"}
+          %span.glyphicon.glyphicon-chevron-right
+
+      #post-carousel.owl-carousel
+        %div Post 1
+        %div Post 2
+        %div Post 3
+        %div Post 4
+        %div Post 5
+        %div Post 6
+        %div Post 7
+        %div Post 8
+        %div Post 9
+        %div Post 10
+
 
 
