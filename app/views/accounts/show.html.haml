@@ -54,5 +54,5 @@
               = link_to 'Follow', follow_account_path(@current_author), method: :put, class: 'btn btn-primary'
 
             - if !@account.pages.find_by(slug: 'imprint').blank?
-              = link_to "Imprint", imprint_pages_path, class: 'btn btn-primary'
+              = link_to "Imprint", imprint_account_path(@account), class: 'btn btn-primary'
 

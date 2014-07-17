@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  skip_before_action :authenticate_account!, only: [:show, :videos]
+  skip_before_action :authenticate_account!, only: [:show, :videos, :imprint]
   before_filter :load_account
 
   layout 'bgwhite'
@@ -22,6 +22,11 @@ class AccountsController < ApplicationController
   def unfollow
     current_account.stop_following(@account) if current_account.following?(@account)
     redirect_to :back
+  end
+
+  def imprint
+    @page = @account.pages.find_by(slug: 'imprint')
+
   end
 
   private
