@@ -166,7 +166,7 @@ GEM
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
-    omniauth-bonofa (0.0.4)
+    omniauth-bonofa (0.0.5)
       omniauth-oauth2 (~> 1.1.1)
     omniauth-cube7 (0.0.3)
       omniauth-oauth2 (~> 1.1.1)
@@ -324,7 +324,7 @@ DEPENDENCIES
   kaminari
   mailcatcher
   mini_magick
-  omniauth-bonofa
+  omniauth-bonofa (~> 0.0.5)
   omniauth-cube7
   panda (~> 1.6.0)
   paranoia (~> 2.0)
