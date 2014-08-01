@@ -59,6 +59,7 @@ gem 'tabs_on_rails'
 gem 'paranoia', '~> 2.0'
 
 gem 'mailcatcher'
+gem 'airbrake'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

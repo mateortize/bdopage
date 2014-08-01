@@ -31,6 +31,9 @@ GEM
       tzinfo (~> 1.1)
     acts_as_follower (0.2.1)
     addressable (2.3.6)
+    airbrake (4.0.0)
+      builder
+      multi_json
     arel (5.0.1.20140414130214)
     auto_html (1.6.4)
       redcarpet (~> 3.1)
@@ -166,7 +169,7 @@ GEM
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
-    omniauth-bonofa (0.0.4)
+    omniauth-bonofa (0.0.5)
       omniauth-oauth2 (~> 1.1.1)
     omniauth-cube7 (0.0.3)
       omniauth-oauth2 (~> 1.1.1)
@@ -305,6 +308,7 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   acts_as_follower
+  airbrake
   auto_html
   binding_of_caller
   bootstrap-sass (~> 3.1.1)
@@ -324,7 +328,7 @@ DEPENDENCIES
   kaminari
   mailcatcher
   mini_magick
-  omniauth-bonofa
+  omniauth-bonofa (~> 0.0.5)
   omniauth-cube7
   panda (~> 1.6.0)
   paranoia (~> 2.0)
