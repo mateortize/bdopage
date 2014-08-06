@@ -1,3 +1,7 @@
+//Load fonts
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700italic,700);
+
 @mixin box-shadow($boxshadow) {
   -moz-box-shadow: $boxshadow;
   -webkit-box-shadow: $boxshadow;
@@ -22,10 +26,6 @@
   -o-border-radius: $borderradius;
   border-radius: $borderradius;
 }
-
-//Load fonts
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700italic,700);
 
 //Basic
 html:not([app='videopage7']) body:before {
@@ -90,6 +90,11 @@ body:before {
   background-color: $secondary;
   width: 30%;
   margin: 10px 0;
+}
+
+//Colors
+.secondarytext {
+  color: $secondary!important;
 }
 
 //Buttons
