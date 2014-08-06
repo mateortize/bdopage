@@ -16,8 +16,8 @@ class AccountProfile < ActiveRecord::Base
   end
 
   def avatar_file_size
-    unless !avatar.blank?
-      unless avatar.file.blank?
+    if !avatar.blank?
+      if !avatar.file.blank?
         if avatar.file.size.to_f/(1000*1000) > 2
           errors.add(:file, "You cannot upload a file greater than 2MB")
         end
