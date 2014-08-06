@@ -7,3 +7,17 @@
     color: $secondary;
   }
 }
+//Homepage
+#myCarousel {
+  margin-bottom: 20px;
+
+  .carousel-caption {
+    text-align: left;
+    left: 10%;
+
+    h2 {
+      color: $light;
+      @include box-shadow(none);
+    }
+  }
+}

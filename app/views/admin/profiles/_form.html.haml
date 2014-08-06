@@ -16,7 +16,7 @@
 
   = f.text_field :first_name
   = f.text_field :last_name
-  - if @profile.avatar?
+  - if !@profile.avatar.blank?
     = f.form_group do
       = image_tag(@profile.avatar_url, :class => 'img-responsive editprofileimg')
       = f.check_box :remove_avatar

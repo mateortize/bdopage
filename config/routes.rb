@@ -94,6 +94,7 @@ Rails.application.routes.draw do
     put :follow, on: :member
     put :unfollow, on: :member
     get :videos, on: :member
+    get :imprint, on: :member
   end
 
   resources :posts

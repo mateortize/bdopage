@@ -23,8 +23,6 @@ gem 'sidekiq'
 gem 'kaminari'
 #gem 'will_paginate'
 
-gem 'active_link_to'
-
 #youtube, vimeo from link
 gem "auto_html"
 gem 'cloudinary'
@@ -55,12 +53,12 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap_form'
 
+gem 'active_link_to'
 gem 'tabs_on_rails'
 gem 'paranoia', '~> 2.0'
 
 gem 'mailcatcher'
-gem 'airbrake'
-
+gem 'airbrake', group: :production
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

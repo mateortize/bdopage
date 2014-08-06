@@ -2,7 +2,11 @@
   #top-header {
 
     .navbar-brand {
-      width: 248px;
+      width: 227px;
+
+      img {
+        width: 100%;
+      }
     }
   }
   #posts {

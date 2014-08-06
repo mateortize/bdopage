@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require_tree .
 //= require masonry.pkgd.min
+//= require owl.carousel
 
 $(document).ready(function() {
     //Masonry
@@ -30,4 +31,6 @@ $(document).ready(function() {
       console.log(111);
       $(this).find('html').css({background: 'none'});
     });
+
+    $("#post-carousel").owlCarousel();
 })
