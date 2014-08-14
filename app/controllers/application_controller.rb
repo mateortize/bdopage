@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def restrict_access
     if request.subdomain.present? && request.subdomain != "www"
-      @account_setting = AccountSetting.where(blog_alias: request.subdomain).first
+      @account_setting = AccountSetting.where(blog_alias: request.subdomain.downcase).first
       raise ActionController::RoutingError.new('Not Found') if @account_setting.blank?
     end
   end
