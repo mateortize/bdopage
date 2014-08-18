@@ -16,6 +16,8 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
   validates :account_id, presence: true
   validate :validate_video_ability, on: :update
+  validates_length_of :content, maximum: 2048
+  validates_length_of :excerpt, maximum: 255
 
   after_save :send_new_post_notification
   before_destroy :set_post_status_to_trash
