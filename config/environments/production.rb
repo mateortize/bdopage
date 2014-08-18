@@ -84,4 +84,19 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.asset_host = 'http://www.videopage7.com'
+
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.mailgun.org',
+    :port => 587,
+    :domain => 'smtp.mailgun.org',
+    :authentication => :login,
+    :user_name => Rails.application.secrets[:mailgun]["user_name"],
+    :password => Rails.application.secrets[:mailgun]["password"],
+    :enable_starttls_auto => false,
+    :openssl_verify_mode => 'none'
+    #:ssl => true
+  }
+
+  config.action_mailer.delivery_method= :smtp
+  config.action_mailer.default_url_options = { :host => 'videopage7.com' }
 end
