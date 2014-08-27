@@ -76,8 +76,13 @@ class Post < ActiveRecord::Base
   end
 
   def screenshot
-    return self.embeded_video.thumbnail_large if !self.embeded_video.blank?
-    return self.video.screenshot if !self.video.blank?
+    begin
+      return self.embeded_video.thumbnail_large if !self.embeded_video.blank?
+      return self.video.screenshot if !self.video.blank?
+    rescue
+      return nil
+    end
+    
     return nil
   end
 
