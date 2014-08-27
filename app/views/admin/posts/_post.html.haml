@@ -1,6 +1,7 @@
 %tr
   %td= image_tag post.screenshot, class: 'img-responsive', style: 'max-width: 120px;'
   %td= post.title
+  %td= post.category.try(:name)
   %td= strip_tags post.excerpt
   %td= post.comments.count
   %td= post.published
