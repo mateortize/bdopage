@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
 
   has_one :video
   belongs_to :account
+  belongs_to :category
 
   scope :published, -> { where(published: true) }
   
@@ -37,6 +38,17 @@ class Post < ActiveRecord::Base
     if self.has_embeded_video?
       errors.add(:video_url, 'Please input correct youtube or vimeo url.') if embeded_video.blank? or !embeded_video.available?
     end
+  end
+
+  def self.search(account, category_id)
+    posts = nil
+    if account.blank?
+      posts = Post.all.published
+    else
+      posts = account.posts.published
+    end
+    posts = posts.where(category_id: category_id) if !category_id.blank?
+    return posts
   end
 
   def publish!
@@ -82,7 +94,7 @@ class Post < ActiveRecord::Base
     rescue
       return nil
     end
-    
+
     return nil
   end
 

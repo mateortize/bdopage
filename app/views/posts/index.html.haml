@@ -1,6 +1,6 @@
 .container
   .row
-    = render "sidebar";
+    = render "sidebar"
     #posts.col-md-9
       - if !current_account.blank? && current_account.posts.first.blank?
         .page-status
