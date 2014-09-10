@@ -12,6 +12,10 @@ class PostsController < ApplicationController
     unless @post.video.blank?
       @post.video.refresh unless @post.video.encoded?
     end
+
+    if @post.video_url.present? || (@post.video.present? && @post.video.encoded?)
+      @post.increment! :views_count
+    end
   end
 
   private

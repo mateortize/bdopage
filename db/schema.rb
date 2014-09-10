@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827090450) do
+ActiveRecord::Schema.define(version: 20140910084950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,10 +168,12 @@ ActiveRecord::Schema.define(version: 20140827090450) do
     t.string   "status"
     t.datetime "deleted_at"
     t.integer  "category_id"
+    t.integer  "views_count", default: 0
   end
 
   add_index "posts", ["account_id"], name: "index_posts_on_account_id", using: :btree
   add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
+  add_index "posts", ["views_count"], name: "index_posts_on_views_count", using: :btree
 
   create_table "video_encodings", force: true do |t|
     t.string   "profile_name"
