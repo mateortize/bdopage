@@ -19,3 +19,5 @@
 /public/assets/*
 /config/database.yml
 /config/secrets.yml
+/doc
+.idea/
