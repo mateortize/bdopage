@@ -12,7 +12,7 @@ gem 'devise'
 
 gem 'panda', '~> 1.6.0'
 
-gem "fog", "~> 1.3.1"
+gem 'fog', '~> 1.23'
 
 gem 'carrierwave'
 
@@ -39,6 +39,8 @@ gem 'bootsy'
 
 gem 'omniauth-cube7'
 gem 'omniauth-bonofa', '~> 0.0.5'
+
+gem 'active_merchant_inatec', github: 'c7devteam/inatec_cc'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -70,7 +72,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-# gem 'spring',        group: :development
+gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -85,8 +87,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'guard-rspec'
+  gem 'rspec-rails', '~> 3.0'
   gem "factory_girl_rails"
   gem "pry"
   gem 'thin'
