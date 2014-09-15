@@ -40,7 +40,13 @@ gem 'bootsy'
 gem 'omniauth-cube7'
 gem 'omniauth-bonofa', '~> 0.0.5'
 
+# payment
 gem 'active_merchant_inatec', github: 'c7devteam/inatec_cc'
+gem 'countries'
+gem 'country_select', '~> 2.0'
+gem 'money-rails'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -88,9 +94,13 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem "factory_girl_rails"
-  gem "pry"
+  gem 'database_cleaner'
+  gem 'spring-commands-rspec'
+  gem 'factory_girl_rails'
+  # gem 'pry'
   gem 'thin'
+  gem 'quiet_assets'
+  gem 'ffaker'
 end
 
 group :development do

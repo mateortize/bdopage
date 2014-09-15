@@ -14,6 +14,7 @@ class Account < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :videos, dependent: :destroy
   has_many :authentications, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   has_one :setting, class_name: 'AccountSetting'
   has_one :profile, class_name: 'AccountProfile'
@@ -27,6 +28,15 @@ class Account < ActiveRecord::Base
   def full_name
     return "#{self.profile.first_name} #{self.profile.last_name}" if self.profile.present?
     "Unknown"
+  end
+
+  def current_plan
+    order = orders.active.first
+    if order
+      order.plan
+    else
+      Order.free_plan
+    end
   end
 
   def blog_alias

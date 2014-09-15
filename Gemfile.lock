@@ -78,7 +78,6 @@ GEM
     cloudinary (1.0.73)
       aws_cf_signer
       rest-client
-    coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -90,7 +89,13 @@ GEM
       jquery-rails
       rails (>= 3.1)
     connection_pool (2.0.0)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
+    country_select (2.0.0)
+      countries (~> 0.9, >= 0.9.3)
+    currencies (0.4.2)
     daemons (1.1.9)
+    database_cleaner (1.3.0)
     debug_inspector (0.0.2)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -110,6 +115,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    ffaker (1.25.0)
     fog (1.23.0)
       fog-brightbox
       fog-core (~> 1.23)
@@ -166,7 +172,6 @@ GEM
       skinny (>= 0.1.2)
       sqlite3-ruby
       thin
-    method_source (0.8.2)
     mime-types (1.25.1)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
@@ -174,6 +179,10 @@ GEM
     minitest (5.4.1)
     money (6.2.1)
       i18n (>= 0.6.4, <= 0.7.0.dev)
+    money-rails (0.0.1)
+      activesupport (>= 3.0)
+      money (>= 4.0.2)
+      railties (>= 3.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -217,10 +226,8 @@ GEM
       activerecord (~> 4.0)
     pg (0.17.1)
     polyglot (0.3.5)
-    pry (0.9.12.4)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
-      slop (~> 3.4)
+    quiet_assets (1.0.3)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -291,8 +298,9 @@ GEM
     skinny (0.2.3)
       eventmachine (~> 1.0.0)
       thin (~> 1.5.0)
-    slop (3.4.7)
     spring (1.1.3)
+    spring-commands-rspec (1.0.2)
+      spring (>= 0.9.1)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -329,6 +337,9 @@ GEM
       multi_json
     warden (1.2.3)
       rack (>= 1.0)
+    wicked_pdf (0.11.0)
+      rails
+    wkhtmltopdf-binary (0.9.9.3)
 
 PLATFORMS
   ruby
@@ -347,8 +358,12 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.0.0)
   commontator (~> 4.6.0)
+  countries
+  country_select (~> 2.0)
+  database_cleaner
   devise
   factory_girl_rails
+  ffaker
   fog (~> 1.23)
   haml
   jbuilder (~> 2.0)
@@ -356,19 +371,23 @@ DEPENDENCIES
   kaminari
   mailcatcher
   mini_magick
+  money-rails
   omniauth-bonofa (~> 0.0.5)
   omniauth-cube7
   panda (~> 1.6.0)
   paranoia (~> 2.0)
   pg
-  pry
+  quiet_assets
   rails (= 4.1.5)
   rspec-rails (~> 3.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   sidekiq
   spring
+  spring-commands-rspec
   tabs_on_rails
   thin
   uglifier (>= 1.3.0)
   video_info
+  wicked_pdf
+  wkhtmltopdf-binary

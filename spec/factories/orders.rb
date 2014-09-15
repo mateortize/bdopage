@@ -1,0 +1,24 @@
+FactoryGirl.define do
+  factory :order do
+    account
+    plan_type 'pro'
+
+    ip '127.0.0.1'
+    number '4149011500000147'
+    year 2014
+    month 12
+    verification_value 147
+
+    payment_method 'inatec'
+    # info
+    # transaction_id
+    # invoice_file
+    # card_brand
+    # last_4_digits
+    expired_at { 1.year.since }
+
+    after(:build) do |order|
+      order.billing_address ||= build(:address, addressable: order)
+    end
+  end
+end
