@@ -47,6 +47,7 @@
         .col-md-12
           %p
             - if @account == current_account
+              = link_to 'Orders', admin_orders_path, class: 'btn btn-default'
               = link_to 'Edit Profile', edit_admin_profile_path, class: 'btn btn-default'
               = link_to 'Edit Imprint Page', edit_admin_pages_imprint_path, class: 'btn btn-default'
               = link_to 'Change Blog Alias', edit_admin_setting_path, class: 'btn btn-default'

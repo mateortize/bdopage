@@ -92,4 +92,18 @@ class Account < ActiveRecord::Base
   def generate_default_pages
     self.pages.create(slug: 'imprint', title: 'Imprint', content: '')
   end
+
+  def check_upgrade_plan!(new_plan)
+    unless new_plan.try :active
+      raise 'Bad or inactive plan'
+    end
+
+    if new_plan == current_plan
+      raise 'Plan already activated'
+    end
+
+    unless new_plan.upgrade_rating > current_plan.upgrade_rating
+      raise "Can't upgrade to plan"
+    end
+  end
 end

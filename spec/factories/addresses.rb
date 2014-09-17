@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :address do
-    addressable { create :account }
+    # addressable { create :account }
     address_1 { Faker::Address.street_address }
     address_2 { Faker::Address.secondary_address }
     city { Faker::Address.city }

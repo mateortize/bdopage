@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.5'
+gem 'rails', '4.1.6'
 
 gem 'pg'
 
@@ -44,9 +44,10 @@ gem 'omniauth-bonofa', '~> 0.0.5'
 gem 'active_merchant_inatec', github: 'c7devteam/inatec_cc'
 gem 'countries'
 gem 'country_select', '~> 2.0'
-gem 'money-rails'
+gem 'money-rails', '~> 0.12'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

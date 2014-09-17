@@ -18,6 +18,7 @@ FactoryGirl.define do
     expired_at { 1.year.since }
 
     after(:build) do |order|
+      order.calculate_prices
       order.billing_address ||= build(:address, addressable: order)
     end
   end

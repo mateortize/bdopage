@@ -1,25 +1,30 @@
+require 'active_merchant/billing/rails'
+
 class Order < ActiveRecord::Base
   TAX_PERCENTAGE = 8.0
   CURRENCY_CODE = 'EUR'
   DURATION = 12 # months
 
   PLANS = {
-    free: {
+    free: OpenStruct.new({
+      active: false,
+      upgrade_rating: 0,
       name: 'FREE',
       price_cents: 0,
-      post_limit: 5
-
-    },
-    pro: {
+      post_limit: 5,
+    }),
+    pro: OpenStruct.new({
+      active: true,
+      upgrade_rating: 10,
       name: 'PRO',
       price_cents: 1000,
-      post_limit: -1
-    },
+      post_limit: -1,
+    }),
     # expert
   }.with_indifferent_access.freeze
 
   belongs_to :account
-  has_one :billing_address, as: :addressable, class_name: 'Address', dependent: :destroy
+  has_one :billing_address, class_name: 'Address', as: :addressable, inverse_of: :addressable, dependent: :destroy
   accepts_nested_attributes_for :billing_address
 
   scope :inatec, -> { where(payment_method: 'inatec') }
@@ -33,7 +38,7 @@ class Order < ActiveRecord::Base
   monetize :tax_cents
   monetize :total_cents
 
-  validates :account, :plan, :plan_type, :status, :payment_method, :expired_at, presence: true
+  validates :account, :plan, :plan_type, :status, :payment_method, presence: true
 
   before_create :inactive_others
 

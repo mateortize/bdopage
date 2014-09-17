@@ -85,6 +85,8 @@ Rails.application.routes.draw do
     
     resource :profile
     resource :setting
+    resources :orders, only: [:index, :new, :create]
+
     get '/' => 'posts#index'
   end
 

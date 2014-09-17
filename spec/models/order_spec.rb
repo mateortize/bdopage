@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   let(:test_plan) do
-    {
+    OpenStruct.new({
       name: 'TEST',
       price_cents: 100,
       post_limit: 10
-    }.with_indifferent_access
+    })
   end
 
   subject do
@@ -55,6 +55,8 @@ RSpec.describe Order, type: :model do
     plan = Order.free_plan
     pp plan
     expect(plan[:price_cents]).to eq 0
+    expect(plan['price_cents']).to eq 0
+    expect(plan.price_cents).to eq 0
   end
 
   describe "#calculate_prices" do
@@ -112,5 +114,18 @@ RSpec.describe Order, type: :model do
     order = build(:order, ip: '127.0.0.1', number: '4149011500000148', year: 2014, month: 12, verification_value: 147)
     expect(order.check_credit_card_validation).to eq false
     pp order.errors.to_hash
+  end
+
+  it 'billing_address_attributes' do
+    attrs = attributes_for :address
+    params = { "plan_type" => "pro", "number" => "4149011500000147", "year" => "2014", "month" => "12", "verification_value" => "147",
+               "billing_address_attributes" => attrs }
+    order = Order.new(params)
+    order.account = create :account
+    order.calculate_prices
+    order.save
+    pp order
+    pp order.billing_address
+    expect(order).to be_persisted
   end
 end

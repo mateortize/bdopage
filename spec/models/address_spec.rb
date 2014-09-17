@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Address, type: :model do
   subject do
-    create :address
+    create :address, addressable: create(:account)
   end
 
   it 'subject' do
