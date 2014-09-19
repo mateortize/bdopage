@@ -32,7 +32,7 @@
 @import "session";
 @import "admin";
 @import "mobile";
-
+@import "override";
 
 .alert-notice{
   @extend .alert-info;
