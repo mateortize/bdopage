@@ -14,13 +14,15 @@ class Order < ActiveRecord::Base
       name: 'FREE',
       price_cents: 0,
       post_limit: 5,
+      post_category: false
     }),
     pro: OpenStruct.new({
       active: true,
       upgrade_rating: 10,
       name: 'PRO',
       price_cents: 1000,
-      post_limit: -1,
+      post_limit: nil, # Can post unlimited videos
+      post_category: true # Can put videos in the category "My successes"
     }),
     # expert
   }.with_indifferent_access.freeze

@@ -106,4 +106,12 @@ class Account < ActiveRecord::Base
       raise "Can't upgrade to plan"
     end
   end
+
+  def can_create_post?
+    current_plan.post_limit.nil? || current_plan.post_limit > posts.count
+  end
+
+  def can_use_post_category?
+    !!current_plan.post_category
+  end
 end
