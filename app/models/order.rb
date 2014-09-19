@@ -1,6 +1,8 @@
 require 'active_merchant/billing/rails'
 
 class Order < ActiveRecord::Base
+  include TokenGenerator
+
   TAX_PERCENTAGE = 8.0
   CURRENCY_CODE = 'EUR'
   DURATION = 12 # months
@@ -59,24 +61,43 @@ class Order < ActiveRecord::Base
 
   def create_payment!
     self.payment_method = 'inatec'
+    self.card_brand = credit_card.brand
+    self.last_4_digits = credit_card.display_number
     calculate_prices unless total_cents
+
+    unless valid? && check_credit_card_validation
+      self.status = :failed
+      raise 'Order validation failed'
+    end
 
     response = ::INATEC_GATEWAY.authorize_with_recurring(total_cents, credit_card, purchase_options)
     process_response(response)
 
-    self.card_brand = credit_card.brand
-    self.last_4_digits = credit_card.display_number
-    save
-
-    response.success?
+    generate_invoice_and_send_mail
   end
 
   def create_recurring_payment!
     response = ::INATEC_GATEWAY.charge_recurring(total_cents, transaction_id, purchase_options)
     process_response(response)
-    save
 
-    response.success?
+    generate_invoice_and_send_mail
+  end
+
+  def self.generate_pdf(order_id)
+    order = Order.find(order_id)
+    return if order.payment_method == 'baio'
+
+    FileUtils.mkpath("tmp/orders")
+    tmp_path = "tmp/orders/invoice_#{order.id}.pdf"
+
+    pdf_content = PdfCreator.render_invoice(order)
+    File.open(tmp_path, 'wb'){|f| f.write pdf_content }
+
+    order.invoice_file = File.open(tmp_path)
+    order.save
+    FileUtils.rm(tmp_path)
+
+    # AccountMailer.payment_success_mail(order.id).deliver
   end
 
   def check_credit_card_validation
@@ -103,10 +124,12 @@ class Order < ActiveRecord::Base
       self.info = response.params
       self.transaction_id = response.params["transid"].first if self.transaction_id.blank?
       self.expired_at = DURATION.months.since
-      active!
+      self.status = :active
+      save!
     else
-      failed!
+      self.status = :failed
       errors.add :base, response.message
+      raise "Payment transaction failed: #{response.message}"
     end
   end
 
@@ -137,6 +160,10 @@ class Order < ActiveRecord::Base
         country:    billing_address.billing_country
       }
     }
+  end
+
+  def generate_invoice_and_send_mail
+    Order.delay.generate_pdf(self.id)
   end
 
   def inactive_others

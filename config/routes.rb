@@ -111,6 +111,10 @@ Rails.application.routes.draw do
     end
   end
 
+  if Rails.env.development?
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root :to => "posts#index"
 end

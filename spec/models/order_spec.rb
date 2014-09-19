@@ -73,7 +73,7 @@ RSpec.describe Order, type: :model do
     it "will create inatec payment" do
       expect(subject).to be_created
 
-      expect(subject.create_payment!).to eq true
+      subject.create_payment!
       subject.reload
       expect(subject.status).to eq 'active'
       expect(subject).to be_active
@@ -83,7 +83,10 @@ RSpec.describe Order, type: :model do
 
     it "will be failed with wrong card info" do
       order = build(:order, ip: '127.0.0.1', number: '4149011500000148', year: 2014, month: 12, verification_value: 147)
-      expect(order.create_payment!).to eq false
+      expect {
+        order.create_payment!
+      }.to raise_error /validation failed/
+      expect(order).to be_failed
     end
   end
 
@@ -93,12 +96,16 @@ RSpec.describe Order, type: :model do
     end
 
     it "will create recurring payment with transaction_id" do
-      expect(subject.create_recurring_payment!).to eq true
+      subject.create_recurring_payment!
+      expect(subject).to be_active
     end
 
     it "will be failed with wrong transaction_id" do
       subject.transaction_id = 'wrong_transaction_id'
-      expect(subject.create_recurring_payment!).to eq false
+      expect {
+        subject.create_recurring_payment!
+      }.to raise_error /transaction failed/
+      expect(subject).to be_failed
     end
   end
 
@@ -122,10 +129,17 @@ RSpec.describe Order, type: :model do
                "billing_address_attributes" => attrs }
     order = Order.new(params)
     order.account = create :account
+    order.payment_method = 'inatec'
     order.calculate_prices
-    order.save
+    order.save!
     pp order
     pp order.billing_address
     expect(order).to be_persisted
+  end
+
+  it '.generate_pdf' do
+    Order.generate_pdf(subject.id)
+    subject.reload
+    expect(subject.invoice_file).to be_present
   end
 end

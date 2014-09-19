@@ -24,10 +24,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def create
-    @order = Order.new(order_params)
-    @order.account = current_account
-    @order.payment_method = 'inatec'
-    @order.calculate_prices
+    @order = current_account.orders.build(order_params)
 
     begin
       current_account.check_upgrade_plan!(@order.plan)
@@ -36,13 +33,16 @@ class Admin::OrdersController < Admin::BaseController
       return
     end
 
-    if @order.valid? && @order.check_credit_card_validation && @order.create_payment!
-      redirect_to admin_orders_path, notice: 'Your order is created.'
-    else
-      Rails.logger.debug { @order && @order.errors.to_hash.inspect }
-      flash.now[:alert] = 'Sorry, payment is failed. Please try it again'
-      render 'new'
-    end
+    @order.create_payment!
+    redirect_to admin_orders_path, notice: 'Your order is created.'
+
+  rescue => ex
+    Rails.logger.error { @order && @order.errors.to_hash.inspect }
+    Rails.logger.error ex.inspect
+    Rails.logger.error ex.backtrace.join("\n")
+
+    flash.now[:alert] = 'Sorry, payment is failed. Please try it again'
+    render 'new'
   end
   
   private
