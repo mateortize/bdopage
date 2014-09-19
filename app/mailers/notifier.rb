@@ -1,9 +1,7 @@
-class Notifier < ActionMailer::Base
+class Notifier < AppMailer
   include ActionView::Helpers::NumberHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::DateHelper
-
-  default :from => "noreply@videopage7.com"
 
   def send_new_post_to_follower(post_id, follower_id)
     @post = Post.find(post_id)

@@ -99,7 +99,7 @@ class Order < ActiveRecord::Base
     order.save
     FileUtils.rm(tmp_path)
 
-    # AccountMailer.payment_success_mail(order.id).deliver
+    AccountMailer.payment_success_mail(order.id).deliver
   end
 
   def check_credit_card_validation
