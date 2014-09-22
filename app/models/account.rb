@@ -16,10 +16,10 @@ class Account < ActiveRecord::Base
   has_many :authentications, dependent: :destroy
   has_many :orders, dependent: :destroy
 
-  has_one :setting, class_name: 'AccountSetting'
-  has_one :profile, class_name: 'AccountProfile'
+  has_one :setting, class_name: 'AccountSetting', dependent: :destroy
+  has_one :profile, class_name: 'AccountProfile', dependent: :destroy
 
-  has_many :pages
+  has_many :pages, dependent: :destroy
 
   after_create :generate_setting
   after_create :generate_profile

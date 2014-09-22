@@ -15,4 +15,8 @@ class AccountSetting < ActiveRecord::Base
     errors.add(:blog_alias, 'is not allowed.') if BLOCK_LIST.include?(self.blog_alias.to_s.downcase)
   end
 
+  def show_blog_logo?
+    blog_logo? && account.can_upload_blog_logo?
+  end
+
 end
