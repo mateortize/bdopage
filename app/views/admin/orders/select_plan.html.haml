@@ -1,0 +1,10 @@
+= render 'admin/shared/setting_tabs'
+
+%h2 Select Plan
+.shortline.mb2
+
+%ul
+  %li
+    = link_to 'PRO', new_admin_order_path(plan: 'pro')
+
+= link_to 'Cancel', admin_orders_path, class: 'btn btn-default'

@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require bootsy
 //= require bootstrap
-//= require_tree .
 //= require masonry.pkgd.min
 //= require owl.carousel
 

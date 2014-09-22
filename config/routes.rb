@@ -85,6 +85,8 @@ Rails.application.routes.draw do
     
     resource :profile
     resource :setting
+    resources :orders, only: [:index, :new, :create]
+
     get '/' => 'posts#index'
   end
 
@@ -109,6 +111,10 @@ Rails.application.routes.draw do
     end
   end
 
+  if Rails.env.development?
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   root :to => "posts#index"
 end

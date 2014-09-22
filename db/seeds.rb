@@ -9,3 +9,5 @@
 
 account1 = Account.create(email: "a1@email.com", password: "defaultpw")
 account2 = Account.create(email: "a2@email.com", password: "defaultpw")
+
+Category.create name: 'my success'

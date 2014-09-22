@@ -5,7 +5,7 @@ unless Rails.env.test?
       config.storage = :file
       config.enable_processing = false
     end
-  else
+  elsif s3_settings && s3_settings["access_key_id"].present?
     CarrierWave.configure do |config|
       config.storage = :fog
       config.fog_credentials = {
@@ -15,6 +15,10 @@ unless Rails.env.test?
         :region                 => s3_settings["region"]
       }
       config.fog_directory  = s3_settings["bucket"]                     # required
+    end
+  else
+    CarrierWave.configure do |config|
+      config.storage = :file
     end
   end
 end

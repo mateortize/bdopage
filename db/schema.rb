@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827090450) do
+ActiveRecord::Schema.define(version: 20140919123726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20140827090450) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.string   "blog_logo"
   end
 
   add_index "account_settings", ["account_id"], name: "index_account_settings_on_account_id", using: :btree
@@ -58,6 +59,21 @@ ActiveRecord::Schema.define(version: 20140827090450) do
 
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
+
+  create_table "addresses", force: true do |t|
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "postal_code"
+    t.string   "country_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["addressable_id", "addressable_type"], name: "index_addresses_on_addressable_id_and_addressable_type", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "account_id"
@@ -145,6 +161,31 @@ ActiveRecord::Schema.define(version: 20140827090450) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
+  create_table "orders", force: true do |t|
+    t.integer  "account_id"
+    t.string   "plan_type"
+    t.integer  "status",         default: 0
+    t.integer  "tax_cents"
+    t.integer  "total_cents"
+    t.integer  "subtotal_cents"
+    t.string   "payment_method"
+    t.string   "transaction_id"
+    t.string   "invoice_file"
+    t.string   "card_brand"
+    t.string   "last_4_digits"
+    t.text     "info"
+    t.date     "expired_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "token"
+  end
+
+  add_index "orders", ["account_id"], name: "index_orders_on_account_id", using: :btree
+  add_index "orders", ["expired_at"], name: "index_orders_on_expired_at", using: :btree
+  add_index "orders", ["plan_type"], name: "index_orders_on_plan_type", using: :btree
+  add_index "orders", ["status"], name: "index_orders_on_status", using: :btree
+  add_index "orders", ["transaction_id"], name: "index_orders_on_transaction_id", using: :btree
+
   create_table "pages", force: true do |t|
     t.string   "slug"
     t.string   "title"
@@ -168,10 +209,12 @@ ActiveRecord::Schema.define(version: 20140827090450) do
     t.string   "status"
     t.datetime "deleted_at"
     t.integer  "category_id"
+    t.integer  "views_count", default: 0
   end
 
   add_index "posts", ["account_id"], name: "index_posts_on_account_id", using: :btree
   add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
+  add_index "posts", ["views_count"], name: "index_posts_on_views_count", using: :btree
 
   create_table "video_encodings", force: true do |t|
     t.string   "profile_name"

@@ -1,5 +1,6 @@
 class AccountSetting < ActiveRecord::Base
-  
+  mount_uploader :blog_logo, LogoUploader
+
   BLOCK_LIST = ['www']
   belongs_to :account
 
@@ -12,6 +13,10 @@ class AccountSetting < ActiveRecord::Base
 
   def validate_block_list
     errors.add(:blog_alias, 'is not allowed.') if BLOCK_LIST.include?(self.blog_alias.to_s.downcase)
+  end
+
+  def show_blog_logo?
+    blog_logo? && account.can_upload_blog_logo?
   end
 
 end
