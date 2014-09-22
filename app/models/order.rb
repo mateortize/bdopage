@@ -14,7 +14,8 @@ class Order < ActiveRecord::Base
       name: 'FREE',
       price_cents: 0,
       post_limit: 5,
-      post_category: false
+      post_category: false,
+      blog_logo: false
     }),
     pro: OpenStruct.new({
       active: true,
@@ -22,7 +23,8 @@ class Order < ActiveRecord::Base
       name: 'PRO',
       price_cents: 1000,
       post_limit: nil, # Can post unlimited videos
-      post_category: true # Can put videos in the category "My successes"
+      post_category: true, # Can put videos in the category "My successes"
+      blog_logo: true # Can upload a custom logo
     }),
     # expert
   }.with_indifferent_access.freeze

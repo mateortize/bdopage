@@ -114,4 +114,8 @@ class Account < ActiveRecord::Base
   def can_use_post_category?
     !!current_plan.post_category
   end
+
+  def can_upload_blog_logo?
+    !!current_plan.blog_logo
+  end
 end

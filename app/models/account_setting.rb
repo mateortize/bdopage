@@ -1,5 +1,6 @@
 class AccountSetting < ActiveRecord::Base
-  
+  mount_uploader :blog_logo, LogoUploader
+
   BLOCK_LIST = ['www']
   belongs_to :account
 
