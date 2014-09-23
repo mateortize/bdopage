@@ -1,5 +1,10 @@
 #sidebar {
 
+  .shortline {
+    margin: 10px auto;
+    width: 80%;
+  }
+
   &.mobilesidebar {
     margin-top: 0;
     margin-bottom: 20px;
