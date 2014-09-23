@@ -224,10 +224,10 @@ ActiveRecord::Schema.define(version: 20140919123726) do
     t.integer  "file_size"
     t.integer  "width"
     t.integer  "height"
+    t.string   "mime_type"
     t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "mime_type"
   end
 
   add_index "video_encodings", ["video_id"], name: "index_video_encodings_on_video_id", using: :btree

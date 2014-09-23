@@ -22,9 +22,9 @@ $(document).ready(function() {
     //Masonry
     if ($(document).width() > 980) {
         var container = document.querySelector('.post-container');
-        var firstHeight = $('.post:first-child').height() + 20;
+        var firstHeight = $('.post:first-child').height() + 30;
         $('.post:nth-child(2)').css('margin-top', firstHeight);
-      $('.post:nth-child(3)').css('margin-top', firstHeight);
+        $('.post:nth-child(3)').css('margin-top', firstHeight);
         var msnry = new Masonry( container, {
             itemSelector: '.post:nth-child(1n + 2)'
         });

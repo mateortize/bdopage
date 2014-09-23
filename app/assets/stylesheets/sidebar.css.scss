@@ -1,5 +1,10 @@
 #sidebar {
 
+  &.mobilesidebar {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
   .sidebar-element {
     margin-bottom: 15px;
     position: relative;
@@ -73,14 +78,23 @@
     }
   }
   .mysuccesses {
-    background-color: $primary;
+    background: #636d7a;
+    background: -moz-linear-gradient(left, $tertiary 0%, $primary 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,$tertiary), color-stop(100%,$primary));
+    background: -webkit-linear-gradient(left, $tertiary 0%,$primary 100%);
+    background: -o-linear-gradient(left, $tertiary 0%,$primary 100%);
+    background: -ms-linear-gradient(left, $tertiary 0%,$primary 100%);
+    background: linear-gradient(to right, $tertiary 0%,$primary 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#636d7a', endColorstr='#252b33',GradientType=1 );
     color: $light;
     padding: 0;
+    margin-bottom: 0;
 
     ul {
       list-style: none;
       padding-left: 0;
       text-align: center;
+      margin-bottom: 0;
     }
     a {
       color: $light;
@@ -92,6 +106,9 @@
 
       &:hover {
         background-color: $secondary;
+      }
+      &:active {
+        text-decoration: none;
       }
     }
   }

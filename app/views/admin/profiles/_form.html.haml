@@ -1,5 +1,5 @@
 = bootstrap_form_for(@profile, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", url: admin_profile_path) do |f|
-  
+
   .form-group
     %label.control-label.col-sm-3
       Email
@@ -22,7 +22,7 @@
       = f.check_box :remove_avatar
   - else
     = f.file_field :avatar
-    
+
   = f.text_area :description
   %hr
   = f.form_group do

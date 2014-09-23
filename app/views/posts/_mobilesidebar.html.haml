@@ -1,0 +1,29 @@
+#sidebar.mobilesidebar
+  - if current_account.blank?
+    .sidebar-element.bgwhite.nopadding.create-post.visible-xs
+      %h3.text-center.nomargin
+        = link_to new_account_session_path, class:'show p3', alt: '' do
+          %span.glyphicon.glyphicon-plus
+          %h4 Create new videopage now!
+    .sidebar-element.bgwhite
+      %h4.secondarytext Customized video hosting made simple
+      .shortline
+      %p
+        With videopage7 you found an easy way to manage and show promotional videos about products, sales pitches, bonuses,
+        news and much more. Interact with prospective clients around the globe, generate leads and get instant feedback in a message board you control.
+        Choose your own subdomain for controlled content management.
+
+  - elsif @current_author == current_account || @current_author.blank?
+    .sidebar-element.bgwhite.nopadding.create-post.visible-xs
+      %h3.text-center.nomargin
+        = link_to new_admin_post_path, class:'show p3', alt: '' do
+          %span.glyphicon.glyphicon-plus
+          %h4 Create new post
+
+  .sidebar-element.bgwhite.mysuccesses.visible-xs
+    %ul
+      %li
+        = link_to "All posts", posts_path
+      - Category.all.each do |category|
+        %li
+          = link_to category.name, posts_path(category_id: category.id)
