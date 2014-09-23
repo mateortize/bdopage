@@ -46,7 +46,7 @@
       
 
   - if current_account.blank?
-    .sidebar-element.bgwhite.nopadding.create-post
+    .sidebar-element.bgwhite.nopadding.create-post.hidden-xs
       %h3.text-center.nomargin
         = link_to new_account_session_path, class:'show p3', alt: '' do
           %span.glyphicon.glyphicon-plus
@@ -60,16 +60,16 @@
         Choose your own subdomain for controlled content management.
 
   - elsif @current_author == current_account || @current_author.blank?        
-    .sidebar-element.bgwhite.nopadding.create-post
+    .sidebar-element.bgwhite.nopadding.create-post.hidden-xs
       %h3.text-center.nomargin
         = link_to new_admin_post_path, class:'show p3', alt: '' do
           %span.glyphicon.glyphicon-plus
           %h4 Create new post
   
-  .sidebar-element.bgwhite
+  .sidebar-element.bgwhite.mysuccesses.hidden-xs
     %ul
       %li
-        = link_to "All", posts_path
+        = link_to "All posts", posts_path
       - Category.all.each do |category|
         %li
           = link_to category.name, posts_path(category_id: category.id)

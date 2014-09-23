@@ -34,7 +34,13 @@ class Admin::SettingsController < Admin::BaseController
   private
 
   def setting_params
-      params.require(:account_setting).permit(:blog_alias,:blog_enabled)
+    attrs = [:blog_alias, :blog_enabled]
+
+    if current_account.can_upload_blog_logo?
+      attrs += [:blog_logo, :blog_logo_cache, :remove_blog_logo]
+    end
+
+    params.require(:account_setting).permit(*attrs)
   end
 
   def redirect_to_www

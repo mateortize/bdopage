@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   before_filter :restrict_access
   before_filter :load_current_author
 
+  helper_method :current_blog_setting
+
   def load_current_author
     @current_author = @account_setting.try(:account)
     @current_author ||= current_account
@@ -22,6 +24,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def current_blog_setting
+    @account_setting
+  end
 
   def restrict_access
     if request.subdomain.present? && request.subdomain != "www"

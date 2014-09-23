@@ -1,5 +1,5 @@
 #post-single
-  .container
+  .container.showpost
     .row.nomargin
       .col-md-9.bgwhite
         .video-container
@@ -22,12 +22,16 @@
             ago
             |
           %span
+            Views:
+            = @post.views_count
+            |
+          %span
             Comments:
             = @post.comments.count
             |
           %span
             Author:
-            = link_to @post.account.full_name, account_path(@post.account)
+            = link_to @post.account.full_name, root_url(host: "#{@post.account.blog_alias}.#{request.domain}")
 
         %span.post-title
           = @post.title

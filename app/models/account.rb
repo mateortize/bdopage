@@ -14,11 +14,12 @@ class Account < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   has_many :videos, dependent: :destroy
   has_many :authentications, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
-  has_one :setting, class_name: 'AccountSetting'
-  has_one :profile, class_name: 'AccountProfile'
+  has_one :setting, class_name: 'AccountSetting', dependent: :destroy
+  has_one :profile, class_name: 'AccountProfile', dependent: :destroy
 
-  has_many :pages
+  has_many :pages, dependent: :destroy
 
   after_create :generate_setting
   after_create :generate_profile
@@ -27,6 +28,15 @@ class Account < ActiveRecord::Base
   def full_name
     return "#{self.profile.first_name} #{self.profile.last_name}" if self.profile.present?
     "Unknown"
+  end
+
+  def current_plan
+    order = orders.active.first
+    if order
+      order.plan
+    else
+      Order.free_plan
+    end
   end
 
   def blog_alias
@@ -81,5 +91,31 @@ class Account < ActiveRecord::Base
 
   def generate_default_pages
     self.pages.create(slug: 'imprint', title: 'Imprint', content: '')
+  end
+
+  def check_upgrade_plan!(new_plan)
+    unless new_plan.try :active
+      raise 'Bad or inactive plan'
+    end
+
+    if new_plan == current_plan
+      raise 'Plan already activated'
+    end
+
+    unless new_plan.upgrade_rating > current_plan.upgrade_rating
+      raise "Can't upgrade to plan"
+    end
+  end
+
+  def can_create_post?
+    current_plan.post_limit.nil? || current_plan.post_limit > posts.count
+  end
+
+  def can_use_post_category?
+    !!current_plan.post_category
+  end
+
+  def can_upload_blog_logo?
+    !!current_plan.blog_logo
   end
 end

@@ -1,145 +1,25 @@
-%nav.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
-  .container-fluid
+#top-header.navbar.navbar-fixed-top.navbar-inverse{:role => "navigation"}
+  .container.header-content
     .navbar-header
-      %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand{:href => root_path}
         =image_tag 'logobeta.png'
-    / Collect the nav links, forms, and other content for toggling
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      %ul.nav.navbar-nav.navbar-right
+    .collapse.navbar-collapse
       - unless current_account.blank?
-        %li
-          = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
-        %li.dropdown
-          %a#profiletoggle{:href => "#"}
-            %span.icon-user
-            %span.toggle-title Open profile
-            %span.toggle-icon.glyphicon.glyphicon-circle-arrow-down
-        %li
-          = link_to "<span class='glyphicon glyphicon-log-out'></span> Sign out".html_safe, destroy_account_session_path, :method => 'delete'
-
+        = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
+        %p.navbar-text.navbar-right.mr0
+          = link_to "<span class='glyphicon glyphicon-off'></span>".html_safe, destroy_account_session_path, :method => 'delete'
+        %p.navbar-text.navbar-right
+          %a.tertiarycolor{:href => account_path(current_account) }
+            %span.glyphicon.glyphicon-user
+            Your profile (
+            = current_account.full_name
+            )
       - else
-        %li
+        %p.navbar-text.navbar-right
           = link_to "Sign In", new_account_session_path
-    #profile.container-fluid
-      .col-xs-12.col-sm-6.col-md-7.col-lg-7
-        / profileimage
-        .col-xs-5.col-sm-5.ccol-md-5.col-lg-4
-          .profileimg
-            = image_tag('nouserimage.jpg', class: 'img-responsive img-circle')
-            // %a{:alt => "change profile image", :href => "#"}
-            //  %span.glyphicon.glyphicon-picture
-            //  %span.txt Change Image
-            .clearfix
-        / Welcometext
-        .col-xs-7.col-sm-7.ccol-md-7.col-lg-8.welcome
-          %h1.bob
-            %span.small Welcome
-            -# TODO: check the viriables
-            -# = succeed "#{current_account.first_name}," do
-              %br/
-            -# = current_account.last_name
-      -# %p Welcome text... news, features etc. ein netter kleiner Wohlfühltext, eventuell textlich andere Produkte anteasern... haben sie schon dies und das probiert?
 
-      / current package, settinglinks
-      .col-xs-12.col-sm-6.col-md-5.col-lg-5.bgcolor.profilesettings
-        .actions
-          .col-xs-6.bor
-            %a{:href => "#"}
-              %span.glyphicon.glyphicon-user
-              Profile Setting
-          .col-xs-6
-            %a{:href => "#"}
-              %span.glyphicon.glyphicon-credit-card
-              Payment
-        %table.table.table-condensed
-          %tr
-            %td Company:
-            %td - none -
-          %tr
-            %td Account:
-            %td FREE user
-          %tr
-            %td e-Mail:
-            %td=current_account.email
-          %tr
-            %td
-              %strong Your promolink:
-            %td
-              %strong -
-
-
-
-    -# old V
-    -#.collapse.navbar-collapse
-    -#  - unless current_account.blank?
-    -#    = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
-    -#    %p.navbar-text.navbar-right.mr0
-    -#      = link_to "<span class='glyphicon glyphicon-log-out'></span>Sign out".html_safe, destroy_account_session_path, :method => 'delete'
-    -#    %p.navbar-text.navbar-right
-    -#      %a.tertiarycolor{:href => account_path(current_account) }
-    -#        %span.glyphicon.glyphicon-user
-    -#        Your profile (
-    -#        = current_account.full_name
-    -#        )
-    -#  - else
-    -#    %p.navbar-text.navbar-right
-    -#      = link_to "Sign In", new_account_session_path
-
-
-
-/* copy videomail7 samefile */
-
-
--#
--#/ Profile row
--#- if account_signed_in?
--##profile.container-fluid
--#  .col-xs-12.col-sm-6.col-md-7.col-lg-7
--#    / profileimage
--#    .col-xs-5.col-sm-5.ccol-md-5.col-lg-4
--#      .profileimg
--#        = image_tag('nouserimage.jpg', class: 'img-responsive img-circle')
--#        // %a{:alt => "change profile image", :href => "#"}
--#        //  %span.glyphicon.glyphicon-picture
--#        //  %span.txt Change Image
--#        .clearfix
--#    / Welcometext
--#    .col-xs-7.col-sm-7.ccol-md-7.col-lg-8.welcome
--#      %h1.bob
--#        %span.small Welcome
--#        = succeed "#{current_account.first_name}," do
--#          %br/
--#        = current_account.last_name
--#      /%p Welcome text... news, features etc. ein netter kleiner Wohlfühltext, eventuell textlich andere Produkte anteasern... haben sie schon dies und das probiert?
--#
--#  / current package, settinglinks
--#  .col-xs-12.col-sm-6.col-md-5.col-lg-5.bgcolor.profilesettings
--#    .actions
--#      .col-xs-6.bor
--#        %a{:href => "#"}
--#          %span.glyphicon.glyphicon-user
--#          Profile Setting
--#      .col-xs-6
--#        %a{:href => "#"}
--#          %span.glyphicon.glyphicon-credit-card
--#          Payment
--#    %table.table.table-condensed
--#      %tr
--#        %td Company:
--#        %td - none -
--#      %tr
--#        %td Account:
--#        %td FREE user
--#      %tr
--#        %td e-Mail:
--#        %td=current_account.email
--#      %tr
--#        %td
--#          %strong Your promolink:
--#        %td
--#          %strong -

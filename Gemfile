@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.6'
 
 gem 'pg'
 
@@ -12,7 +12,7 @@ gem 'devise'
 
 gem 'panda', '~> 1.6.0'
 
-gem "fog", "~> 1.3.1"
+gem 'fog', '~> 1.23'
 
 gem 'carrierwave'
 
@@ -39,6 +39,15 @@ gem 'bootsy'
 
 gem 'omniauth-cube7'
 gem 'omniauth-bonofa', '~> 0.0.5'
+
+# payment
+gem 'active_merchant_inatec', github: 'c7devteam/inatec_cc'
+gem 'countries'
+gem 'country_select', '~> 2.0'
+gem 'money-rails', '~> 0.12'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -70,7 +79,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-# gem 'spring',        group: :development
+gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -85,11 +94,14 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'guard-rspec'
-  gem "factory_girl_rails"
-  gem "pry"
+  gem 'rspec-rails', '~> 3.0'
+  gem 'database_cleaner'
+  gem 'spring-commands-rspec'
+  gem 'factory_girl_rails'
+  # gem 'pry'
   gem 'thin'
+  gem 'quiet_assets'
+  gem 'ffaker'
 end
 
 group :development do
