@@ -87,7 +87,7 @@ Rails.application.routes.draw do
     resource :setting
     resources :orders, only: [:index, :new, :create]
 
-    get '/' => 'posts#index'
+    get '' => 'posts#index'
   end
   
   resources :accounts do
@@ -115,7 +115,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :account do
-    root to: "admin/posts#index"
+    root to: "devise/sessions#new"
   end
 
 end

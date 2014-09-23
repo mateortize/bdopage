@@ -5,6 +5,6 @@ class OmniauthController < ApplicationController
   def create
     @account = Account.from_omniauth(env['omniauth.auth'])
     sign_in @account
-    redirect_to root_path
+    redirect_to posts_path
   end
 end
