@@ -203,10 +203,19 @@ table {
   }
 }
 
+//Forms
+input {
+  color: $grey4;
+
+  &:focus {
+    color: $grey4!important;
+  }
+}
+
 //Alerts
 .alert {
-  background-color: $light;
-  color: $primary;
+  background-color: $primary;
+  color: $light;
   position: fixed;
   width: 50%;
   margin-left: -25%;
@@ -215,6 +224,11 @@ table {
   top: 50%;
   z-index: 1;
   padding: 20px;
+
+  button {
+    color: $light;
+    opacity: 1;
+  }
 }
 .page-status {
 

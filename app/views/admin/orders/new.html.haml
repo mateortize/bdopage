@@ -4,20 +4,24 @@
 .shortline.mb2
 
 %legend Order Summary
-.col-sm-8
-  %table.table.table-bordered
-    %tr
-      %td Plan
-      %td= @order.plan.name
-    %tr
-      %td Price
-      %td= money_with_cents_and_with_symbol(@order.subtotal)
-    %tr
-      %td Tax (#{Order::TAX_PERCENTAGE}%)
-      %td= money_with_cents_and_with_symbol(@order.tax)
-    %tr
-      %td Total
-      %td= money_with_cents_and_with_symbol(@order.total)
+.col-sm-12
+  %div.table-responsive
+    %table.table.table-bordered
+      %tr
+        %td Plan
+        %td= @order.plan.name
+      %tr
+        %td Price
+        %td= money_with_cents_and_with_symbol(@order.subtotal)
+      %tr
+        %td Tax (#{Order::TAX_PERCENTAGE}%)
+        %td= money_with_cents_and_with_symbol(@order.tax)
+      %tr
+        %td Total
+        %td= money_with_cents_and_with_symbol(@order.total)
+
+
+
 
 = bootstrap_form_for [:admin, @order], layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-8' do |f|
   = f.hidden_field :plan_type
@@ -41,5 +45,5 @@
 
   %hr
   = f.form_group do
-    = f.submit 'Process Payment', class: 'btn btn-success', confirm: "Are you sure to create this order?"
+    = f.submit 'Process Payment', class: 'btn btn-primary', confirm: "Are you sure to create this order?"
     = link_to 'Cancel', admin_orders_path, class: 'btn btn-default'
