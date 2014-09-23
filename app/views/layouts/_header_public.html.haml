@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => root_path}
+      %a.navbar-brand{:href => posts_path}
         - if current_blog_setting.try :show_blog_logo?
           = image_tag current_blog_setting.blog_logo.thumb.url
         - else
