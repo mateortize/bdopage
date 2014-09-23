@@ -10,10 +10,9 @@
   %body
     - if !current_account.blank? && current_account == @current_author
       = render "layouts/header_admin"
-    - else
-      = render "layouts/header_public"
 
-    .container-fluid
+
+    .container-fluid.nopadding
       = render "/shared/flashes"
       = yield
       = render "layouts/footer"

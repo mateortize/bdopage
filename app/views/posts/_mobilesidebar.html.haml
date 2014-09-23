@@ -5,7 +5,7 @@
         = link_to new_account_session_path, class:'show p3', alt: '' do
           %span.glyphicon.glyphicon-plus
           %h4 Create new videopage now!
-    .sidebar-element.bgwhite
+    .sidebar-element.bgwhite.visible-xs
       %h4.secondarytext Customized video hosting made simple
       .shortline
       %p
@@ -22,8 +22,10 @@
 
   .sidebar-element.bgwhite.mysuccesses.visible-xs
     %ul
-      %li
-        = link_to "All posts", posts_path
-      - Category.all.each do |category|
+      - if !params[:category_id].blank?
         %li
-          = link_to category.name, posts_path(category_id: category.id)
+          = link_to "All posts", posts_path
+      - else
+        - Category.all.each do |category|
+          %li
+            = link_to category.name, posts_path(category_id: category.id)
