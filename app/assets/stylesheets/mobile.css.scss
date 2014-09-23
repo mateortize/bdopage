@@ -41,6 +41,19 @@
       a {
         display: block;
         width: 100%;
+        margin-bottom: 3px;
+        padding: 14px;
+      }
+    }
+  }
+  #footer {
+    .footer-nav {
+      text-align: center;
+
+      .copyright {
+        display: block;
+        margin-bottom: 10px;
+        margin-right: 0;
       }
     }
   }

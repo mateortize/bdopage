@@ -12,7 +12,7 @@
       - unless current_account.blank?
         = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
         %p.navbar-text.navbar-right.mr0
-          = link_to "<span class='glyphicon glyphicon-log-out'></span>Sign out".html_safe, destroy_account_session_path, :method => 'delete'
+          = link_to "<span class='glyphicon glyphicon-off'></span>".html_safe, destroy_account_session_path, :method => 'delete'
         %p.navbar-text.navbar-right
           %a.tertiarycolor{:href => account_path(current_account) }
             %span.glyphicon.glyphicon-user
