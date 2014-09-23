@@ -89,8 +89,6 @@ Rails.application.routes.draw do
 
     get '/' => 'posts#index'
   end
-
-  get '' => 'posts#index', as: :account_root
   
   resources :accounts do
     put :follow, on: :member
@@ -116,5 +114,8 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  root :to => "posts#index"
+  devise_scope :account do
+    root to: "admin/posts#index"
+  end
+
 end
