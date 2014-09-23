@@ -176,9 +176,12 @@ a {
   color: $secondary;
 
   &:hover {
-    outline: none;
     text-decoration: none;
     color: $primary;
+  }
+  &:active,
+  &:focus {
+    outline: none;
   }
   &.tertiarycolor {
     color: $tertiary!important;
