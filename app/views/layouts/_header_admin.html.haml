@@ -12,7 +12,7 @@
       - unless current_account.blank?
         = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
         %p.navbar-text.navbar-right.mr0
-          = link_to "<span class='glyphicon glyphicon-off'></span>".html_safe, destroy_account_session_path, :method => 'delete'
+          = link_to "<span class='glyphicon glyphicon-off'></span>".html_safe, destroy_account_session_path, :method => 'delete', :title => 'Logout'
         %p.navbar-text.navbar-right
           %a#profiletoggle{:href => "#"}
             %span.icon-user
@@ -30,7 +30,10 @@
       / profileimage
       .col-xs-5.col-sm-5.ccol-md-5.col-lg-4
         .profileimg
-          = image_tag('nouserimage.jpg', class: 'img-responsive img-circle')
+          - if !current_account.profile.avatar.blank?
+            = image_tag(current_account.profile.avatar_url, :class => 'img-responsive img-rounded')
+          - else
+            = image_tag "nouserimage.jpg", :class => "img-responsive"
           // %a{:alt => "change profile image", :href => "#"}
           //  %span.glyphicon.glyphicon-picture
           //  %span.txt Change Image
@@ -41,17 +44,18 @@
           %span.small Welcome
           = succeed "#{current_account.full_name}" do
             %br/
-        /%p Welcome text... news, features etc. ein netter kleiner Wohlfühltext, eventuell textlich andere Produkte anteasern... haben sie schon dies und das probiert?
+        %p
+          = current_account.profile.description
 
     / current package, settinglinks
     .col-xs-12.col-sm-6.col-md-5.col-lg-5.bgcolor.profilesettings
       .actions
         .col-xs-6.bor
-          %a{:href => "#"}
+          %a{:href => edit_admin_profile_path}
             %span.glyphicon.glyphicon-user
             Profile Setting
         .col-xs-6
-          %a{:href => "#"}
+          %a{:href => admin_orders_path}
             %span.glyphicon.glyphicon-credit-card
             Payment
       %table.table.table-condensed

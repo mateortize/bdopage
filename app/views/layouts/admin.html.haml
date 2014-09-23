@@ -8,10 +8,11 @@
     = csrf_meta_tags
     %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
   %body
-    .container.mt2
+    .container-fluid.nopadding.nomargin
       = render "layouts/header_admin"
-      = render "/shared/flashes"
-      .bgwhite
-        = yield
+      .container.mt2
+        = render "/shared/flashes"
+        .bgwhite
+          = yield
 
     = yield :javascript
