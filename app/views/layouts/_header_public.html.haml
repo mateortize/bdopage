@@ -7,7 +7,10 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand{:href => root_path}
-        =image_tag 'logobeta.png'
+        - if current_blog_setting.try :show_blog_logo?
+          = image_tag current_blog_setting.blog_logo.thumb.url
+        - else
+          = image_tag 'logobeta.png'
 
     .collapse.navbar-collapse
       - unless current_account.blank?

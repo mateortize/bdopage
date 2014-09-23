@@ -72,4 +72,27 @@
       margin-top: 15px;
     }
   }
+  .mysuccesses {
+    background-color: $primary;
+    color: $light;
+    padding: 0;
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      text-align: center;
+    }
+    a {
+      color: $light;
+      font-size: 1.6em;
+      display: block;
+      padding: 30px;
+      font-weight: 400;
+      @include transition(all 300ms ease);
+
+      &:hover {
+        background-color: $secondary;
+      }
+    }
+  }
 }

@@ -2,6 +2,11 @@
   .post {
     margin-bottom: 20px;
 
+    &:first-child {
+      width: 100%;
+      float: none!important;
+    }
+
     .bgwhite {
       padding: 20px 20px 0 20px;
     }

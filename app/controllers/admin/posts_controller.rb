@@ -1,6 +1,13 @@
 class Admin::PostsController < Admin::BaseController
 
   before_filter :load_post, only: [:show, :update, :destroy, :edit, :publish, :unpublish]
+
+  before_filter only: [:new, :create] do
+    unless current_account.can_create_post?
+      redirect_to admin_posts_path, notice: 'Upgrade your plan to post more videos'
+      false
+    end
+  end
   
   set_tab :post
 
@@ -26,7 +33,7 @@ class Admin::PostsController < Admin::BaseController
 
   def update
     if @post.update_attributes(post_params)
-      flash[:success] = "Updated successfully."
+      flash.now[:success] = "Updated successfully."
     end
     render :edit
   end
@@ -37,7 +44,7 @@ class Admin::PostsController < Admin::BaseController
     if @post.save_draft!
 
       if @post.has_embeded_video?
-        flash[:success] = "Created successfully"
+        flash.now[:success] = "Created successfully"
         render :edit
       else
         flash[:success] = "Created successfully, Please upload your video!"
@@ -95,8 +102,13 @@ class Admin::PostsController < Admin::BaseController
       @post = current_account.posts.find(params[:id]) unless params[:id].blank?
     end
     
-
     def post_params
-      params.require(:post).permit(:title,:content, :excerpt, :video_url, :bootsy_image_gallery_id, :category_id)
+      attrs = [:title, :content, :excerpt, :video_url, :bootsy_image_gallery_id]
+
+      if current_account.can_use_post_category?
+        attrs << :category_id
+      end
+
+      params.require(:post).permit(*attrs)
     end
 end

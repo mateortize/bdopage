@@ -14,18 +14,22 @@
 //= require jquery_ujs
 //= require bootsy
 //= require bootstrap
-//= require_tree .
 //= require masonry.pkgd.min
 //= require owl.carousel
+//= require profile
 
 $(document).ready(function() {
     //Masonry
     if ($(document).width() > 980) {
         var container = document.querySelector('.post-container');
+        var firstHeight = $('.post:first-child').height() + 20;
+        $('.post:nth-child(2)').css('margin-top', firstHeight);
+      $('.post:nth-child(3)').css('margin-top', firstHeight);
         var msnry = new Masonry( container, {
-            itemSelector: '.post'
+            itemSelector: '.post:nth-child(1n + 2)'
         });
     }
+
 
     $('iframe').load(function(){
       console.log(111);
