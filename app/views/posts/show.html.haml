@@ -31,7 +31,7 @@
             |
           %span
             Author:
-            = link_to @post.account.full_name, account_path(@post.account)
+            = link_to @post.account.full_name, root_url(host: "#{@post.account.blog_alias}.#{request.domain}")
 
         %span.post-title
           = @post.title
