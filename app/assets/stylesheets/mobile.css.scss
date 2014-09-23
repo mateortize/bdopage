@@ -27,4 +27,21 @@
       display: block;
     }
   }
+  #showprofile {
+    text-align: center;
+
+    .show-blogalias {
+      text-align: center;
+    }
+    .follower-count {
+      display: none;
+    }
+    .profile-actions {
+
+      a {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
 }

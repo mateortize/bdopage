@@ -93,6 +93,9 @@
       &:hover {
         background-color: $secondary;
       }
+      &:active {
+        text-decoration: none;
+      }
     }
   }
 }
