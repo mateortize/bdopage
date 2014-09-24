@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   
   
   def index
-    @posts = Post.search(current_author, params[:category_id]).order("created_at desc").page(params[:page]).per(12)
+    account = current_author if current_author!=current_account
+    @posts = Post.search(account, params[:category_id]).order("created_at desc").page(params[:page]).per(12)
   end
 
   def show
