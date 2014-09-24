@@ -15,10 +15,10 @@
     .collapse.navbar-collapse
       - unless current_account.blank?
         %p.navbar-text.navbar-right
-          = link_to "Sign out", destroy_account_session_path, :method => 'delete'
+          = link_to "<span class='glyphicon glyphicon-off'></span>".html_safe, destroy_account_session_path, :method => 'delete', :title => 'Logout'
         %p.navbar-text.navbar-right
-          Signed in as
-          %a{:href => account_path(current_account) }
+          %a{:href => admin_posts_url(host: "www.#{request.domain}") }
+            Signed in as
             = current_account.full_name
       - else
         %p.navbar-text.navbar-right
