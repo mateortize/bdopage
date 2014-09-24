@@ -35,7 +35,7 @@
           %hr.visible-xs
           .row.visible-xs
             .col-xs-12
-              - unless current_account.following?(@current_author)
+              - if current_account and !current_account.following?(@current_author)
                 = link_to follow_account_path(@current_author), method: :put, class: 'follow-layer-mobile' do
                   %span.glyphicon.glyphicon-plus
                   Follow

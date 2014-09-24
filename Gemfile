@@ -98,7 +98,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'spring-commands-rspec'
   gem 'factory_girl_rails'
-  # gem 'pry'
+  gem 'pry'
   gem 'thin'
   gem 'quiet_assets'
   gem 'ffaker'
