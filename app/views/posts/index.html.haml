@@ -16,18 +16,19 @@
               .bgwhite
                 .status-head
                   .status-icon.icon-icon3
-                  %span Your first post
+                  %span Edit your profile
                 .status-body
-                  = link_to new_admin_post_path, alt: '' do
-                    Now you can create your first video post quickly.
+                  = link_to edit_admin_profile_path, alt: '' do
+                    Edit your own profile and create your VLOG subdomain name
 
             .col-md-4
               .bgwhite
                 .status-head
                   .status-icon.icon-icon2
-                  %span Publish
+                  %span Your first post
                 .status-body
-                  After creating your video post, you can publish it!
+                  =link_to new_admin_post_path do
+                    Now you are ready to create your first video post
       .row.post-container
         = render @posts
     = render "mobilesidebar"
