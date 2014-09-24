@@ -31,7 +31,7 @@
             %p.user-shortdesc
               = truncate (@current_author.profile.description), length: 125
 
-        - unless current_account.blank?
+        - if current_account != @current_author
           %hr.visible-xs
           .row.visible-xs
             .col-xs-12
