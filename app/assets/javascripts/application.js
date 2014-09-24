@@ -37,4 +37,11 @@ $(document).ready(function() {
     });
 
     $("#post-carousel").owlCarousel();
+
+    $('#profiletoggle').on('click', function(){
+      if($(window).width() <= 690){
+        $('.navbar-collapse').collapse('hide');
+        $(window).scrollTop(0);
+      }
+    });
 })

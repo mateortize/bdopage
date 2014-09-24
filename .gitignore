@@ -21,3 +21,11 @@
 /config/secrets.yml
 /doc
 .idea/
+
+app/assets/stylesheets/application.css.css
+
+app/views/layouts/application.html.html
+
+app/views/layouts/_header_public.html.html
+
+app/assets/stylesheets/header.css.css
