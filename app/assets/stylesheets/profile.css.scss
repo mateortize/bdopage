@@ -56,3 +56,93 @@
     }
   }
 }
+
+/* Plans */
+#plans {
+
+  ul {
+    list-style: none;
+    overflow: hidden;
+
+    li {
+      padding: 15px;
+
+      &.plan-head {
+        padding: 0;
+        @include border-radius(5px 5px 0 0);
+        overflow: hidden;
+
+        h3 {
+          background-color: $primary;
+          color: $light;
+          margin: 0;
+          padding: 15px;
+          font-size: 2.3em;
+        }
+      }
+      &.plan-image {
+        margin: 20px 0;
+      }
+      &.yes,
+      &.no {
+        border-bottom: 1px solid darken($grey1, 5);
+        background-color: lighten($grey1, 5);
+        position: relative;
+        padding-right: 55px;
+        word-break: break-all;
+        font-weight: 400;
+        @include transition(al 300ms);
+
+        &:hover {
+          &:hover {
+            background-color: lighten($grey1, 4);
+          }
+        }
+      }
+      &.yes {
+
+        &:after {
+          content: '';
+          background: asset-url('checker.png') -2px 0px no-repeat;
+          position: absolute;
+          right: 10px;
+          top: 12px;
+          width: 30px;
+          height: 30px;
+        }
+      }
+      &.no {
+
+        &:after {
+          content: '';
+          background: asset-url('checker.png') -2px -72px no-repeat;
+          position: absolute;
+          right: 10px;
+          top: 12px;
+          width: 30px;
+          height: 30px;
+        }
+      }
+      &.buy {
+        background-color: $primarybg;
+        text-align: center;
+        padding: 0;
+        overflow: hidden;
+        @include border-radius(0 0 5px 5px);
+
+        a {
+          color: $light;
+          font-weight: 500;
+          font-size: 1.2em;
+          display: block;
+          padding: 15px;
+          @include transition(all 300ms);
+
+          &:hover {
+            background-color: $secondarybg;
+          }
+        }
+      }
+    }
+  }
+}

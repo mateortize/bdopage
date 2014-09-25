@@ -19,6 +19,14 @@
 //= require profile
 
 $(document).ready(function() {
+
+    function fadeAlert() {
+      var alert = $('.alert');
+
+      alert.delay(3000).fadeOut();
+    }
+    fadeAlert();
+
     //Masonry
     if ($(document).width() > 980) {
         var container = document.querySelector('.post-container');

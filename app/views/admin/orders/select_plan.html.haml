@@ -1,10 +1,57 @@
 = render 'admin/shared/setting_tabs'
 
-%h2 Select Plan
-.shortline.mb2
+#plans
+  %h2 Select Plan
+  .shortline.mb2
 
-%ul
-  %li
-    = link_to 'PRO', new_admin_order_path(plan: 'pro')
+  .row
+    %ul.col-md-4
+      %li.plan-head
+        %h3 Free
+      %li.plan-image
+        = image_tag 'https://www.transmit7.com/assets/package_free.png'
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.no
+        oidjqwiodjqopidjpq
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.buy
+        = link_to 'Register', '#'
 
-= link_to 'Cancel', admin_orders_path, class: 'btn btn-default'
+    %ul.col-md-4
+      %li.plan-head
+        %h3 Pro
+      %li.plan-image
+        = image_tag 'https://www.transmit7.com/assets/package_free.png'
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.no
+        oidjqwiodjqopidjpq
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.buy
+        = link_to 'Upgrate to PRO', new_admin_order_path(plan: 'pro')
+    %ul.col-md-4
+      %li.plan-head
+        %h3 Expert
+      %li.plan-image
+        = image_tag 'https://www.transmit7.com/assets/package_free.png'
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.no
+        oidjqwiodjqopidjpq
+      %li.yes
+        oidjqwiodjqopidjpq
+      %li.buy
+        = link_to 'Upgrate to EXPERT', '#'
+
+  .row.mt2
+    .col-md-12.text-right
+      = link_to 'Cancel', admin_orders_path, class: 'btn btn-default'
