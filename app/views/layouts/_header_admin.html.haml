@@ -11,15 +11,16 @@
     .collapse.navbar-collapse
       - unless current_account.blank?
         = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
-        %p.navbar-text.navbar-right.mr0
-          = link_to "<span class='glyphicon glyphicon-off'></span>".html_safe, destroy_account_session_path, :method => 'delete', :title => 'Logout'
-        %p.navbar-text.navbar-right
-          %a#profiletoggle{:href => "#"}
-            %span.icon-user
-            %span.toggle-title
-              %span.glyphicon.glyphicon-user
-              = current_account.full_name
-            %span.toggle-icon.glyphicon.glyphicon-circle-arrow-down
+        .navbar-right
+          %p.navbar-text
+            %a#profiletoggle{:href => "#"}
+              %span.icon-user
+              %span.toggle-title
+                %span.glyphicon.glyphicon-user
+                = current_account.full_name
+              %span.toggle-icon.glyphicon.glyphicon-circle-arrow-down
+          %p.navbar-text.mr0
+            = link_to "<span class='glyphicon glyphicon-off'></span>".html_safe, destroy_account_session_path, :method => 'delete', :title => 'Logout'
       - else
         %p.navbar-text.navbar-right
           = link_to "Sign In", new_account_session_path

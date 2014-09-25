@@ -24,8 +24,9 @@
     %ul
       - if !params[:category_id].blank?
         %li
-          %span.glyphicon.glyphicon-plus
-          = link_to "All posts", posts_path
+          = link_to posts_path do
+            %span.glyphicon.glyphicon-th
+            %h4 All posts
       - else
         - Category.all.each do |category|
           %li
