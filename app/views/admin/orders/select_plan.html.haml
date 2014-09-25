@@ -10,6 +10,9 @@
         %h3 Free
       %li.plan-image
         = image_tag 'https://www.transmit7.com/assets/package_free.png'
+        %span.price
+          %span 0,-€
+          %span.price-small year
       %li.yes
         oidjqwiodjqopidjpq
       %li.yes
@@ -26,6 +29,9 @@
         %h3 Pro
       %li.plan-image
         = image_tag 'https://www.transmit7.com/assets/package_free.png'
+        %span.price
+          %span 59,-€
+          %span.price-small year
       %li.yes
         oidjqwiodjqopidjpq
       %li.yes
@@ -35,12 +41,15 @@
       %li.yes
         oidjqwiodjqopidjpq
       %li.buy
-        = link_to 'Upgrate to PRO', new_admin_order_path(plan: 'pro')
+        = link_to 'Upgrade to PRO', new_admin_order_path(plan: 'pro')
     %ul.col-md-4
       %li.plan-head
         %h3 Expert
       %li.plan-image
         = image_tag 'https://www.transmit7.com/assets/package_free.png'
+        %span.price
+          %span 99,-€
+          %span.price-small year
       %li.yes
         oidjqwiodjqopidjpq
       %li.yes
@@ -50,7 +59,7 @@
       %li.yes
         oidjqwiodjqopidjpq
       %li.buy
-        = link_to 'Upgrate to EXPERT', '#'
+        = link_to 'Upgrade to EXPERT', '#'
 
   .row.mt2
     .col-md-12.text-right
