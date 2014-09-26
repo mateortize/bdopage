@@ -21,7 +21,9 @@ class AccountSetting < ActiveRecord::Base
   end
 
   def validate_blog_alias_change
-    errors.add(:blog_alias, "can change only 1 time a month.") if !self.blog_alias_changed_at.blank? and 1.month.ago < self.blog_alias_changed_at
+    if !self.blog_alias_changed_at.blank? and 1.month.ago < self.blog_alias_changed_at
+      errors.add(:blog_alias, "Last changed date is #{self.blog_alias_changed_at.to_date}, You can change only 1 time a month.")
+    end
   end
 
   def update_blog_alias_changed_at
