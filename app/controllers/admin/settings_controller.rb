@@ -24,7 +24,6 @@ class Admin::SettingsController < Admin::BaseController
   def update
     @setting = current_account.setting
     if @setting.update_attributes(setting_params)
-      @setting.update_blog_alias_changed_at()
       redirect_to account_path(current_account)
     else
       render :edit
