@@ -2,7 +2,7 @@ class Video < ActiveRecord::Base
   belongs_to :post
   belongs_to :account, counter_cache: true
 
-  has_many :encodings, class_name: 'VideoEncoding', foreign_key: 'video_id'
+  has_many :encodings, class_name: 'VideoEncoding', foreign_key: 'video_id', dependent: :destroy
 
   validates_presence_of :panda_video_id
   scope :encoded, -> { where(encoded: true) }
@@ -41,16 +41,18 @@ class Video < ActiveRecord::Base
   end
 
   def refresh
-
-      encodings = self.panda_video.encodings
-      unless encodings.blank?
-        encodings.each do |encoding|
-          if encoding.status == "success"
-            self.create_video_encoding(encoding)
-          end
+    unless panda_encodings.blank?
+      panda_encodings.each do |encoding|
+        if encoding.status == "success"
+          self.create_video_encoding(encoding)
         end
       end
+    end
+  end
 
+  def self.accept_upload?(file_name)
+    mime_type = Rack::Mime.mime_type(File.extname(file_name))
+    mime_type.start_with? 'video'
   end
 
   private

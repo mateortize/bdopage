@@ -3,6 +3,7 @@
   .col-md-6
     .help
       %span Please choose a file that is under 200 MB.
+
 = bootstrap_form_for [:admin, @post, @video], url: admin_post_video_path(@post), layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", html: { role: "form" } do |f|
   = f.hidden_field :panda_video_id
   - if @video.new_record?
@@ -10,6 +11,8 @@
       %label.control-label.col-sm-3
         File
       .col-sm-9
+        #upload-error.label.label-danger(style="display:none;" )
+          Not a video file
         .progress.progress-striped.active
           #progress-bar.progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45", :role => "progressbar", :style => "width: 0%"}
             %span.sr-only 0% Complete
@@ -44,32 +47,59 @@
 
 - if @video.new_record?
   = content_for :javascript do
-    %script{:src => "//cdn.pandastream.com/u/2.1/panda-uploader.min.js"}
+    %script{:src => "//cdn.pandastream.com/u/2.3/panda-uploader.min.js"}
     :javascript
+      var currentFile = null;
+      var uploadCancelled = false;
+
       var upl = panda.uploader.init({
         'buttonId': 'browse',
         'onQueue': function(files) {
           $.each(files, function(i, file) {
-            upl.setPayload(file, {'csrf': " form_authenticity_token "});
-          })
+            upl.setPayload(file, {'csrf': "#{ form_authenticity_token }"});
+          });
+          currentFile = null;
+          uploadCancelled = false;
+          $('#upload-error').hide();
         },
-        'maxFileSize': '200 MB',
+        'onStart': function(file) {
+          console.log("onStart");
+          currentFile = file;
+        },
         'onProgress': function(file, percent) {
-          console.log("progress", percent, "%");
+          // console.log("onProgress", percent, "%");
           $("#progress-bar").css("width", percent + "%");
         },
         'onSuccess': function(file, data) {
-          console.log("Hey");
+          console.log("onSuccess");
           $("#video_panda_video_id").val(data.id)
+          currentFile = null;
         },
         'onError': function(file, message) {
-          console.log("error", message);
+          console.log("onError", message);
+          if (!currentFile) {
+            $('#upload-error').show(); // upload not accepted
+          }
+          currentFile = null;
+        },
+        'onCancel': function(file) {
+          console.log("onCancel");
+          uploadCancelled = true;
         },
         'onComplete': function(){
-          $("#new_video").submit();
+          console.log("onComplete");
+          if (!uploadCancelled) {
+            $("#new_video").submit();
+          }
+          currentFile = null;
         }
       });
 
       $("#cancel-btn").click(function() {
-        upl.cancel(file);
+        if (currentFile) {
+          upl.cancel(currentFile);
+          $("#progress-bar").css("width", "0%");
+        }
       });
+
+      $('.panda-uploader').attr('accept', 'video/*');

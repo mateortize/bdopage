@@ -68,10 +68,12 @@
           %td - none -
         %tr
           %td Account:
-          %td FREE user
+          %td
+            = current_account.current_plan.name
+            user
         %tr
           %td e-Mail:
-          %td=current_account.email
+          %td= current_account.email
         %tr
           %td
             %strong Your promolink:

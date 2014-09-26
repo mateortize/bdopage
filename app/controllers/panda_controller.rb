@@ -6,13 +6,17 @@ class PandaController < ActionController::Base
   end
 
   def authorize_upload
-    upload = Panda.post('/videos/upload.json', {
-      file_name: upload_payload['filename'],
-      file_size: upload_payload['filesize'],
-      use_all_profiles: true
-    })
+    if Video.accept_upload?(upload_payload['filename'])
+      upload = Panda.post('/videos/upload.json', {
+        file_name: upload_payload['filename'],
+        file_size: upload_payload['filesize'],
+        use_all_profiles: true
+      })
 
-    render :json => {:upload_url => upload['location']}
+      render json: { upload_url: upload['location'] }
+    else
+      head :unprocessable_entity
+    end
   end
 
   def notifications
