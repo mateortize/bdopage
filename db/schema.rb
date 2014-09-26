@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140919123726) do
+ActiveRecord::Schema.define(version: 20140926064250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140919123726) do
     t.datetime "updated_at"
     t.integer  "account_id"
     t.string   "blog_logo"
+    t.datetime "blog_alias_changed_at"
   end
 
   add_index "account_settings", ["account_id"], name: "index_account_settings_on_account_id", using: :btree
@@ -224,10 +225,10 @@ ActiveRecord::Schema.define(version: 20140919123726) do
     t.integer  "file_size"
     t.integer  "width"
     t.integer  "height"
-    t.string   "mime_type"
     t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "mime_type"
   end
 
   add_index "video_encodings", ["video_id"], name: "index_video_encodings_on_video_id", using: :btree

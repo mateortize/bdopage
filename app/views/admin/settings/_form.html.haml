@@ -2,6 +2,10 @@
   = f.text_field :blog_alias
   = #f.select :blog_enabled, [true, false]
 
+  = f.form_group do
+    Last blog alias changed at:
+    = @setting.blog_alias_changed_at
+
   - if current_account.can_upload_blog_logo?
     = f.file_field :blog_logo
     = f.hidden_field :blog_logo_cache
