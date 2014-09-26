@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20140926064250) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.integer  "video_id"
     t.string   "video_url"
     t.boolean  "published"
     t.string   "status"
@@ -219,7 +220,6 @@ ActiveRecord::Schema.define(version: 20140926064250) do
 
   create_table "video_encodings", force: true do |t|
     t.string   "profile_name"
-    t.string   "panda_video_id"
     t.string   "status"
     t.string   "url"
     t.integer  "file_size"
@@ -228,7 +228,6 @@ ActiveRecord::Schema.define(version: 20140926064250) do
     t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "mime_type"
   end
 
   add_index "video_encodings", ["video_id"], name: "index_video_encodings_on_video_id", using: :btree
@@ -236,14 +235,17 @@ ActiveRecord::Schema.define(version: 20140926064250) do
   create_table "videos", force: true do |t|
     t.string   "title"
     t.string   "panda_video_id"
-    t.boolean  "encoded",        default: false
+    t.string   "screenshot"
+    t.string   "h264_url"
+    t.string   "ogg_url"
     t.string   "height"
     t.string   "width"
     t.string   "file_size"
-    t.string   "screenshot"
-    t.integer  "account_id"
+    t.string   "profile"
+    t.boolean  "encoded",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "account_id"
     t.string   "url"
     t.integer  "post_id"
   end
