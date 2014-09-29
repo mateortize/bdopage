@@ -10,6 +10,9 @@ class PostsController < ApplicationController
   end
 
   def show
+    # Show the comments without clicking first on "Show Comments"
+    @commontator_thread_show = true
+
     unless @post.video.blank?
       @post.video.refresh unless @post.video.encoded?
     end
