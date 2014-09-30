@@ -17,12 +17,12 @@ RSpec.describe Account, type: :model do
 
   describe '#current_plan' do
     it 'free' do
-      expect(subject.current_plan).to eq Order.free_plan
+      expect(subject.current_plan).to eq Plan.free_plan
     end
 
     it 'inactive' do
       s1 = create :order, account: subject, status: :inactive
-      expect(subject.current_plan).to eq Order.free_plan
+      expect(subject.current_plan).to eq Plan.free_plan
     end
 
     it 'active' do

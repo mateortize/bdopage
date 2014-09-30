@@ -21,12 +21,6 @@ RSpec.describe Order, type: :model do
     expect(subject.plan[:name]).to eq test_plan[:name]
   end
 
-  it 'PLANS' do
-    pp Order::PLANS
-    expect(Order::PLANS[:free]).to be_present
-    expect(Order::PLANS[:pro]).to be_present
-  end
-
   it '#status' do
     expect(subject).to be_created
     subject.active!
@@ -49,14 +43,6 @@ RSpec.describe Order, type: :model do
     opts = subject.send :purchase_options
     pp opts
     expect(opts).to be_present
-  end
-
-  it '.free_plan' do
-    plan = Order.free_plan
-    pp plan
-    expect(plan[:price_cents]).to eq 0
-    expect(plan['price_cents']).to eq 0
-    expect(plan.price_cents).to eq 0
   end
 
   describe "#calculate_prices" do

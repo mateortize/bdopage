@@ -33,7 +33,7 @@ class Account < ActiveRecord::Base
     if order
       order.plan
     else
-      Order.free_plan
+      Plan.free_plan
     end
   end
 

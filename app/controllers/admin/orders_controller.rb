@@ -8,7 +8,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def new
-    selected_plan = Order::PLANS[params[:plan]]
+    selected_plan = Plan.by_plan_type(params[:plan])
     if selected_plan
       current_account.check_upgrade_plan!(selected_plan)
       @order = current_account.orders.build plan_type: params[:plan]

@@ -13,11 +13,9 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     super
 
-    if resource.persisted?
-      if session[:referrer_code].present?
-        resource.apply_referrer_code!(session[:referrer_code])
-        session[:referrer_code] = nil
-      end
+    if resource.persisted? && session[:referrer_code].present?
+      resource.apply_referrer_code!(session[:referrer_code])
+      session[:referrer_code] = nil
     end
   end
 
@@ -27,5 +25,4 @@ class RegistrationsController < Devise::RegistrationsController
     # '/admin/profile/edit'
     posts_path
   end
-  
 end

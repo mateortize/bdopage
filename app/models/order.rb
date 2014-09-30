@@ -3,30 +3,6 @@ require 'active_merchant/billing/rails'
 class Order < ActiveRecord::Base
   include TokenGenerator
 
-  DURATION = 12 # months
-
-  PLANS = {
-    free: OpenStruct.new({
-      active: false,
-      upgrade_rating: 0,
-      name: 'FREE',
-      price_cents: 0,
-      post_limit: 5,
-      post_category: false,
-      blog_logo: false
-    }),
-    pro: OpenStruct.new({
-      active: true,
-      upgrade_rating: 10,
-      name: 'PRO',
-      price_cents: 1000,
-      post_limit: nil, # Can post unlimited videos
-      post_category: true, # Can put videos in the category "My successes"
-      blog_logo: true # Can upload a custom logo
-    }),
-    # expert
-  }.with_indifferent_access.freeze
-
   belongs_to :account
   has_one :billing_address, class_name: 'Address', as: :addressable, inverse_of: :addressable, dependent: :destroy
   accepts_nested_attributes_for :billing_address
@@ -46,12 +22,8 @@ class Order < ActiveRecord::Base
 
   before_create :inactive_others
 
-  def self.free_plan
-    PLANS[:free]
-  end
-
   def plan
-    PLANS[plan_type]
+    Plan.by_plan_type(plan_type)
   end
 
   def tax_percentage
@@ -128,7 +100,7 @@ class Order < ActiveRecord::Base
     if response.success?
       self.info = response.params
       self.transaction_id = response.params["transid"].first if self.transaction_id.blank?
-      self.expired_at = DURATION.months.since
+      self.expired_at = Plan::DURATION.months.since
       self.status = :active
       save!
     else

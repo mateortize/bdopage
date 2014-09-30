@@ -5,11 +5,9 @@ class OmniauthController < ApplicationController
   def create
     @account = Account.from_omniauth(env['omniauth.auth'])
 
-    if @account.persisted?
-      if session[:referrer_code].present?
-        @account.apply_referrer_code!(session[:referrer_code])
-        session[:referrer_code] = nil
-      end
+    if @account.persisted? && session[:referrer_code].present?
+      @account.apply_referrer_code!(session[:referrer_code])
+      session[:referrer_code] = nil
     end
 
     sign_in @account
