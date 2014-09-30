@@ -15,12 +15,20 @@ class Plan
       active: true,
       upgrade_rating: 10,
       name: 'PRO',
-      price_cents: 1000,
+      price_cents: 5900,
       post_limit: nil,     # Can post unlimited videos
       post_category: true, # Can put videos in the category "My successes"
       blog_logo: true      # Can upload a custom logo
     }),
-    # expert
+    expert: OpenStruct.new({
+      active: false,
+      upgrade_rating: 100,
+      name: 'EXPERT',
+      price_cents: 9900,
+      post_limit: nil,     # Can post unlimited videos
+      post_category: true, # Can put videos in the category "My successes"
+      blog_logo: true      # Can upload a custom logo
+    })
   }.with_indifferent_access.freeze
 
   def self.by_plan_type(plan_type)
@@ -33,6 +41,10 @@ class Plan
 
   def self.pro_plan
     by_plan_type(:pro)
+  end
+
+  def self.expert_plan
+    by_plan_type(:expert)
   end
 
 end

@@ -116,8 +116,18 @@ class Account < ActiveRecord::Base
       raise 'Plan already activated'
     end
 
-    unless new_plan.upgrade_rating > current_plan.upgrade_rating
+    if new_plan.upgrade_rating < current_plan.upgrade_rating
       raise "Can't upgrade to plan"
+    end
+  end
+
+  def upgrade_plan_status(new_plan)
+    if new_plan == current_plan
+      :current
+    elsif !new_plan.active || new_plan.upgrade_rating < current_plan.upgrade_rating
+      :cannot_upgrade
+    else
+      :can_upgrade
     end
   end
 

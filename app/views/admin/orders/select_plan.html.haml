@@ -22,7 +22,11 @@
       %li.yes
         oidjqwiodjqopidjpq
       %li.buy
-        = link_to 'Register', '#'
+        - case current_account.upgrade_plan_status(Plan.free_plan)
+        - when :current
+          = link_to 'Current plan', '#', class: 'btn disabled', disabled: true
+        - when :cannot_upgrade
+          = link_to "Can't upgrade", '#', class: 'btn disabled', disabled: true
 
     %ul.col-md-4
       %li.plan-head
@@ -41,7 +45,14 @@
       %li.yes
         oidjqwiodjqopidjpq
       %li.buy
-        = link_to 'Upgrade to PRO', new_admin_order_path(plan: 'pro')
+        - case current_account.upgrade_plan_status(Plan.pro_plan)
+        - when :current
+          = link_to 'Current plan', '#', class: 'btn disabled', disabled: true
+        - when :can_upgrade
+          = link_to "Upgrade to PRO", new_admin_order_path(plan: 'pro')
+        - else
+          = link_to "Can't upgrade", '#', class: 'btn disabled', disabled: true
+
     %ul.col-md-4
       %li.plan-head
         %h3 Expert
@@ -59,7 +70,13 @@
       %li.yes
         oidjqwiodjqopidjpq
       %li.buy
-        = link_to 'Upgrade to EXPERT', '#'
+        - case current_account.upgrade_plan_status(Plan.expert_plan)
+        - when :current
+          = link_to 'Current plan', '#', class: 'btn disabled', disabled: true
+        - when :can_upgrade
+          = link_to "Upgrade to EXPERT", new_admin_order_path(plan: 'expert')
+        - else
+          = link_to "Can't upgrade", '#', class: 'btn disabled', disabled: true
 
   .row.mt2
     .col-md-12.text-right
