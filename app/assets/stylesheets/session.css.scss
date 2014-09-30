@@ -69,6 +69,33 @@ body.extern footer{
       margin-bottom: 5px;
     }
   }
+  #error_explanation {
+    border-bottom: 1px solid $grey1;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+
+    h2 {
+      font-size: 1.2em;
+      padding-left: 0;
+    }
+    ul {
+      padding-left: 15px;
+    }
+  }
+}
+#forgotpassword {
+
+  .form-group {
+    margin-bottom: 5px;
+
+    label {
+      text-align: left;
+      margin-bottom: 5px;
+    }
+    input {
+      margin-bottom: 5px;
+    }
+  }
 }
 
 @media only screen
