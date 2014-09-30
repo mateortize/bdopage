@@ -48,6 +48,7 @@ gem 'money-rails', '~> 0.12'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+gem 'rest-client'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

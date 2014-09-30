@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926064250) do
+ActiveRecord::Schema.define(version: 20140930120202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,23 +42,27 @@ ActiveRecord::Schema.define(version: 20140926064250) do
   add_index "account_settings", ["account_id"], name: "index_account_settings_on_account_id", using: :btree
 
   create_table "accounts", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                     default: "", null: false
+    t.string   "encrypted_password",        default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",             default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "videos_count",           default: 0
-    t.integer  "posts_count",            default: 0
+    t.integer  "videos_count",              default: 0
+    t.integer  "posts_count",               default: 0
+    t.string   "promotion_code"
+    t.integer  "bonofa_partner_account_id"
   end
 
+  add_index "accounts", ["bonofa_partner_account_id"], name: "index_accounts_on_bonofa_partner_account_id", using: :btree
   add_index "accounts", ["email"], name: "index_accounts_on_email", unique: true, using: :btree
+  add_index "accounts", ["promotion_code"], name: "index_accounts_on_promotion_code", using: :btree
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
 
   create_table "addresses", force: true do |t|
@@ -205,7 +209,6 @@ ActiveRecord::Schema.define(version: 20140926064250) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
-    t.integer  "video_id"
     t.string   "video_url"
     t.boolean  "published"
     t.string   "status"
@@ -220,6 +223,7 @@ ActiveRecord::Schema.define(version: 20140926064250) do
 
   create_table "video_encodings", force: true do |t|
     t.string   "profile_name"
+    t.string   "panda_video_id"
     t.string   "status"
     t.string   "url"
     t.integer  "file_size"
@@ -228,6 +232,7 @@ ActiveRecord::Schema.define(version: 20140926064250) do
     t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "mime_type"
   end
 
   add_index "video_encodings", ["video_id"], name: "index_video_encodings_on_video_id", using: :btree
@@ -235,17 +240,14 @@ ActiveRecord::Schema.define(version: 20140926064250) do
   create_table "videos", force: true do |t|
     t.string   "title"
     t.string   "panda_video_id"
-    t.string   "screenshot"
-    t.string   "h264_url"
-    t.string   "ogg_url"
+    t.boolean  "encoded",        default: false
     t.string   "height"
     t.string   "width"
     t.string   "file_size"
-    t.string   "profile"
-    t.boolean  "encoded",        default: false
+    t.string   "screenshot"
+    t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "account_id"
     t.string   "url"
     t.integer  "post_id"
   end

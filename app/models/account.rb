@@ -42,7 +42,23 @@ class Account < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    Authentication.where(auth.slice("provider", "uid")).first.try(:account) || create_from_omniauth(auth)
+    account = Authentication.where(auth.slice("provider", "uid")).first.try(:account) || create_from_omniauth(auth)
+    if auth.info && account.promotion_code != auth.info.promotion_code
+      account.update promotion_code: auth.info.promotion_code
+    end
+    account
+  end
+
+  def apply_referrer_code!(referrer_code)
+    if referrer_code.present? && promotion_code != referrer_code
+      response = RestClient.get "https://shop.bonofa.com/api/v1/promo_code/#{referrer_code}"
+      json = MultiJson.load(response)
+      update bonofa_partner_account_id: json['account_id']
+    end
+  rescue => ex
+    Rails.logger.error response
+    Rails.logger.error ex.inspect
+    Rails.logger.error ex.backtrace.join("\n")
   end
 
   def self.create_from_omniauth(auth)

@@ -30,4 +30,10 @@ RSpec.describe Account, type: :model do
       expect(subject.current_plan).to eq s1.plan
     end
   end
+
+  it '#apply_referrer_code!' do
+    subject.bonofa_partner_account_id = nil
+    subject.apply_referrer_code! 'bonofa'
+    expect(subject.bonofa_partner_account_id).to eq 1
+  end
 end

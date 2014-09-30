@@ -78,7 +78,11 @@
           %td
             %strong Your promolink:
           %td
-            %strong -
+            %strong
+              - if current_account.promotion_code.present?
+                = promolink_url(referrer_code: current_account.promotion_code)
+              - else
+                \-
   / Profile End
 
 
