@@ -64,8 +64,8 @@ RSpec.describe Order, type: :model do
       subject.calculate_prices
 
       expect(subject.subtotal_cents).to eq 100
-      expect(subject.tax_cents).to eq Order::TAX_PERCENTAGE
-      expect(subject.total_cents).to eq(100 + Order::TAX_PERCENTAGE)
+      expect(subject.tax_cents).to eq Rails.application.secrets[:tax_percentage].to_f
+      expect(subject.total_cents).to eq(100 + Rails.application.secrets[:tax_percentage].to_f)
     end
   end
 
@@ -141,5 +141,11 @@ RSpec.describe Order, type: :model do
     Order.generate_pdf(subject.id)
     subject.reload
     expect(subject.invoice_file).to be_present
+  end
+
+  it '#tax_percentage' do
+    subject.calculate_prices
+    pp subject
+    expect(subject.tax_percentage).to eq Rails.application.secrets[:tax_percentage].to_f
   end
 end

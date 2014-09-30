@@ -3,8 +3,6 @@ require 'active_merchant/billing/rails'
 class Order < ActiveRecord::Base
   include TokenGenerator
 
-  TAX_PERCENTAGE = 8.0
-  CURRENCY_CODE = 'EUR'
   DURATION = 12 # months
 
   PLANS = {
@@ -56,10 +54,13 @@ class Order < ActiveRecord::Base
     PLANS[plan_type]
   end
 
+  def tax_percentage
+    tax_cents * 100.0 / subtotal_cents
+  end
+
   def calculate_prices
     self.subtotal_cents = plan[:price_cents]
-
-    self.total_cents = ((subtotal_cents / 100.0) * TAX_PERCENTAGE) + subtotal_cents
+    self.total_cents = ((subtotal_cents / 100.0) * Rails.application.secrets[:tax_percentage].to_f) + subtotal_cents
     self.tax_cents = total_cents - subtotal_cents
   end
 
@@ -156,7 +157,7 @@ class Order < ActiveRecord::Base
       last_name:    account.profile.last_name,
       description:  'Videopage7 plan purchase',
       email:        account.email,
-      currency:     CURRENCY_CODE,
+      currency:     Rails.application.secrets[:currency_code],
       address: {
         zip:        billing_address.postal_code,
         street:     billing_address.address_1,

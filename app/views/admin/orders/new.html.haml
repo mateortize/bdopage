@@ -14,7 +14,7 @@
         %td Price
         %td= money_with_cents_and_with_symbol(@order.subtotal)
       %tr
-        %td Tax (#{Order::TAX_PERCENTAGE}%)
+        %td Tax (#{percentage_with_symbol(@order.tax_percentage)})
         %td= money_with_cents_and_with_symbol(@order.tax)
       %tr
         %td Total
