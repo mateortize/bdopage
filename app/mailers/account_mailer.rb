@@ -4,7 +4,7 @@ class AccountMailer < AppMailer
     @account = @order.account
 
     if @order.invoice_file.file
-      attachments["Invoice_#{@order.id}.pdf"] = @order.invoice_file.read
+      attachments[@order.invoice_filename] = @order.invoice_file.read
     end
     
     mail(subject: "[Videopage7] Your payment has been completed.", to: @account.email)

@@ -6,7 +6,7 @@
     .col-xs-6.text-right
       %h1 INVOICE
       %h3
-        %span{style: "color: #aaa;"}= "VP7-#{'%05d' % order.id}"
+        %span{style: "color: #aaa;"}= order.invoice_id
         | #{order.created_at.to_date.iso8601}
   .row{style: "margin-bottom: 2em;"}
     .col-xs-5

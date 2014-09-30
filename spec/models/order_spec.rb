@@ -134,4 +134,9 @@ RSpec.describe Order, type: :model do
     pp subject
     expect(subject.tax_percentage).to eq Rails.application.secrets[:tax_percentage].to_f
   end
+
+  it '#invoice_filename' do
+    pp subject.invoice_filename
+    expect(subject.invoice_filename).to match /VP7.+pdf/
+  end
 end

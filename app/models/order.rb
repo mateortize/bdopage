@@ -65,7 +65,7 @@ class Order < ActiveRecord::Base
     return if order.payment_method == 'baio'
 
     FileUtils.mkpath("tmp/orders")
-    tmp_path = "tmp/orders/invoice_#{order.id}.pdf"
+    tmp_path = File.join("tmp/orders", order.invoice_filename)
 
     pdf_content = PdfCreator.render_invoice(order)
     File.open(tmp_path, 'wb'){|f| f.write pdf_content }
@@ -75,6 +75,14 @@ class Order < ActiveRecord::Base
     FileUtils.rm(tmp_path)
 
     AccountMailer.payment_success_mail(order.id).deliver
+  end
+
+  def invoice_id
+    'VP7-%05d' % id
+  end
+
+  def invoice_filename
+    "#{invoice_id}.pdf"
   end
 
   def check_credit_card_validation
