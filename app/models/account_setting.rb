@@ -24,7 +24,7 @@ class AccountSetting < ActiveRecord::Base
     if self.blog_alias_changed?
       if !self.blog_alias_changed_at.blank? and 1.month.ago < self.blog_alias_changed_at
         errors.add(:blog_alias, "Last changed date is #{self.blog_alias_changed_at.to_date}, You can change only 1 time a month.")
-      else
+      elsif persisted?
         self.blog_alias_changed_at = Time.now
       end
     end
