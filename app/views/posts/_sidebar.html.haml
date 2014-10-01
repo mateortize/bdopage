@@ -75,9 +75,10 @@
             %h4 All posts
       - else
         - Category.all.each do |category|
-          %li
-            = link_to posts_path(category_id: category.id) do
-              %span.glyphicon.glyphicon-star
-              %h4
-                = category.name
+          - if category.posts_for(@current_author.id).count > 0 or !individual_blog?
+            %li
+              = link_to posts_path(category_id: category.id) do
+                %span.glyphicon.glyphicon-star
+                %h4
+                  = category.name
 
