@@ -10,7 +10,7 @@
         - if current_account.setting.try :show_blog_logo?
           = image_tag current_account.setting.blog_logo.thumb.url
         - else
-          = image_tag 'logobeta.png'
+          = image_tag 'logo.png'
     .collapse.navbar-collapse
       - unless current_account.blank?
         = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
