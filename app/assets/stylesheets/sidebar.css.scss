@@ -32,6 +32,10 @@
       background: linear-gradient(to right, $tertiary 0%,$primary 100%);
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#636d7a', endColorstr='#252b33',GradientType=1 );
 
+      .glyphicon {
+        font-size: 1.7em;
+      }
+
       a {
         color: $secondary;
         @include transition(all 300ms ease);
@@ -104,7 +108,7 @@
     .glyphicon {
       color: $secondary;
       @include transition(all 300ms ease);
-      font-size: 1.2em;
+      font-size: 2em;
     }
 
     h4 {
