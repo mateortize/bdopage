@@ -16,4 +16,8 @@ module ApplicationHelper
 
     html
   end
+
+  def individual_blog?
+    request.subdomain.present? && request.subdomain != "www"
+  end
 end
