@@ -14,16 +14,17 @@
           %span= plan_price_with_symbol(Plan.free_plan.price_cents)
           %span.price-small year
       %li.yes
-        Can create a videopage
+        Create ONE videopage
       %li.yes
-        Have a own domain
+        Use Your Own Domain
       %li.no
-        Can post unlimited videos (Max 5)
-      %li
+        Post Up To 4 Videos
+      %li.yes
+        500MB space
       %li.no
-        Can put videos in a categeroy "Successes"
+        Place Your Videos In "Successes" Category
       %li.no
-        Can upload a custom logo
+        Upload Your Custom Logo
       %li.buy
         - case current_account.upgrade_plan_status(Plan.free_plan)
         - when :current
@@ -40,15 +41,17 @@
           %span= plan_price_with_symbol(Plan.pro_plan.price_cents)
           %span.price-small year
       %li.yes
-        Can create a videopage
+        Create ONE videopage
       %li.yes
-        Have a own domain
+        Use Your Own Domain
       %li.yes
-        Can post unlimited videos
+        Post Unlimited Videos
       %li.yes
-        Can put videos in a categeroy "Successes"
+        5GB space
       %li.yes
-        Can upload a custom logo
+        Place Your Videos In "Successes" Category
+      %li.yes
+        Upload Your Custom Logo
       %li.buy
         - case current_account.upgrade_plan_status(Plan.pro_plan)
         - when :current
@@ -67,15 +70,17 @@
           %span= plan_price_with_symbol(Plan.expert_plan.price_cents)
           %span.price-small year
       %li.yes
-        Can create a videopage
+        Create ONE videopage
       %li.yes
-        Have a own domain
+        Use Your Own Domain
       %li.yes
-        Can post unlimited videos
+        Post Unlimited Videos
       %li.yes
-        Can put videos in a categeroy "Successes"
+        10GB space
       %li.yes
-        Can upload a custom logo
+        Place Your Videos In "Successes" Category
+      %li.yes
+        Upload Your Custom Logo
       %li.buy
         - case current_account.upgrade_plan_status(Plan.expert_plan)
         - when :current
