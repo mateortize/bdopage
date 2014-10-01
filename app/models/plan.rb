@@ -21,7 +21,7 @@ class Plan
       blog_logo: true      # Can upload a custom logo
     }),
     expert: OpenStruct.new({
-      active: false,
+      active: true,
       upgrade_rating: 100,
       name: 'EXPERT',
       price_cents: 1000,

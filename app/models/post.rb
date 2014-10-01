@@ -52,6 +52,11 @@ class Post < ActiveRecord::Base
   end
 
   def publish!
+    if video.present? && video.screenshot.blank?
+      video.refresh
+      return false unless screenshot
+    end
+
     self.status = 'published'
     self.published = true
     self.save
