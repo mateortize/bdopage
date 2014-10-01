@@ -116,7 +116,8 @@ Rails.application.routes.draw do
 
   devise_scope :account do
     get '/p/:referrer_code', to: 'registrations#promolink', as: 'promolink'
-    root to: "devise/sessions#new"
   end
+
+  root to: "admin/posts#index"
 
 end
