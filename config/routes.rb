@@ -118,6 +118,6 @@ Rails.application.routes.draw do
     get '/p/:referrer_code', to: 'registrations#promolink', as: 'promolink'
   end
 
-  root to: "admin/posts#index"
+  root to: "posts#index"
 
 end
