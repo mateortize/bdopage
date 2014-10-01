@@ -75,7 +75,7 @@
             %h4 All posts
       - else
         - Category.all.each do |category|
-          - if category.posts_for(@current_author.id).count > 0 or !individual_blog?
+          - if (!@current_author.blank? and category.posts_for(@current_author.id).count > 0) or !individual_blog?
             %li
               = link_to posts_path(category_id: category.id) do
                 %span.glyphicon.glyphicon-star
