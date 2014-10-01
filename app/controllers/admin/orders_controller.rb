@@ -39,7 +39,11 @@ class Admin::OrdersController < Admin::BaseController
     redirect_to admin_orders_path, notice: 'Your order is created.'
 
   rescue => ex
-    Rails.logger.error { @order && @order.errors.to_hash.inspect }
+    if @order
+      Rails.logger.error @order.errors.to_hash.inspect
+      @order.destroy if @order.persisted?
+    end
+
     Rails.logger.error ex.inspect
     Rails.logger.error ex.backtrace.join("\n")
 

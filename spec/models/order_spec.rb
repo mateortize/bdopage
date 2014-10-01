@@ -40,10 +40,20 @@ RSpec.describe Order, type: :model do
     expect(credit_card).to be_valid
   end
 
-  it '#purchase_options' do
-    opts = subject.send :purchase_options
-    pp opts
-    expect(opts).to be_present
+  describe '#purchase_options' do
+    it 'has invoice_id' do
+      opts = subject.send :purchase_options
+      pp opts
+      expect(opts).to be_present
+      expect(opts[:order_id]).to eq subject.invoice_id
+    end
+
+    it 'new' do
+      o1 = build :order
+      expect {
+        o1.send :purchase_options
+      }.to raise_error /Must be persisted/i
+    end
   end
 
   describe "#calculate_prices" do
@@ -76,7 +86,7 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe "#create_recurring_payment!" do
+  xdescribe "#create_recurring_payment!" do
     before :each do
       subject.create_payment!
     end
@@ -142,5 +152,20 @@ RSpec.describe Order, type: :model do
 
   it '#full_name' do
     expect(subject.full_name).to be_present
+  end
+
+  it '#inactive_others'do
+    a1 = create :account
+    o1 = create :order, account: a1, status: :active
+    o2 = create :order, account: a1, status: :active
+    o3 = create :order, account: a1, status: :active
+
+    o1.send :inactive_others
+    o1.reload
+    o2.reload
+    o3.reload
+    expect(o1).to be_active
+    expect(o2).to be_inactive
+    expect(o3).to be_inactive
   end
 end

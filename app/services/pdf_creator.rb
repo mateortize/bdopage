@@ -11,7 +11,7 @@ class PdfCreator
         plan:            order.plan
       }
     )
-    Rails.logger.debug { content }
+    # Rails.logger.debug { content }
 
     WickedPdf.new.pdf_from_string(content)
   end

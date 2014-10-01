@@ -20,8 +20,6 @@ class Order < ActiveRecord::Base
 
   validates :account, :plan, :plan_type, :status, :payment_method, presence: true
 
-  before_create :inactive_others
-
   def plan
     Plan.by_plan_type(plan_type)
   end
@@ -46,19 +44,25 @@ class Order < ActiveRecord::Base
       self.status = :failed
       raise 'Order validation failed'
     end
+    save!
 
     response = ::INATEC_GATEWAY.authorize_with_recurring(total_cents, credit_card, purchase_options)
     process_response(response)
 
-    generate_invoice_and_send_mail
+    if active?
+      inactive_others
+      generate_invoice_and_send_mail
+    else
+      raise 'Not active payment'
+    end
   end
 
-  def create_recurring_payment!
-    response = ::INATEC_GATEWAY.charge_recurring(total_cents, transaction_id, purchase_options)
-    process_response(response)
-
-    generate_invoice_and_send_mail
-  end
+  #TODO def create_recurring_payment!
+  #   response = ::INATEC_GATEWAY.charge_recurring(total_cents, transaction_id, purchase_options)
+  #   process_response(response)
+  #
+  #   generate_invoice_and_send_mail
+  # end
 
   def self.generate_pdf(order_id)
     order = Order.find(order_id)
@@ -134,8 +138,10 @@ class Order < ActiveRecord::Base
   end
 
   def purchase_options
+    raise 'Must be persisted' unless persisted?
+
     {
-      order_id:     "#{Time.now.to_i}-#{SecureRandom.random_number(1_000_000_000)}",
+      order_id:     invoice_id,
       ip:           ip,
       first_name:   account.profile.first_name,
       last_name:    account.profile.last_name,
@@ -156,6 +162,6 @@ class Order < ActiveRecord::Base
   end
 
   def inactive_others
-    account.orders.active.update_all(status: Order.statuses[:inactive])
+    account.orders.where('id != ?', id).active.update_all(status: Order.statuses[:inactive])
   end
 end
