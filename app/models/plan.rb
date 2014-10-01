@@ -15,7 +15,7 @@ class Plan
       active: true,        # Can be purchased
       upgrade_rating: 10,
       name: 'PRO',
-      price_cents: 5900,
+      price_cents: 9900,
       post_limit: nil,     # Can post unlimited videos
       post_category: true, # Can put videos in the category "My successes"
       blog_logo: true      # Can upload a custom logo
@@ -24,7 +24,7 @@ class Plan
       active: false,
       upgrade_rating: 100,
       name: 'EXPERT',
-      price_cents: 9900,
+      price_cents: 14900,
       post_limit: nil,     # Can post unlimited videos
       post_category: true, # Can put videos in the category "My successes"
       blog_logo: true      # Can upload a custom logo

@@ -14,13 +14,15 @@
           %span= plan_price_with_symbol(Plan.free_plan.price_cents)
           %span.price-small year
       %li.yes
-        oidjqwiodjqopidjpq
+        Can create a videopage
       %li.yes
-        oidjqwiodjqopidjpq
+        Have a own domain
       %li.no
-        oidjqwiodjqopidjpq
-      %li.yes
-        oidjqwiodjqopidjpq
+        Can post unlimited videos (Max 5)
+      %li.no
+        Can put videos in a categeroy "Successes"
+      %li.no
+        Can upload a custom logo
       %li.buy
         - case current_account.upgrade_plan_status(Plan.free_plan)
         - when :current
@@ -37,13 +39,15 @@
           %span= plan_price_with_symbol(Plan.pro_plan.price_cents)
           %span.price-small year
       %li.yes
-        oidjqwiodjqopidjpq
+        Can create a videopage
       %li.yes
-        oidjqwiodjqopidjpq
-      %li.no
-        oidjqwiodjqopidjpq
+        Have a own domain
       %li.yes
-        oidjqwiodjqopidjpq
+        Can post unlimited videos
+      %li.yes
+        Can put videos in a categeroy "Successes"
+      %li.yes
+        Can upload a custom logo
       %li.buy
         - case current_account.upgrade_plan_status(Plan.pro_plan)
         - when :current
@@ -53,7 +57,7 @@
         - else
           = link_to "Can't upgrade", '#', class: 'btn disabled', disabled: true
 
-    %ul.col-md-4
+    %ul.col-md-4.coming-soon
       %li.plan-head
         %h3 Expert
       %li.plan-image
@@ -62,13 +66,15 @@
           %span= plan_price_with_symbol(Plan.expert_plan.price_cents)
           %span.price-small year
       %li.yes
-        oidjqwiodjqopidjpq
+        Can create a videopage
       %li.yes
-        oidjqwiodjqopidjpq
-      %li.no
-        oidjqwiodjqopidjpq
+        Have a own domain
       %li.yes
-        oidjqwiodjqopidjpq
+        Can post unlimited videos
+      %li.yes
+        Can put videos in a categeroy "Successes"
+      %li.yes
+        Can upload a custom logo
       %li.buy
         - case current_account.upgrade_plan_status(Plan.expert_plan)
         - when :current
