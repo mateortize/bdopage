@@ -11,7 +11,9 @@ class Admin::OrdersController < Admin::BaseController
     selected_plan = Plan.by_plan_type(params[:plan])
     if selected_plan
       current_account.check_upgrade_plan!(selected_plan)
-      @order = current_account.orders.build plan_type: params[:plan]
+      @order = current_account.orders.build plan_type: params[:plan],
+                                            first_name: current_account.profile.first_name,
+                                            last_name: current_account.profile.last_name
       @order.calculate_prices
       @order.build_billing_address
     else
@@ -49,7 +51,7 @@ class Admin::OrdersController < Admin::BaseController
 
   def order_params
     params.fetch(:order, {})
-          .permit(:number, :year, :month, :verification_value, :plan_type,
+          .permit(:first_name, :last_name, :number, :year, :month, :verification_value, :plan_type,
                   billing_address_attributes: [:id, :address_1, :address_2, :city, :state, :postal_code, :country_code])
           .merge({ip: request.remote_ip})
   end

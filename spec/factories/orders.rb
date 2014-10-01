@@ -3,6 +3,8 @@ FactoryGirl.define do
     account
     plan_type 'pro'
 
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     ip '127.0.0.1'
     number '4149011500000147'
     year 2014

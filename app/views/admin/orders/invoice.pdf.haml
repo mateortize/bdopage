@@ -30,13 +30,16 @@
         .panel-body
           %p
             %strong
-              = "Mr/Mrs. #{account.full_name}"
+              = "Mr/Mrs. #{order.full_name}"
             %br
             = "#{billing_address.address_line1}"
             %br
             = "#{billing_address.address_line2}"
           %p
             %strong Kd-Nr. | Partner-ID
+            - if account.promotion_code.present?
+              %br
+              = account.promotion_code
   / / end client details section
   %table.table.table-bordered
     %thead

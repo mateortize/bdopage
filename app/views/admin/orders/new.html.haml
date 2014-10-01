@@ -27,6 +27,8 @@
   = f.hidden_field :plan_type
 
   %legend Card Information
+  = f.text_field :first_name, required: true
+  = f.text_field :last_name, required: true
   = f.text_field :number, required: true, label: 'Card number'
   = f.select :year, (Date.today.year..(Date.today.year + 10)), required: true
   = f.select :month, (1..12), required: true

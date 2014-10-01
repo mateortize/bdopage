@@ -25,6 +25,7 @@ RSpec.describe Order, type: :model do
     expect(subject).to be_created
     subject.active!
     subject.reload
+    expect(subject.status).to eq 'active'
     expect(subject).to be_active
   end
 
@@ -61,7 +62,6 @@ RSpec.describe Order, type: :model do
 
       subject.create_payment!
       subject.reload
-      expect(subject.status).to eq 'active'
       expect(subject).to be_active
       expect(subject.card_brand).to eq 'visa'
       expect(subject.last_4_digits).to eq 'XXXX-XXXX-XXXX-0147'
@@ -138,5 +138,9 @@ RSpec.describe Order, type: :model do
   it '#invoice_filename' do
     pp subject.invoice_filename
     expect(subject.invoice_filename).to match /VP7.+pdf/
+  end
+
+  it '#full_name' do
+    expect(subject.full_name).to be_present
   end
 end

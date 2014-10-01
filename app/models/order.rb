@@ -85,6 +85,10 @@ class Order < ActiveRecord::Base
     "#{invoice_id}.pdf"
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def check_credit_card_validation
     success = true
 
@@ -120,8 +124,8 @@ class Order < ActiveRecord::Base
 
   def credit_card
     @credit_card ||= ActiveMerchant::Billing::CreditCard.new(
-      first_name:         account.profile.first_name,
-      last_name:          account.profile.last_name,
+      first_name:         first_name,
+      last_name:          last_name,
       month:              month,
       year:               year,
       verification_value: verification_value,
