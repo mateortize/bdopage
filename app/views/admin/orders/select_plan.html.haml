@@ -11,7 +11,7 @@
       %li.plan-image
         = image_tag 'videopage7_free.png'
         %span.price
-          %span 0,-€
+          %span= plan_price_with_symbol(Plan.free_plan.price_cents)
           %span.price-small year
       %li.yes
         oidjqwiodjqopidjpq
@@ -34,7 +34,7 @@
       %li.plan-image
         = image_tag 'videopage7_pro.png'
         %span.price
-          %span 59,-€
+          %span= plan_price_with_symbol(Plan.pro_plan.price_cents)
           %span.price-small year
       %li.yes
         oidjqwiodjqopidjpq
@@ -59,7 +59,7 @@
       %li.plan-image
         = image_tag 'videopage7_expert.png'
         %span.price
-          %span 99,-€
+          %span= plan_price_with_symbol(Plan.expert_plan.price_cents)
           %span.price-small year
       %li.yes
         oidjqwiodjqopidjpq

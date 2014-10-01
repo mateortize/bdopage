@@ -12,7 +12,7 @@ class Plan
       blog_logo: false
     }),
     pro: OpenStruct.new({
-      active: true,
+      active: true,        # Can be purchased
       upgrade_rating: 10,
       name: 'PRO',
       price_cents: 5900,
