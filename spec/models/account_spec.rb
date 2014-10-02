@@ -36,4 +36,35 @@ RSpec.describe Account, type: :model do
     subject.apply_referrer_code! 'bonofa'
     expect(subject.bonofa_partner_account_id).to eq 1
   end
+
+  describe '.from_omniauth' do
+    let(:info) { OpenStruct.new baio_package: Plan::BAIO_FOR_EXPERT.first }
+    let(:auth) { OpenStruct.new provider: 'bonofa', uid: '1', info: info }
+
+    before(:each) {
+      subject.authentications.create! provider: 'bonofa', uid:  '1', token: '111'
+    }
+
+    it 'baio partner get expert plan' do
+      a1 = Account.from_omniauth(auth) # upgrade
+      expect(subject).to eq a1
+      expect(subject.current_plan).to eq Plan.expert_plan
+
+      info.baio_package = 'bad'
+      Account.from_omniauth(auth) # downgrade
+      expect(subject.current_plan).to eq Plan.free_plan
+    end
+
+    it 'not baio partner downgrade' do
+      subject.orders.create! plan_type: 'pro', status: :active, payment_method: 'inatec', expired_at: 1.years.since
+      expect(subject.current_plan).to eq Plan.pro_plan
+
+      Order.create_baio_order(subject)
+      expect(subject.current_plan).to eq Plan.expert_plan
+
+      info.baio_package = 'bad'
+      Account.from_omniauth(auth) # downgrade
+      expect(subject.current_plan).to eq Plan.pro_plan
+    end
+  end
 end

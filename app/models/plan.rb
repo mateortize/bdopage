@@ -1,4 +1,6 @@
 class Plan
+  BAIO_FOR_EXPERT = %w(vip_package pro_package).freeze
+
   DURATION = 12 # months
 
   PLANS = {
