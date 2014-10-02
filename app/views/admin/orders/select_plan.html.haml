@@ -1,4 +1,5 @@
-= render 'admin/shared/setting_tabs'
+- if current_account
+  = render 'admin/shared/setting_tabs'
 
 #plans
   %h2 Select Plan
@@ -26,11 +27,14 @@
       %li.no
         Upload Your Custom Logo
       %li.buy
-        - case current_account.upgrade_plan_status(Plan.free_plan)
+        - case current_account && current_account.upgrade_plan_status(Plan.free_plan)
         - when :current
           = link_to 'Current plan', '#', class: 'btn disabled', disabled: true
-        - when :cannot_upgrade
-          = link_to "Can't upgrade", '#', class: 'btn disabled', disabled: true
+        - else
+          - if current_account
+            = link_to "Can't upgrade", '#', class: 'btn disabled', disabled: true
+          - else
+            = link_to "REGISTER", new_account_session_path
 
     %ul.col-md-4
       %li.plan-head
@@ -53,7 +57,7 @@
       %li.yes
         Upload Your Custom Logo
       %li.buy
-        - case current_account.upgrade_plan_status(Plan.pro_plan)
+        - case current_account && current_account.upgrade_plan_status(Plan.pro_plan)
         - when :current
           = link_to 'Current plan', '#', class: 'btn disabled', disabled: true
         - when :can_upgrade
@@ -82,7 +86,7 @@
       %li.yes
         Upload Your Custom Logo
       %li.buy
-        - case current_account.upgrade_plan_status(Plan.expert_plan)
+        - case current_account && current_account.upgrade_plan_status(Plan.expert_plan)
         - when :current
           = link_to 'Current plan', '#', class: 'btn disabled', disabled: true
         - when :can_upgrade
@@ -90,6 +94,7 @@
         - else
           = link_to "Can't upgrade", '#', class: 'btn disabled', disabled: true
 
-  .row.mt2
-    .col-md-12.text-right
-      = link_to 'Cancel', admin_orders_path, class: 'btn btn-default'
+  - if current_account
+    .row.mt2
+      .col-md-12.text-right
+        = link_to 'Cancel', admin_orders_path, class: 'btn btn-default'
