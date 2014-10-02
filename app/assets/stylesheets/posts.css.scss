@@ -4,6 +4,13 @@
   .post {
     margin-bottom: 20px;
 
+    .successes-post {
+      font-size: 1.7em;
+      margin-left: 20px;
+      position: relative;
+      top: -2px;
+    }
+
     &:first-child {
       width: 100%;
       float: none!important;
@@ -89,7 +96,6 @@
 
       .searchicon {
         color: $grey1;
-        display: block;
         font-size: 1.5em;
         font-weight: 300;
         @include transition(margin 400ms 150ms ease-in);

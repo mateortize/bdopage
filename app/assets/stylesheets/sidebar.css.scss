@@ -48,8 +48,10 @@
         }
         &:hover {
           text-decoration: none;
+          background-color: $secondary;
 
           span {
+            color: $light;
             -moz-transform: rotate(90deg);
             -webkit-transform: rotate(90deg);
             -o-transform: rotate(90deg);
