@@ -33,5 +33,7 @@
     .row
       %a.read.text-right{:href => post_path(post), :alt => ''}
         %span.text-left.pull-left.search-text Continue reading
+        - if !post.category.blank?
+          %span.glyphicon.glyphicon-star.pull-right{ class: "#{post.category.name.downcase}-post"}
         %span.glyphicon.glyphicon-circle-arrow-right.searchicon
         %span.clearfix
