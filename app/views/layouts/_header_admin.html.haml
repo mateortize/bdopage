@@ -7,7 +7,7 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand{:href => posts_path}
-        - if current_account.setting.try :show_blog_logo?
+        - if current_account && current_account.setting.try(:show_blog_logo?)
           = image_tag current_account.setting.blog_logo.thumb.url
         - else
           = image_tag 'logo.png'
