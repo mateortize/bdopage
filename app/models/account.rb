@@ -28,13 +28,12 @@ class Account < ActiveRecord::Base
     "Unknown"
   end
 
+  def current_order
+    orders.active.first
+  end
+
   def current_plan
-    order = orders.active.first
-    if order
-      order.plan
-    else
-      Plan.free_plan
-    end
+    current_order.try(:plan) || Plan.free_plan
   end
 
   def blog_alias
@@ -42,10 +41,33 @@ class Account < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    account = Authentication.where(auth.slice("provider", "uid")).first.try(:account) || create_from_omniauth(auth)
-    if auth.info && account.promotion_code != auth.info.promotion_code
-      account.update promotion_code: auth.info.promotion_code
+    Rails.logger.debug { auth.to_hash }
+    account = Authentication.where(provider: auth[:provider], uid: auth[:uid]).first.try(:account) || create_from_omniauth(auth)
+
+    if auth.info
+      if account.promotion_code != auth.info.promotion_code
+        account.update promotion_code: auth.info.promotion_code
+      end
+
+      if auth.provider.to_s == 'bonofa'
+        if Plan::BAIO_FOR_EXPERT.include? auth.info.baio_package
+          # Upgrade
+          unless account.current_order.try :baio_order?
+            Order.create_baio_order(account)
+          end
+        elsif account.current_order.try :baio_order?
+          # Downgrade
+          account.current_order.cancelled!
+
+          # Restore inactive
+          recent = account.orders.not_baio.most_recent.inactive.first
+          if recent && recent.expired_at > Date.today
+            recent.active!
+          end
+        end
+      end
     end
+
     account
   end
 
@@ -53,10 +75,11 @@ class Account < ActiveRecord::Base
     if referrer_code.present? && promotion_code != referrer_code
       response = RestClient.get "https://shop.bonofa.com/api/v1/promo_code/#{referrer_code}"
       json = MultiJson.load(response)
-      update bonofa_partner_account_id: json['account_id']
+      if json['code'] == 'OK'
+        update bonofa_partner_account_id: json['account_id']
+      end
     end
   rescue => ex
-    Rails.logger.error response
     Rails.logger.error ex.inspect
     Rails.logger.error ex.backtrace.join("\n")
   end

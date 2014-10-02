@@ -8,15 +8,17 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :billing_address
 
   scope :inatec, -> { where(payment_method: 'inatec') }
+  scope :not_baio, -> { where("payment_method != 'baio'") }
+  scope :most_recent, -> { order('created_at DESC') }
 
   enum status: { created: 0, active: 1, inactive: 2, cancelled: 3, failed: 4 }
   serialize :info, Hash
   mount_uploader :invoice_file, InvoiceUploader
   attr_accessor :number, :year, :month, :verification_value, :ip
 
-  monetize :subtotal_cents
-  monetize :tax_cents
-  monetize :total_cents
+  monetize :subtotal_cents, disable_validation: true
+  monetize :tax_cents, disable_validation: true
+  monetize :total_cents, disable_validation: true
 
   validates :account, :plan, :plan_type, :status, :payment_method, presence: true
 
@@ -66,7 +68,7 @@ class Order < ActiveRecord::Base
 
   def self.generate_pdf(order_id)
     order = Order.find(order_id)
-    return if order.payment_method == 'baio'
+    return if order.baio_order?
 
     FileUtils.mkpath("tmp/orders")
     tmp_path = File.join("tmp/orders", order.invoice_filename)
@@ -108,6 +110,20 @@ class Order < ActiveRecord::Base
     end
 
     success
+  end
+
+  def baio_order?
+    payment_method == 'baio'
+  end
+
+  def self.create_baio_order(account)
+    order = account.orders.create plan_type: 'expert', status: :active, payment_method: 'baio', expired_at: 100.years.since
+    order.inactive_others if order.persisted?
+    order
+  end
+
+  def inactive_others
+    account.orders.where('id != ?', id).active.update_all(status: Order.statuses[:inactive])
   end
 
   private
@@ -159,9 +175,5 @@ class Order < ActiveRecord::Base
 
   def generate_invoice_and_send_mail
     Order.delay.generate_pdf(self.id)
-  end
-
-  def inactive_others
-    account.orders.where('id != ?', id).active.update_all(status: Order.statuses[:inactive])
   end
 end
