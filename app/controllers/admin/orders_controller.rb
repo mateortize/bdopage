@@ -1,4 +1,6 @@
 class Admin::OrdersController < Admin::BaseController
+  skip_before_action :authenticate_account!, only: :new
+
   set_tab :orders
 
   def index
@@ -9,7 +11,7 @@ class Admin::OrdersController < Admin::BaseController
 
   def new
     selected_plan = Plan.by_plan_type(params[:plan])
-    if selected_plan
+    if current_account && selected_plan
       current_account.check_upgrade_plan!(selected_plan)
       @order = current_account.orders.build plan_type: params[:plan],
                                             first_name: current_account.profile.first_name,
