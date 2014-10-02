@@ -13,7 +13,7 @@
               Sub Total:
               = money_with_cents_and_with_symbol(@order.subtotal)
               %br
-              Tax (#{"#{Order::TAX_PERCENTAGE}"}%):
+              Tax (#{percentage_with_symbol(@order.tax_percentage)}):
               = money_with_cents_and_with_symbol(@order.tax)
               %br
               Total:

@@ -7,7 +7,10 @@
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand{:href => posts_path}
-        =image_tag 'logobeta.png'
+        - if current_account.setting.try :show_blog_logo?
+          = image_tag current_account.setting.blog_logo.thumb.url
+        - else
+          = image_tag 'logo.png'
     .collapse.navbar-collapse
       - unless current_account.blank?
         = active_link_to "<span class='glyphicon glyphicon-th-large'></span>Manage your posts".html_safe, admin_posts_path
@@ -65,15 +68,21 @@
           %td - none -
         %tr
           %td Account:
-          %td FREE user
+          %td
+            = current_account.current_plan.name
+            user
         %tr
           %td e-Mail:
-          %td=current_account.email
+          %td= current_account.email
         %tr
           %td
             %strong Your promolink:
           %td
-            %strong -
+            %strong
+              - if current_account.promotion_code.present?
+                = promolink_url(referrer_code: current_account.promotion_code)
+              - else
+                \-
   / Profile End
 
 

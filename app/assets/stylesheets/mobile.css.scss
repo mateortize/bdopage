@@ -5,7 +5,9 @@
       width: 227px;
 
       img {
-        width: 100%;
+        width: auto;
+        height: auto;
+        max-height: 50px;
       }
     }
   }
@@ -57,4 +59,48 @@
       }
     }
   }
+}
+@media screen and (max-width: 480px) {
+  #admin-overview {
+
+    .overview-head {
+      text-align: center;
+
+      h2 {
+        display: block;
+        width: 100%;
+      }
+      p {
+
+        &.create-container {
+          text-align: center;
+          width: 100%;
+
+          a {
+            width: 100%;
+          }
+        }
+      }
+      .shortline {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+    .overview-body {
+
+      .nav-tabs {
+
+        li {
+          width: 100%;
+          display: block;
+          text-align: center;
+        }
+      }
+    }
+    table {
+      margin-top: 0;
+    }
+  }
+
+
 }

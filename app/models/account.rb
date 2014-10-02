@@ -1,9 +1,7 @@
 class Account < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-
-  #disabled :registerable
-  devise :database_authenticatable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   acts_as_commontator
@@ -35,7 +33,7 @@ class Account < ActiveRecord::Base
     if order
       order.plan
     else
-      Order.free_plan
+      Plan.free_plan
     end
   end
 
@@ -44,7 +42,23 @@ class Account < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    Authentication.where(auth.slice("provider", "uid")).first.try(:account) || create_from_omniauth(auth)
+    account = Authentication.where(auth.slice("provider", "uid")).first.try(:account) || create_from_omniauth(auth)
+    if auth.info && account.promotion_code != auth.info.promotion_code
+      account.update promotion_code: auth.info.promotion_code
+    end
+    account
+  end
+
+  def apply_referrer_code!(referrer_code)
+    if referrer_code.present? && promotion_code != referrer_code
+      response = RestClient.get "https://shop.bonofa.com/api/v1/promo_code/#{referrer_code}"
+      json = MultiJson.load(response)
+      update bonofa_partner_account_id: json['account_id']
+    end
+  rescue => ex
+    Rails.logger.error response
+    Rails.logger.error ex.inspect
+    Rails.logger.error ex.backtrace.join("\n")
   end
 
   def self.create_from_omniauth(auth)
@@ -102,8 +116,18 @@ class Account < ActiveRecord::Base
       raise 'Plan already activated'
     end
 
-    unless new_plan.upgrade_rating > current_plan.upgrade_rating
+    if new_plan.upgrade_rating < current_plan.upgrade_rating
       raise "Can't upgrade to plan"
+    end
+  end
+
+  def upgrade_plan_status(new_plan)
+    if new_plan == current_plan
+      :current
+    elsif !new_plan.active || new_plan.upgrade_rating < current_plan.upgrade_rating
+      :cannot_upgrade
+    else
+      :can_upgrade
     end
   end
 

@@ -63,6 +63,26 @@
   ul {
     list-style: none;
     overflow: hidden;
+    position: relative;
+
+    &.coming-soon {
+
+      &:before {
+        content: 'Coming soon...';
+        padding-top: 200px;
+        font-size: 2.5em;
+        font-weight: 300;
+        position: absolute;
+        left: 15px;
+        top: 0;
+        right: 15px;
+        bottom: 0;
+        background-color: rgba($primarybg, .7);
+        z-index: 1;
+        color: $light;
+        text-align: center;
+      }
+    }
 
     li {
       padding: 15px;
@@ -106,7 +126,7 @@
         background-color: lighten($grey1, 5);
         position: relative;
         padding-right: 55px;
-        word-break: break-all;
+        word-break: break-word;
         font-weight: 400;
         @include transition(al 300ms);
 

@@ -28,6 +28,6 @@ class AccountProfile < ActiveRecord::Base
 
   def profile_image
     return avatar_url unless avatar_url.blank?
-    ActionController::Base.helpers.asset_path("nouserimage.jpg", :digest => false)
+    'nouserimage.jpg'
   end
 end

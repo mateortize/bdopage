@@ -21,16 +21,11 @@ RSpec.describe Order, type: :model do
     expect(subject.plan[:name]).to eq test_plan[:name]
   end
 
-  it 'PLANS' do
-    pp Order::PLANS
-    expect(Order::PLANS[:free]).to be_present
-    expect(Order::PLANS[:pro]).to be_present
-  end
-
   it '#status' do
     expect(subject).to be_created
     subject.active!
     subject.reload
+    expect(subject.status).to eq 'active'
     expect(subject).to be_active
   end
 
@@ -45,18 +40,20 @@ RSpec.describe Order, type: :model do
     expect(credit_card).to be_valid
   end
 
-  it '#purchase_options' do
-    opts = subject.send :purchase_options
-    pp opts
-    expect(opts).to be_present
-  end
+  describe '#purchase_options' do
+    it 'has invoice_id' do
+      opts = subject.send :purchase_options
+      pp opts
+      expect(opts).to be_present
+      expect(opts[:order_id]).to eq subject.invoice_id
+    end
 
-  it '.free_plan' do
-    plan = Order.free_plan
-    pp plan
-    expect(plan[:price_cents]).to eq 0
-    expect(plan['price_cents']).to eq 0
-    expect(plan.price_cents).to eq 0
+    it 'new' do
+      o1 = build :order
+      expect {
+        o1.send :purchase_options
+      }.to raise_error /Must be persisted/i
+    end
   end
 
   describe "#calculate_prices" do
@@ -64,8 +61,8 @@ RSpec.describe Order, type: :model do
       subject.calculate_prices
 
       expect(subject.subtotal_cents).to eq 100
-      expect(subject.tax_cents).to eq Order::TAX_PERCENTAGE
-      expect(subject.total_cents).to eq(100 + Order::TAX_PERCENTAGE)
+      expect(subject.tax_cents).to eq Rails.application.secrets[:tax_percentage].to_f
+      expect(subject.total_cents).to eq(100 + Rails.application.secrets[:tax_percentage].to_f)
     end
   end
 
@@ -75,7 +72,6 @@ RSpec.describe Order, type: :model do
 
       subject.create_payment!
       subject.reload
-      expect(subject.status).to eq 'active'
       expect(subject).to be_active
       expect(subject.card_brand).to eq 'visa'
       expect(subject.last_4_digits).to eq 'XXXX-XXXX-XXXX-0147'
@@ -90,7 +86,7 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe "#create_recurring_payment!" do
+  xdescribe "#create_recurring_payment!" do
     before :each do
       subject.create_payment!
     end
@@ -141,5 +137,35 @@ RSpec.describe Order, type: :model do
     Order.generate_pdf(subject.id)
     subject.reload
     expect(subject.invoice_file).to be_present
+  end
+
+  it '#tax_percentage' do
+    subject.calculate_prices
+    pp subject
+    expect(subject.tax_percentage).to eq Rails.application.secrets[:tax_percentage].to_f
+  end
+
+  it '#invoice_filename' do
+    pp subject.invoice_filename
+    expect(subject.invoice_filename).to match /VP7.+pdf/
+  end
+
+  it '#full_name' do
+    expect(subject.full_name).to be_present
+  end
+
+  it '#inactive_others'do
+    a1 = create :account
+    o1 = create :order, account: a1, status: :active
+    o2 = create :order, account: a1, status: :active
+    o3 = create :order, account: a1, status: :active
+
+    o1.send :inactive_others
+    o1.reload
+    o2.reload
+    o3.reload
+    expect(o1).to be_active
+    expect(o2).to be_inactive
+    expect(o3).to be_inactive
   end
 end

@@ -83,6 +83,7 @@ class Admin::PostsController < Admin::BaseController
       flash[:success] = "Published successfully."
       redirect_to admin_posts_path
     else
+      flash[:alert] = "Can't publish unfinished video"
       redirect_to edit_admin_post_path(@post)
     end
   end

@@ -17,7 +17,7 @@ class Admin::VideosController < Admin::BaseController
 
   def refresh
     @video.refresh
-    redirect_to edit_admin_post_video_path(@post, @video)
+    redirect_to edit_admin_post_video_path(@post)
   end
 
   def update

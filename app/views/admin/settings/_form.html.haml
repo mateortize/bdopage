@@ -16,3 +16,4 @@
   = f.form_group do
     = f.submit "Save", class: 'btn btn-primary'
     = link_to 'Cancel', :back, class: 'btn btn-default'
+    = link_to 'Open videopage', root_url(host: "#{@setting.blog_alias}.#{request.domain}"), class: 'btn btn-default', target: '_blank'
